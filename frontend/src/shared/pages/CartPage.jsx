@@ -85,22 +85,33 @@ export default function CartPage() {
                   </div>
 
                   <div className="cart-item-list">
-                    {items.map((item) => (
-                      <article className="cart-item-card" key={item.slug}>
+                    {items.map((item) => {
+                      const itemKey = item.cartKey || item.slug;
+                      const hasCustomization = item.customName || item.customCity;
+
+                      return (
+                      <article className="cart-item-card" key={itemKey}>
                         <img src={item.image || fallbackImages[item.slug] || fallbackImages["birthday-bloom-box"]} alt="" />
                         <div>
                           <p>{meta.label}</p>
                           <h3>{item.name}</h3>
+                          {hasCustomization ? (
+                            <dl className="cart-custom-details">
+                              {item.customName ? <><dt>Name</dt><dd>{item.customName}</dd></> : null}
+                              {item.customCity ? <><dt>City</dt><dd>{item.customCity}</dd></> : null}
+                            </dl>
+                          ) : null}
                           <strong>{formatPrice(item.price)}</strong>
                           <div className="cart-quantity">
-                            <button type="button" onClick={() => updateCartQuantity(item.slug, item.quantity - 1)} aria-label={`Decrease ${item.name}`}>-</button>
+                            <button type="button" onClick={() => updateCartQuantity(itemKey, item.quantity - 1)} aria-label={`Decrease ${item.name}`}>-</button>
                             <span>{item.quantity}</span>
-                            <button type="button" onClick={() => updateCartQuantity(item.slug, item.quantity + 1)} aria-label={`Increase ${item.name}`}>+</button>
+                            <button type="button" onClick={() => updateCartQuantity(itemKey, item.quantity + 1)} aria-label={`Increase ${item.name}`}>+</button>
                           </div>
                         </div>
-                        <button className="cart-remove" type="button" onClick={() => removeFromCart(item.slug)} aria-label={`Remove ${item.name}`}>&times;</button>
+                        <button className="cart-remove" type="button" onClick={() => removeFromCart(itemKey)} aria-label={`Remove ${item.name}`}>&times;</button>
                       </article>
-                    ))}
+                    );
+                    })}
                   </div>
 
                   <p className="cart-store-note">{meta.note}</p>

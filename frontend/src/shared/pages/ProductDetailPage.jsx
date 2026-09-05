@@ -31,7 +31,12 @@ function WearProductDetail({ product }) {
   ];
 
   const handleAddToCart = () => {
-    for (let index = 0; index < quantity; index += 1) addToCart(product);
+    const customizedProduct = {
+      ...product,
+      customName,
+      customCity
+    };
+    for (let index = 0; index < quantity; index += 1) addToCart(customizedProduct);
     setAdded(true);
   };
 

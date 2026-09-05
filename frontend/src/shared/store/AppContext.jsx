@@ -18,19 +18,22 @@ export function AppProvider({ children }) {
 
   function addToCart(product) {
     setCartItems((items) => {
-      const existing = items.find((item) => item.slug === product.slug);
-      if (existing) return items.map((item) => item.slug === product.slug ? { ...item, quantity: item.quantity + 1 } : item);
-      return [...items, { ...product, price: product.salePrice || product.price, quantity: 1 }];
+      const customName = product.customName?.trim() || "";
+      const customCity = product.customCity?.trim() || "";
+      const cartKey = [product.slug, customName.toLowerCase(), customCity.toLowerCase()].join("|");
+      const existing = items.find((item) => item.cartKey === cartKey);
+      if (existing) return items.map((item) => item.cartKey === cartKey ? { ...item, quantity: item.quantity + 1 } : item);
+      return [...items, { ...product, customName, customCity, cartKey, price: product.salePrice || product.price, quantity: 1 }];
     });
   }
 
-  function removeFromCart(slug) {
-    setCartItems((items) => items.filter((item) => item.slug !== slug));
+  function removeFromCart(cartKey) {
+    setCartItems((items) => items.filter((item) => (item.cartKey || item.slug) !== cartKey));
   }
 
-  function updateCartQuantity(slug, quantity) {
-    if (quantity < 1) return removeFromCart(slug);
-    setCartItems((items) => items.map((item) => item.slug === slug ? { ...item, quantity } : item));
+  function updateCartQuantity(cartKey, quantity) {
+    if (quantity < 1) return removeFromCart(cartKey);
+    setCartItems((items) => items.map((item) => (item.cartKey || item.slug) === cartKey ? { ...item, quantity } : item));
   }
 
   function toggleWishlist(slug) {
