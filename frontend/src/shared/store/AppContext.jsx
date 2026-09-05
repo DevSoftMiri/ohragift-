@@ -2,22 +2,7 @@ import { createContext, useContext, useMemo, useState } from "react";
 
 const AppContext = createContext(null);
 
-const starterCart = [
-  {
-    slug: "oversized-essential-tee",
-    name: "Oversized Essential Tee",
-    store: "wears",
-    price: 899,
-    quantity: 1
-  },
-  {
-    slug: "birthday-bloom-box",
-    name: "Birthday Bloom Box",
-    store: "gifts",
-    price: 1299,
-    quantity: 1
-  }
-];
+const starterCart = [];
 
 export function AppProvider({ children }) {
   const [cartItems, setCartItems] = useState(starterCart);

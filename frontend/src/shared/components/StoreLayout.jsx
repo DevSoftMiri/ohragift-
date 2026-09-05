@@ -2,6 +2,36 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAppContext } from "../store/AppContext";
 
+function WearsFooter() {
+  return (
+    <footer className="wears-footer">
+      <nav aria-label="OHRA Wears social links">
+        <a href="https://www.instagram.com/wearohra/" target="_blank" rel="noreferrer">Instagram</a>
+        <a href="https://www.linkedin.com/in/ohrawear" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="https://www.facebook.com/people/ohrawear" target="_blank" rel="noreferrer">Facebook</a>
+        <Link to="/wears/about">About Us</Link>
+      </nav>
+      <nav aria-label="OHRA Wears customer care">
+        <Link to="/wears/info/shipping-policy">Shipping &amp; Payment</Link>
+        <Link to="/wears/info/returns-replacement">Returns &amp; Exchanges</Link>
+        <Link to="/wears/info/business-enquiries">Business Enquiries</Link>
+        <Link to="/wears/info/customer-enquiries">Customer Enquiries</Link>
+      </nav>
+      <Link className="wears-footer-logo" to="/wears" aria-label="OHRA Wears home">
+        <img src="/images/wears/wear logo.png" alt="OHRA Wears" />
+      </Link>
+      <div className="wears-footer-bottom">
+        <span>&copy; 2026, OHRA Wears</span>
+        <Link to="/wears/info/privacy-policy">Privacy policy</Link>
+        <Link to="/wears/info/terms-of-service">Terms of service</Link>
+        <Link to="/wears/info/cancellation-policy">Refund policy</Link>
+        <Link to="/wears/info/shipping-policy">Shipping policy</Link>
+        <Link to="/wears/info/customer-enquiries">Contact information</Link>
+      </div>
+    </footer>
+  );
+}
+
 export default function StoreLayout({ store, children }) {
   const { cartItems, totals, wishlistItems, removeFromCart, updateCartQuantity } = useAppContext();
   const location = useLocation();
@@ -50,6 +80,15 @@ export default function StoreLayout({ store, children }) {
 
   return (
     <div className={`store-shell ${store}`}>
+      {!isGifts ? (
+        <div className="wears-top-strip" aria-label="OHRA Wears custom product messages">
+          <span>CUSTOM PRODUCT</span>
+          <span>CUSTOM DESIGN</span>
+          <span>WEAR YOUR OWN STORY</span>
+          <span>CUSTOM MADE FOR YOU</span>
+          <span>WEAR WHAT YOU IMAGINE</span>
+        </div>
+      ) : null}
       <header className="store-header">
         {isGifts ? (
           <>
@@ -206,12 +245,12 @@ export default function StoreLayout({ store, children }) {
           <>
             <Link className="wears-logo-link" to="/wears" aria-label="OHRA Wears home"><img src="/images/wears/wear logo.png" alt="OHRA Wears" /></Link>
             <nav className="wears-primary-nav" aria-label="Wears navigation">
-              <Link to="/wears/products">Shop</Link>
+              <Link to="/wears">Shop</Link>
               <a href="#summer-drop">Summer '26</a>
               <a href="#best-sellers">Almost Gone</a>
             </nav>
             <div className="header-links">
-              <Link className="wears-to-gifts" to="/gifts">OHRA GIFTS</Link>
+              <Link className="wears-to-gifts" to="/gifts">OHRA GIFTS <span aria-hidden="true">&rarr;</span></Link>
               <Link aria-label="Wishlist" to="/wishlist">&#9825;<span>{wishlistItems.length}</span></Link>
               <Link aria-label="Shopping bag" to="/cart">&#128722;<span>{totals.items}</span></Link>
             </div>
@@ -219,13 +258,14 @@ export default function StoreLayout({ store, children }) {
         )}
       </header>
       {children}
+      {!isGifts ? <WearsFooter /> : null}
       <nav className="mobile-store-switcher" aria-label="Switch OHRA store">
         <Link className={!isWearsPath ? "active gifts-tab" : "gifts-tab"} to="/gifts">
-          <span aria-hidden="true">&#127873;</span>
+          <span aria-hidden="true"><img src="/images/gift.png" alt="" /></span>
           <strong>OHRA Gifts</strong>
         </Link>
         <Link className={isWearsPath ? "active wears-tab" : "wears-tab"} to="/wears">
-          <span aria-hidden="true">&#128085;</span>
+          <span aria-hidden="true"><img src="/images/cloth.png" alt="" /></span>
           <strong>OHRA Wears</strong>
         </Link>
       </nav>

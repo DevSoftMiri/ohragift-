@@ -5,16 +5,18 @@ import { getProductBySlug } from "../services/catalogService";
 import { useAppContext } from "../store/AppContext";
 
 const wearLookItems = [
-  ["Classic Denim Shirt", "Rs. 1,299", "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=400&q=80"],
-  ["Relaxed Fit Jeans", "Rs. 1,599", "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=400&q=80"],
-  ["Minimal Sneakers", "Rs. 2,499", "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=400&q=80"],
-  ["Signature Cap", "Rs. 699", "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=400&q=80"]
+  ["Ambala City Graphic T-Shirt", "Rs. 899", "/images/wears/ambala%20main.png"],
+  ["Delhi City Graphic T-Shirt", "Rs. 899", "/images/wears/delhi%20main.png"],
+  ["Hisar City Graphic T-Shirt", "Rs. 899", "/images/wears/hisar%20main.png"],
+  ["Karnal City Graphic T-Shirt", "Rs. 899", "/images/wears/Karnal%20main.png"]
 ];
 
 function WearProductDetail({ product }) {
-  const galleryImages = [product.image, ...wearLookItems.slice(0, 4).map((item) => item[2])];
+  const galleryImages = [product.image, product.secondaryImage].filter(Boolean);
   const [selectedImage, setSelectedImage] = useState(galleryImages[0]);
   const [selectedSize, setSelectedSize] = useState("M");
+  const [customName, setCustomName] = useState("");
+  const [customCity, setCustomCity] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
   const [openSection, setOpenSection] = useState("Product Details");
@@ -37,7 +39,7 @@ function WearProductDetail({ product }) {
     <main className="wear-product-page">
       <nav className="wear-product-breadcrumb" aria-label="Breadcrumb">
         <Link to="/wears">Home</Link><span aria-hidden="true">&rsaquo;</span>
-        <Link to="/wears/products">Wears</Link><span aria-hidden="true">&rsaquo;</span>
+        <Link to="/wears">Wears</Link><span aria-hidden="true">&rsaquo;</span>
         <span>{product.name}</span>
       </nav>
 
@@ -59,7 +61,7 @@ function WearProductDetail({ product }) {
           <p className="wear-product-description">{product.description}</p>
           <div className="wear-price-row"><strong>Rs. {(product.salePrice || product.price).toLocaleString("en-IN")}</strong>{product.salePrice && product.salePrice !== product.price ? <del>Rs. {product.price.toLocaleString("en-IN")}</del> : null}<b>15% OFF</b></div>
 
-          <div className="wear-option-group"><span>Color: Sky Blue</span><div className="wear-swatches"><button className="selected" aria-label="Sky Blue" type="button" /><button aria-label="Stone" type="button" /><button aria-label="Black" type="button" /><button aria-label="White" type="button" /></div></div>
+          <div className="wear-option-group wear-custom-fields"><span>Customization</span><div><label>Name<input type="text" value={customName} onChange={(event) => setCustomName(event.target.value)} placeholder="Enter name" /></label><label>City Name<input type="text" value={customCity} onChange={(event) => setCustomCity(event.target.value)} placeholder="Enter city" /></label></div></div>
           <div className="wear-option-group"><div className="wear-size-heading"><span>Size</span><button type="button">Size Guide</button></div><div className="wear-size-options">{sizes.map((size) => <button className={selectedSize === size ? "selected" : ""} key={size} type="button" onClick={() => setSelectedSize(size)}>{size}</button>)}</div></div>
           <div className="wear-option-group"><span>Quantity</span><div className="wear-quantity"><button type="button" onClick={() => setQuantity((value) => Math.max(1, value - 1))}>−</button><span>{quantity}</span><button type="button" onClick={() => setQuantity((value) => value + 1)}>+</button></div></div>
 
@@ -71,7 +73,7 @@ function WearProductDetail({ product }) {
         </section>
       </div>
 
-      <section className="wear-complete-look"><h2>Complete The Look</h2><div>{wearLookItems.map(([name, price, image]) => <Link to="/wears/products" key={name}><img src={image} alt={name} /><strong>{name}</strong><small>{price}</small></Link>)}</div></section>
+      <section className="wear-complete-look"><h2>Complete The Look</h2><div>{wearLookItems.map(([name, price, image]) => <Link to="/wears" key={name}><img src={image} alt={name} /><strong>{name}</strong><small>{price}</small></Link>)}</div></section>
     </main>
   );
 }

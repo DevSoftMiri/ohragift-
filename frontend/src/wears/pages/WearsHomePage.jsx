@@ -2,46 +2,99 @@ import { Link } from "react-router-dom";
 import StoreLayout from "../../shared/components/StoreLayout";
 
 const summerDrop = [
-  ["Tropic Parade Relaxed Fit Printed Shirt", "Rs. 2,999.00", "https://images.unsplash.com/photo-1626497764746-6dc36546b388?auto=format&fit=crop&w=720&q=85"],
-  ["The Fallen Star Relaxed Fit Printed Shirt", "Rs. 2,799.00", "https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=720&q=85"],
-  ["Out Of Office Regular Fit Printed Shirt", "Rs. 2,699.00", "https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?auto=format&fit=crop&w=720&q=85"],
-  ["Pavilions Regular Fit Printed Shirt", "Rs. 2,799.00", "https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=720&q=85"]
+  {
+    name: "Ambala City Graphic T-Shirt",
+    description: "Add your chosen city, location, or name to create a personal everyday tee.",
+    price: "Rs. 899.00",
+    image: "/images/wears/ambala%20main.png",
+    secondaryImage: "/images/wears/ambala%20t%20shirt.png"
+  },
+  {
+    name: "Ambala Heritage Graphic T-Shirt",
+    description: "Customize the front artwork with a place or person that matters to you.",
+    price: "Rs. 899.00",
+    image: "/images/wears/ambala%202%20main.png",
+    secondaryImage: "/images/wears/ambala%202%20tshirt.png"
+  },
+  {
+    name: "Ambala Statement Graphic T-Shirt",
+    description: "Made for custom names and locations with a relaxed, easy-to-style fit.",
+    price: "Rs. 899.00",
+    image: "/images/wears/ambala%203%20main.png",
+    secondaryImage: "/images/wears/ambala%203%20tshit.png"
+  },
+  {
+    name: "Bathinda City Graphic T-Shirt",
+    description: "Turn a favorite city, hometown, or personal name into a wearable graphic.",
+    price: "Rs. 899.00",
+    image: "/images/wears/bathinda%20main.png",
+    secondaryImage: "/images/wears/bathinda%20t%20shirt.png"
+  }
 ];
 
 const bestSellers = [
-  ["Powerless Influence Relaxed Fit Printed Shirt", "Rs. 2,799.00", "https://images.unsplash.com/photo-1506629905607-d405b7a30db9?auto=format&fit=crop&w=720&q=85"],
-  ["Sad Holidays Oversized Fit Printed Jersey", "Rs. 2,499.00", "https://images.unsplash.com/photo-1566206091558-7f218b696731?auto=format&fit=crop&w=720&q=85"],
-  ["An Evil Door And A Well Short Sleeve Shirt", "Rs. 2,799.00", "https://images.unsplash.com/photo-1598032895397-b9472444bf93?auto=format&fit=crop&w=720&q=85"],
-  ["It's O' Brooklyn Relaxed Fit Shirt", "Rs. 2,699.00", "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=720&q=85"]
+  {
+    name: "Delhi City Graphic T-Shirt",
+    description: "Personalize the design with your selected city name, location, or initials.",
+    price: "Rs. 899.00",
+    image: "/images/wears/delhi%20main.png",
+    secondaryImage: "/images/wears/delhi%20t%20shirt.png"
+  },
+  {
+    name: "Hisar City Graphic T-Shirt",
+    description: "A clean custom tee for names, places, groups, trips, and local memories.",
+    price: "Rs. 899.00",
+    image: "/images/wears/hisar%20main.png",
+    secondaryImage: "/images/wears/hisar%20tshirt.png"
+  },
+  {
+    name: "Karnal City Graphic T-Shirt",
+    description: "Built for custom place names or personal text while keeping a premium look.",
+    price: "Rs. 899.00",
+    image: "/images/wears/Karnal%20main.png",
+    secondaryImage: "/images/wears/karnal%20t%20shirt.png"
+  },
+  {
+    name: "Sirsa Women's Graphic T-Shirt",
+    description: "Create a simple statement tee using a loved one’s name or favorite place.",
+    price: "Rs. 899.00",
+    image: "/images/wears/women%20and%20sirsa.png",
+    secondaryImage: "/images/wears/women%20and%20sirsa%20t%20shirt.png"
+  }
 ];
 
 const archive = [
-  "https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=600&q=85",
-  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=85",
-  "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&w=600&q=85",
-  "https://images.unsplash.com/photo-1611601322175-ef8ec8c85f01?auto=format&fit=crop&w=600&q=85",
-  "https://images.unsplash.com/photo-1614890085618-0e1054da74b0?auto=format&fit=crop&w=600&q=85",
-  "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=600&q=85"
+  "/images/wears/custom%20name%20with%20car.png",
+  "/images/wears/custom%20name%20with%20car%20t%20shirt.png",
+  "/images/wears/ambala%20main.png",
+  "/images/wears/delhi%20main.png",
+  "/images/wears/hisar%20main.png",
+  "/images/wears/Karnal%20main.png"
 ];
 
 function productSlug(name) {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
 
-function ProductRail({ title, items, id }) {
-  return <section className="wears-rail" id={id}><div className="wears-rail-heading"><h2>{title}</h2><Link to="/wears/products">View All</Link></div><div className="wears-product-row">{items.map(([name, price, image]) => <article key={name}><Link to={`/wears/product/${productSlug(name)}`}><img src={image} alt={name} /><h3>{name}</h3><p>{price}</p></Link></article>)}</div></section>;
+function ProductRail({ title, items, id, showViewAll = true }) {
+  return <section className="wears-rail" id={id}><div className="wears-rail-heading"><h2>{title}</h2>{showViewAll ? <Link to="/wears">View All</Link> : null}</div><div className="wears-product-row">{items.map((product) => <article key={product.name}><Link to={`/wears/product/${productSlug(product.name)}`}><span className="wears-product-image"><img src={product.image} alt={product.name} /><img src={product.secondaryImage} alt={`${product.name} alternate view`} /></span><h3>{product.name}</h3><span className="wears-product-description">{product.description}</span><p>{product.price}</p></Link></article>)}</div></section>;
 }
 
 export default function WearsHomePage() {
   return (
     <StoreLayout store="wears">
       <main className="wears-home">
-        <section className="wears-hero"><img src="/images/wears/wears-hero.png" alt="OHRA Wears summer campaign" /><Link to="/wears/products">Shop Now</Link></section>
+        <section className="wears-hero"><picture><source media="(max-width: 720px)" srcSet="/images/wears/mobile%20hero.png" /><img src="/images/wears/hero%20desktop.png" alt="OHRA Wears city T-shirt campaign" /></picture><Link to="#summer-drop">Shop Now</Link></section>
         <ProductRail title="New In // Summer Drop" items={summerDrop} id="summer-drop" />
-        <ProductRail title="Best Sellers" items={bestSellers} id="best-sellers" />
+        <ProductRail title="Best Sellers" items={bestSellers} id="best-sellers" showViewAll={false} />
         <section className="wears-archive"><h2>OHRA Wears Archives</h2><div>{archive.map((image, index) => <img src={image} alt="OHRA Wears editorial archive" key={image} className={`archive-${index + 1}`} />)}</div></section>
-        <section className="wears-rail wears-accessories"><div className="wears-rail-heading"><h2>Accessories</h2><Link to="/wears/products">View All</Link></div><div className="wears-product-row">{[["Banjara Bucket Hat", "Rs. 1,299.00", "https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=720&q=85"], ["Checkers & Hukam Socks", "Rs. 499.00", "https://images.unsplash.com/photo-1582966772680-860e372bb558?auto=format&fit=crop&w=720&q=85"], ["The Mascot Socks", "Rs. 499.00", "https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?auto=format&fit=crop&w=720&q=85"], ["Endless Rides Socks", "Rs. 499.00", "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=720&q=85"]].map(([name, price, image]) => <article key={name}><Link to={`/wears/product/${productSlug(name)}`}><img src={image} alt={name} /><h3>{name}</h3><p>{price}</p></Link></article>)}</div></section>
-        <footer className="wears-footer"><div><img src="/images/wears/wear logo.png" alt="OHRA Wears" /><p>Follow the good noise.</p></div><nav><a href="#top">Instagram</a><a href="#top">LinkedIn</a><a href="#top">Spotted</a><a href="#top">About Us</a></nav><nav><a href="#top">Shipping & Payment</a><a href="#top">Returns & Exchanges</a><a href="#top">Business Enquiries</a><a href="#top">Customer Enquiries</a></nav><small>&copy; 2026 OHRA Wears. Privacy policy. Terms of service.</small></footer>
+        <section className="wears-rail wears-accessories"><div className="wears-rail-heading"><h2>Custom Drop</h2><Link to="/wears">View All</Link></div><div className="wears-product-row">{[{
+          name: "Custom Name Car Graphic T-Shirt",
+          description: "Add a name, city, or location to create a custom car-themed T-shirt.",
+          price: "Rs. 899.00",
+          image: "/images/wears/custom%20name%20with%20car.png",
+          secondaryImage: "/images/wears/custom%20name%20with%20car%20t%20shirt.png"
+        }].map((product) => <article key={product.name}><Link to={`/wears/product/${productSlug(product.name)}`}><span className="wears-product-image"><img src={product.image} alt={product.name} /><img src={product.secondaryImage} alt={`${product.name} alternate view`} /></span><h3>{product.name}</h3><span className="wears-product-description">{product.description}</span><p>{product.price}</p></Link></article>)}</div></section>
       </main>
     </StoreLayout>
   );

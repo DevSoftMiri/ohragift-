@@ -1,3 +1,105 @@
+const wearProducts = [
+  {
+    name: "Ambala City Graphic T-Shirt",
+    slug: "ambala-city-graphic-t-shirt",
+    store: "wears",
+    price: 899,
+    salePrice: 899,
+    image: "/images/wears/ambala%20main.png",
+    secondaryImage: "/images/wears/ambala%20t%20shirt.png",
+    eyebrow: "Summer Drop",
+    description: "Add your chosen city, location, or name to create a personal everyday tee."
+  },
+  {
+    name: "Ambala Heritage Graphic T-Shirt",
+    slug: "ambala-heritage-graphic-t-shirt",
+    store: "wears",
+    price: 899,
+    salePrice: 899,
+    image: "/images/wears/ambala%202%20main.png",
+    secondaryImage: "/images/wears/ambala%202%20tshirt.png",
+    eyebrow: "Summer Drop",
+    description: "Customize the front artwork with a place or person that matters to you."
+  },
+  {
+    name: "Ambala Statement Graphic T-Shirt",
+    slug: "ambala-statement-graphic-t-shirt",
+    store: "wears",
+    price: 899,
+    salePrice: 899,
+    image: "/images/wears/ambala%203%20main.png",
+    secondaryImage: "/images/wears/ambala%203%20tshit.png",
+    eyebrow: "Summer Drop",
+    description: "Made for custom names and locations with a relaxed, easy-to-style fit."
+  },
+  {
+    name: "Bathinda City Graphic T-Shirt",
+    slug: "bathinda-city-graphic-t-shirt",
+    store: "wears",
+    price: 899,
+    salePrice: 899,
+    image: "/images/wears/bathinda%20main.png",
+    secondaryImage: "/images/wears/bathinda%20t%20shirt.png",
+    eyebrow: "Summer Drop",
+    description: "Turn a favorite city, hometown, or personal name into a wearable graphic."
+  },
+  {
+    name: "Delhi City Graphic T-Shirt",
+    slug: "delhi-city-graphic-t-shirt",
+    store: "wears",
+    price: 899,
+    salePrice: 899,
+    image: "/images/wears/delhi%20main.png",
+    secondaryImage: "/images/wears/delhi%20t%20shirt.png",
+    eyebrow: "Best Sellers",
+    description: "Personalize the design with your selected city name, location, or initials."
+  },
+  {
+    name: "Hisar City Graphic T-Shirt",
+    slug: "hisar-city-graphic-t-shirt",
+    store: "wears",
+    price: 899,
+    salePrice: 899,
+    image: "/images/wears/hisar%20main.png",
+    secondaryImage: "/images/wears/hisar%20tshirt.png",
+    eyebrow: "Best Sellers",
+    description: "A clean custom tee for names, places, groups, trips, and local memories."
+  },
+  {
+    name: "Karnal City Graphic T-Shirt",
+    slug: "karnal-city-graphic-t-shirt",
+    store: "wears",
+    price: 899,
+    salePrice: 899,
+    image: "/images/wears/Karnal%20main.png",
+    secondaryImage: "/images/wears/karnal%20t%20shirt.png",
+    eyebrow: "Best Sellers",
+    description: "Built for custom place names or personal text while keeping a premium look."
+  },
+  {
+    name: "Sirsa Women's Graphic T-Shirt",
+    slug: "sirsa-women-s-graphic-t-shirt",
+    store: "wears",
+    price: 899,
+    salePrice: 899,
+    image: "/images/wears/women%20and%20sirsa.png",
+    secondaryImage: "/images/wears/women%20and%20sirsa%20t%20shirt.png",
+    eyebrow: "Best Sellers",
+    description: "Create a simple statement tee using a loved one's name or favorite place."
+  },
+  {
+    name: "Custom Name Car Graphic T-Shirt",
+    slug: "custom-name-car-graphic-t-shirt",
+    store: "wears",
+    price: 899,
+    salePrice: 899,
+    image: "/images/wears/custom%20name%20with%20car.png",
+    secondaryImage: "/images/wears/custom%20name%20with%20car%20t%20shirt.png",
+    eyebrow: "Custom Drop",
+    description: "Add a name, city, or location to create a custom car-themed T-shirt."
+  }
+];
+
 const sampleCatalog = [
   {
     name: "Birthday Bloom Box",
@@ -79,146 +181,7 @@ const sampleCatalog = [
     eyebrow: "Best Selling Gifts",
     description: "A playful custom couple frame made for anniversaries and celebrations."
   },
-  {
-    name: "Oversized Essential Tee",
-    slug: "oversized-essential-tee",
-    store: "wears",
-    price: 899,
-    salePrice: 799,
-    image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=80",
-    eyebrow: "Best Sellers",
-    description: "Heavyweight cotton, relaxed drape, and an editorial everyday silhouette."
-  },
-  {
-    name: "Tropic Parade Relaxed Fit Printed Shirt",
-    slug: "tropic-parade-relaxed-fit-printed-shirt",
-    store: "wears",
-    price: 2999,
-    salePrice: 2999,
-    image: "https://images.unsplash.com/photo-1626497764746-6dc36546b388?auto=format&fit=crop&w=720&q=85",
-    eyebrow: "Summer Drop",
-    description: "A relaxed printed shirt made for warm days, easy movement, and good noise."
-  },
-  {
-    name: "The Fallen Star Relaxed Fit Printed Shirt",
-    slug: "the-fallen-star-relaxed-fit-printed-shirt",
-    store: "wears",
-    price: 2799,
-    salePrice: 2799,
-    image: "https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=720&q=85",
-    eyebrow: "Summer Drop",
-    description: "An expressive printed shirt with a relaxed fit and lightweight everyday feel."
-  },
-  {
-    name: "Out Of Office Regular Fit Printed Shirt",
-    slug: "out-of-office-regular-fit-printed-shirt",
-    store: "wears",
-    price: 2699,
-    salePrice: 2699,
-    image: "https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?auto=format&fit=crop&w=720&q=85",
-    eyebrow: "Summer Drop",
-    description: "A clean regular-fit shirt designed for off-duty plans and everyday styling."
-  },
-  {
-    name: "Pavilions Regular Fit Printed Shirt",
-    slug: "pavilions-regular-fit-printed-shirt",
-    store: "wears",
-    price: 2799,
-    salePrice: 2799,
-    image: "https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=720&q=85",
-    eyebrow: "Summer Drop",
-    description: "A statement regular-fit shirt with considered details and an easy drape."
-  },
-  {
-    name: "Powerless Influence Relaxed Fit Printed Shirt",
-    slug: "powerless-influence-relaxed-fit-printed-shirt",
-    store: "wears",
-    price: 2799,
-    salePrice: 2799,
-    image: "https://images.unsplash.com/photo-1506629905607-d405b7a30db9?auto=format&fit=crop&w=720&q=85",
-    eyebrow: "Best Sellers",
-    description: "A relaxed printed layer with a confident silhouette and soft hand feel."
-  },
-  {
-    name: "Sad Holidays Oversized Fit Printed Jersey",
-    slug: "sad-holidays-oversized-fit-printed-jersey",
-    store: "wears",
-    price: 2499,
-    salePrice: 2499,
-    image: "https://images.unsplash.com/photo-1566206091558-7f218b696731?auto=format&fit=crop&w=720&q=85",
-    eyebrow: "Best Sellers",
-    description: "An oversized jersey built for comfort, layering, and expressive everyday looks."
-  },
-  {
-    name: "An Evil Door And A Well Short Sleeve Shirt",
-    slug: "an-evil-door-and-a-well-short-sleeve-shirt",
-    store: "wears",
-    price: 2799,
-    salePrice: 2799,
-    image: "https://images.unsplash.com/photo-1598032895397-b9472444bf93?auto=format&fit=crop&w=720&q=85",
-    eyebrow: "Best Sellers",
-    description: "A short sleeve statement shirt with a relaxed attitude and considered finish."
-  },
-  {
-    name: "It's O' Brooklyn Relaxed Fit Shirt",
-    slug: "it-s-o-brooklyn-relaxed-fit-shirt",
-    store: "wears",
-    price: 2699,
-    salePrice: 2699,
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=720&q=85",
-    eyebrow: "Best Sellers",
-    description: "A relaxed fit shirt with an effortless city-ready shape and feel."
-  },
-  {
-    name: "Banjara Bucket Hat",
-    slug: "banjara-bucket-hat",
-    store: "wears",
-    price: 1299,
-    salePrice: 1299,
-    image: "https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=720&q=85",
-    eyebrow: "Accessories",
-    description: "A statement bucket hat made to finish relaxed OHRA Wears looks."
-  },
-  {
-    name: "Checkers & Hukam Socks",
-    slug: "checkers-hukam-socks",
-    store: "wears",
-    price: 499,
-    salePrice: 499,
-    image: "https://images.unsplash.com/photo-1582966772680-860e372bb558?auto=format&fit=crop&w=720&q=85",
-    eyebrow: "Accessories",
-    description: "Comfort-first socks with a playful graphic finish."
-  },
-  {
-    name: "The Mascot Socks",
-    slug: "the-mascot-socks",
-    store: "wears",
-    price: 499,
-    salePrice: 499,
-    image: "https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?auto=format&fit=crop&w=720&q=85",
-    eyebrow: "Accessories",
-    description: "A soft everyday pair with a distinct OHRA Wears point of view."
-  },
-  {
-    name: "Endless Rides Socks",
-    slug: "endless-rides-socks",
-    store: "wears",
-    price: 499,
-    salePrice: 499,
-    image: "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=720&q=85",
-    eyebrow: "Accessories",
-    description: "Everyday socks designed for comfort, movement, and repeat wear."
-  },
-  {
-    name: "Studio Layer Shirt",
-    slug: "studio-layer-shirt",
-    store: "wears",
-    price: 1699,
-    salePrice: 1499,
-    image: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80",
-    eyebrow: "New Arrivals",
-    description: "A clean layering piece built around structure, texture, and movement."
-  }
+  ...wearProducts
 ];
 
 const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
