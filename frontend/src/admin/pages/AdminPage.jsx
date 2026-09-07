@@ -3,14 +3,17 @@ import { Link } from "react-router-dom";
 import { getAdminCatalog, loginAdmin, removeCategory, removeProduct, saveCategory, saveProduct } from "../../shared/services/adminService";
 
 const emptyCategory = { name: "", kind: "category", description: "", image: "", status: "active" };
-const emptyProduct = { name: "", category: "", occasion: "", description: "", price: "", salePrice: "", inventory: "0", images: "", status: "draft" };
+const emptyProduct = { name: "", category: "", occasion: "", subCategory: "", description: "", price: "", salePrice: "", inventory: "0", images: "", status: "draft" };
+const giftCategoryNames = ["Photo Frames", "Decor", "Gifts"];
+const giftOccasionNames = ["Anniversary", "Birthday", "Wedding"];
+const personalisedProductTypes = ["Mugs", "Keychains", "Pens"];
 
 function ProductRows({ products, token, loadCatalog, onEdit }) {
   if (!products.length) return <p>No products yet.</p>;
   return <div className="admin-list">
     {products.map((product) => <article key={product._id}>
       <img src={product.images?.[0]} alt="" />
-      <div><strong>{product.name}</strong><small>{product.category || "Uncategorised"} - Rs. {product.salePrice || product.price}</small></div>
+      <div><strong>{product.name}</strong><small>{product.subCategory || product.category || "Uncategorised"} - Rs. {product.salePrice || product.price}</small></div>
       <small>{product.status}</small>
       <div><button onClick={() => onEdit(product)}>Edit</button><button onClick={() => removeProduct(product._id, token).then(loadCatalog)}>Delete</button></div>
     </article>)}
@@ -27,8 +30,15 @@ export default function AdminPage() {
   const [productForm, setProductForm] = useState(emptyProduct);
   const [notice, setNotice] = useState("");
   const [loading, setLoading] = useState(false);
-  const categoryOptions = categories.filter((category) => (category.kind || "category") === "category");
-  const occasionOptions = categories.filter((category) => category.kind === "occasion");
+  const categoryOptions = store === "gifts"
+    ? giftCategoryNames.map((name) => ({ name }))
+    : categories.filter((category) => (category.kind || "category") === "category");
+  const occasionOptions = store === "gifts"
+    ? giftOccasionNames.map((name) => ({ name }))
+    : categories.filter((category) => category.kind === "occasion");
+  const visibleCategories = store === "gifts"
+    ? categories.filter((category) => (category.kind === "occasion" && giftOccasionNames.includes(category.name)) || (category.kind !== "occasion" && giftCategoryNames.includes(category.name)))
+    : categories;
 
   async function loadCatalog() {
     if (!token) return;
@@ -130,8 +140,8 @@ export default function AdminPage() {
       <section className="admin-card">
         <div className="admin-card-title"><h2>{categoryForm._id ? `Edit ${categoryForm.kind === "occasion" ? "occasion" : "category"}` : "Add category / occasion"}</h2><button onClick={() => setCategoryForm(emptyCategory)}>New</button></div>
         <form onSubmit={handleCategory} className="admin-form">
-          <label>Entry type<select value={categoryForm.kind || "category"} onChange={(event) => setCategoryForm({ ...categoryForm, kind: event.target.value })}><option value="category">Category</option><option value="occasion">Occasion</option></select></label>
-          <label>Name<input required value={categoryForm.name} onChange={(event) => setCategoryForm({ ...categoryForm, name: event.target.value })} placeholder={categoryForm.kind === "occasion" ? "Birthday" : "Flowers & Bouquets"} /></label>
+          <label>Entry type<select value={categoryForm.kind || "category"} onChange={(event) => setCategoryForm({ ...categoryForm, kind: event.target.value, name: "" })}><option value="category">Category</option><option value="occasion">Occasion</option></select></label>
+          <label>Name{store === "gifts" ? <select required value={categoryForm.name} onChange={(event) => setCategoryForm({ ...categoryForm, name: event.target.value })}><option value="">Choose {categoryForm.kind === "occasion" ? "occasion" : "category"}</option>{(categoryForm.kind === "occasion" ? giftOccasionNames : giftCategoryNames).map((name) => <option key={name} value={name}>{name}</option>)}</select> : <input required value={categoryForm.name} onChange={(event) => setCategoryForm({ ...categoryForm, name: event.target.value })} placeholder={categoryForm.kind === "occasion" ? "Birthday" : "Unisex"} />}</label>
           <label>Description<textarea value={categoryForm.description} onChange={(event) => setCategoryForm({ ...categoryForm, description: event.target.value })} placeholder="Short category description" /></label>
           <label>Image URL<input value={categoryForm.image} onChange={(event) => setCategoryForm({ ...categoryForm, image: event.target.value })} placeholder="https://..." /></label>
           <label>Status<select value={categoryForm.status} onChange={(event) => setCategoryForm({ ...categoryForm, status: event.target.value })}><option value="active">Visible</option><option value="hidden">Hidden</option></select></label>
@@ -145,6 +155,7 @@ export default function AdminPage() {
           <label>Product name<input required value={productForm.name} onChange={(event) => setProductForm({ ...productForm, name: event.target.value })} /></label>
           <label>Category<select required value={productForm.category} onChange={(event) => setProductForm({ ...productForm, category: event.target.value })}><option value="">Choose category</option>{categoryOptions.map((category) => <option key={category._id} value={category.name}>{category.name}</option>)}</select></label>
           {store === "gifts" && <label>Occasion<select value={productForm.occasion || ""} onChange={(event) => setProductForm({ ...productForm, occasion: event.target.value })}><option value="">Choose occasion</option>{occasionOptions.map((occasion) => <option key={occasion._id} value={occasion.name}>{occasion.name}</option>)}</select></label>}
+          {store === "gifts" && <label>Personalised type<select value={productForm.subCategory || ""} onChange={(event) => setProductForm({ ...productForm, subCategory: event.target.value })}><option value="">Not a personalised product</option>{personalisedProductTypes.map((type) => <option key={type} value={type}>{type}</option>)}</select></label>}
           <label className="wide">Description<textarea value={productForm.description} onChange={(event) => setProductForm({ ...productForm, description: event.target.value })} /></label>
           <label>Regular price<input required min="0" type="number" value={productForm.price} onChange={(event) => setProductForm({ ...productForm, price: event.target.value })} /></label>
           <label>Sale price<input min="0" type="number" value={productForm.salePrice} onChange={(event) => setProductForm({ ...productForm, salePrice: event.target.value })} /></label>
@@ -159,7 +170,7 @@ export default function AdminPage() {
     <section className="admin-inventory">
       <div><h2>{store === "gifts" ? "Gift" : "Wears"} categories & occasions</h2><span>{categories.length} entries</span></div>
       {loading ? <p>Loading catalog...</p> : <div className="admin-list">
-        {categories.map((category) => <article key={category._id}><strong>{category.name}</strong><small>{category.kind === "occasion" ? "Occasion" : "Category"} - {category.status}</small><div><button onClick={() => setCategoryForm({ ...emptyCategory, ...category, kind: category.kind || "category" })}>Edit</button><button onClick={() => removeCategory(category._id, token).then(loadCatalog)}>Delete</button></div></article>)}
+        {visibleCategories.map((category) => <article key={category._id}><strong>{category.name}</strong><small>{category.kind === "occasion" ? "Occasion" : "Category"} - {category.status}</small><div><button onClick={() => setCategoryForm({ ...emptyCategory, ...category, kind: category.kind || "category" })}>Edit</button><button onClick={() => removeCategory(category._id, token).then(loadCatalog)}>Delete</button></div></article>)}
         {!categories.length && <p>No categories or occasions yet.</p>}
       </div>}
     </section>

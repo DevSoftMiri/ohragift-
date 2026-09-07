@@ -2,9 +2,14 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getProductsByStore } from "../services/catalogService";
 import { useAppContext } from "../store/AppContext";
-import OptimizedImage from "../components/OptimizedImage";
 
 const fallbackImages = {
+  "personalized-wooden-photo-frame": "/images/gifts/product%20image/photoframe.png",
+  "earthy-leaf-ceramic-planter": "/images/gifts/product%20image/Decor.png",
+  "ohra-floral-celebration-hamper": "/images/gifts/product%20image/gift%20product.png",
+  "romantic-anniversary-keepsake-hamper": "/images/gifts/product%20image/anniversary%20gift.png",
+  "royal-wedding-keepsake-hamper": "/images/gifts/product%20image/wedding%20product.png",
+  "birthday-bliss-gift-hamper": "/images/gifts/product%20image/birthday%20gift.png",
   "birthday-bloom-box": "https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=420&q=80",
   "golden-hour-gift-hamper": "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=420&q=80",
   "oversized-essential-tee": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=420&q=80",
@@ -91,27 +96,27 @@ export default function CartPage() {
                       const hasCustomization = item.customName || item.customCity;
 
                       return (
-                      <article className="cart-item-card" key={itemKey}>
-                        <OptimizedImage src={item.image || fallbackImages[item.slug] || fallbackImages["birthday-bloom-box"]} alt="" sizes="118px" />
-                        <div>
-                          <p>{meta.label}</p>
-                          <h3>{item.name}</h3>
-                          {hasCustomization ? (
-                            <dl className="cart-custom-details">
-                              {item.customName ? <><dt>Name</dt><dd>{item.customName}</dd></> : null}
-                              {item.customCity ? <><dt>City</dt><dd>{item.customCity}</dd></> : null}
-                            </dl>
-                          ) : null}
-                          <strong>{formatPrice(item.price)}</strong>
-                          <div className="cart-quantity">
-                            <button type="button" onClick={() => updateCartQuantity(itemKey, item.quantity - 1)} aria-label={`Decrease ${item.name}`}>-</button>
-                            <span>{item.quantity}</span>
-                            <button type="button" onClick={() => updateCartQuantity(itemKey, item.quantity + 1)} aria-label={`Increase ${item.name}`}>+</button>
+                        <article className="cart-item-card" key={itemKey}>
+                          <img src={item.image || fallbackImages[item.slug] || fallbackImages["birthday-bloom-box"]} alt={item.name} loading="lazy" />
+                          <div>
+                            <p>{meta.label}</p>
+                            <h3>{item.name}</h3>
+                            {hasCustomization ? (
+                              <dl className="cart-custom-details">
+                                {item.customName ? <><dt>Name</dt><dd>{item.customName}</dd></> : null}
+                                {item.customCity ? <><dt>City</dt><dd>{item.customCity}</dd></> : null}
+                              </dl>
+                            ) : null}
+                            <strong>{formatPrice(item.price)}</strong>
+                            <div className="cart-quantity">
+                              <button type="button" onClick={() => updateCartQuantity(itemKey, item.quantity - 1)} aria-label={`Decrease ${item.name}`}>-</button>
+                              <span>{item.quantity}</span>
+                              <button type="button" onClick={() => updateCartQuantity(itemKey, item.quantity + 1)} aria-label={`Increase ${item.name}`}>+</button>
+                            </div>
                           </div>
-                        </div>
-                        <button className="cart-remove" type="button" onClick={() => removeFromCart(itemKey)} aria-label={`Remove ${item.name}`}>&times;</button>
-                      </article>
-                    );
+                          <button className="cart-remove" type="button" onClick={() => removeFromCart(itemKey)} aria-label={`Remove ${item.name}`}>&times;</button>
+                        </article>
+                      );
                     })}
                   </div>
 
@@ -155,7 +160,7 @@ export default function CartPage() {
           <div className="cart-bestseller-grid">
             {recommendedGifts.map((product) => (
               <article key={product.slug}>
-                <Link to={`/gifts/product/${product.slug}`}><OptimizedImage src={product.image || fallbackImages[product.slug] || fallbackImages["birthday-bloom-box"]} alt={product.name} sizes="(max-width: 720px) 45vw, 20vw" /></Link>
+                <Link to={`/gifts/product/${product.slug}`}><img src={product.image || fallbackImages[product.slug] || fallbackImages["birthday-bloom-box"]} alt={product.name} loading="lazy" /></Link>
                 <p>{product.eyebrow || product.category || "OHRA Gifts"}</p>
                 <Link to={`/gifts/product/${product.slug}`}><h3>{product.name}</h3></Link>
                 <strong>{formatPrice(product.salePrice || product.price)}</strong>

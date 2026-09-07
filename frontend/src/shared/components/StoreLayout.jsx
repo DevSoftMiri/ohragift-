@@ -36,31 +36,32 @@ export default function StoreLayout({ store, children }) {
   const { cartItems, totals, wishlistItems, removeFromCart, updateCartQuantity } = useAppContext();
   const location = useLocation();
   const [mobilePanel, setMobilePanel] = useState(null);
+  const [closedDropdown, setClosedDropdown] = useState(null);
   const isGifts = store === "gifts";
   const isWearsPath = location.pathname.startsWith("/wears");
   const isPersonalisedPath = location.pathname.startsWith("/gifts/personalised") || location.pathname.startsWith("/gifts/create-your-gift");
   const giftNavItems = [
+    ["Home", "/gifts", false],
     ["Categories", "/gifts/categories", true],
     ["Occasions", "/gifts/occasions", true],
-    ["Personalised", "/gifts/personalised", true],
-    ["Hampers", "/gifts/boxes", true],
-    ["Best Sellers", "/gifts/bestsellers", false],
+    ["Personalised", "/gifts/personalised", false],
+    ["Hampers", "/gifts/boxes", false],
   ];
   const giftDropdowns = {
     Categories: {
       title: "Shop by Category",
       to: "/gifts/categories",
-      links: ["Flowers & Bouquets", "Chocolates & Sweets", "Cakes & Celebration", "Home & Living", "Fashion & Accessories", "Beauty & Self-Care", "Stationery", "Photo Gifts", "Kids Gifts", "Spiritual Gifts", "Premium Gifts"]
+      links: ["Photo Frames", "Decor", "Gifts"]
     },
     Occasions: {
       title: "Shop by Occasion",
       to: "/gifts/occasions",
-      links: ["Birthday", "Anniversary", "Wedding", "Engagement", "Housewarming", "Baby Shower", "Graduation", "Farewell", "Diwali", "Raksha Bandhan", "Holi", "Christmas"]
+      links: ["Anniversary", "Birthday", "Wedding"]
     },
     Personalised: {
       title: "Personalised Gifts",
       to: "/gifts/personalised",
-      links: ["Personalised Mugs", "Photo Frames", "Custom Bottles", "Name Keychains", "Custom Cushions", "Photo Lamps", "Engraved Gifts", "Custom Diaries", "Personalised Pens", "Custom Jewellery"]
+      links: ["Personalised Mugs", "Personalised Keychains", "Personalised Pens"]
     },
     Hampers: {
       title: "Gift Boxes & Hampers",
@@ -107,16 +108,16 @@ export default function StoreLayout({ store, children }) {
 
               <nav className="gift-primary-nav" aria-label="Gifts navigation">
                 {giftNavItems.map(([label, to, hasMenu]) => (
-                  <div className="gift-nav-item" key={to}>
+                  <div className={`gift-nav-item${closedDropdown === label ? " dropdown-closed" : ""}`} key={to} onMouseEnter={() => setClosedDropdown(null)}>
                     <Link className={location.pathname === to ? "active" : ""} to={to}>{label}</Link>
                     {hasMenu && (
                       <section className="gift-mega-menu single-dropdown" aria-label={`${label} menu`}>
                         <div className="gift-mega-links">
                           <p>{giftDropdowns[label].title}</p>
                           {giftDropdowns[label].links.map((item) => (
-                            <Link key={item} to={giftDropdowns[label].to}>{item}</Link>
+                            <Link key={item} onClick={() => setClosedDropdown(label)} to={`${giftDropdowns[label].to}?${label === "Occasions" ? "occasion" : "category"}=${encodeURIComponent(item)}`}>{item}</Link>
                           ))}
-                          <Link className="gift-mega-more" to={giftDropdowns[label].to}>View All {label} <span>&rarr;</span></Link>
+                          <Link className="gift-mega-more" onClick={() => setClosedDropdown(label)} to={giftDropdowns[label].to}>View All {label} <span>&rarr;</span></Link>
                         </div>
                       </section>
                     )}
@@ -170,7 +171,6 @@ export default function StoreLayout({ store, children }) {
 
                   {mobilePanel === "menu" && (
                     <nav className="gift-mobile-menu" aria-label="Mobile gifts menu">
-                      <Link to="/gifts" onClick={() => setMobilePanel(null)}><i>H</i>Home</Link>
                       {giftNavItems.map(([label, to, hasMenu]) => (
                         hasMenu ? (
                           <button key={label} type="button" onClick={() => setMobilePanel(label.toLowerCase())}>
@@ -194,7 +194,7 @@ export default function StoreLayout({ store, children }) {
                     <section className="gift-mobile-submenu">
                       <h2>{giftDropdowns[mobilePanel === "hampers" ? "Hampers" : mobilePanel[0].toUpperCase() + mobilePanel.slice(1)].title}</h2>
                       {giftDropdowns[mobilePanel === "hampers" ? "Hampers" : mobilePanel[0].toUpperCase() + mobilePanel.slice(1)].links.map((item, index) => (
-                        <Link key={item} to={giftDropdowns[mobilePanel === "hampers" ? "Hampers" : mobilePanel[0].toUpperCase() + mobilePanel.slice(1)].to} onClick={() => setMobilePanel(null)}>
+                        <Link key={item} to={`${giftDropdowns[mobilePanel === "hampers" ? "Hampers" : mobilePanel[0].toUpperCase() + mobilePanel.slice(1)].to}?${mobilePanel === "occasions" ? "occasion" : "category"}=${encodeURIComponent(item)}`} onClick={() => setMobilePanel(null)}>
                           <img src={mobileShortcuts[index % mobileShortcuts.length][2]} alt="" />
                           <span>{item}</span>
                           <b>&rsaquo;</b>

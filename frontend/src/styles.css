@@ -206,6 +206,52 @@ picture {
   color: #ffffff;
 }
 
+@media (max-width: 900px) {
+  .gifts-taxonomy-home-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gift-collection-page:has(.taxonomy-shop-page) .gift-collection-hero {
+  min-height: 210px;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+@media (max-width: 580px) {
+  .gift-collection-page:has(.taxonomy-shop-page) .gift-collection-hero {
+    min-height: 170px;
+    padding-top: 1.15rem;
+    padding-bottom: 1.15rem;
+  }
+}
+
+.gift-product-card > button.liked,
+.taxonomy-product-grid article > button.saved,
+.hamper-product-grid article > button.saved,
+.wear-save-button.saved,
+.product-wishlist-button.saved {
+  color: #d09a16;
+}
+
+.wear-save-button.saved,
+.product-wishlist-button.saved {
+  border-color: #d09a16;
+}
+
+.store-shell.gifts .gift-primary-nav .gift-nav-item.dropdown-closed:hover .single-dropdown,
+.store-shell.gifts .gift-primary-nav .gift-nav-item.dropdown-closed:focus-within .single-dropdown {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+}
+
+/* Keep category and product imagery square across the Gifts storefront. */
+.taxonomy-card-grid img,
+.taxonomy-product-grid article > a:first-child img {
+  aspect-ratio: 1;
+}
+
 .mobile-store-switcher { display: none; }
 
 .hero-panel,
@@ -266,10 +312,10 @@ picture {
 .crossing-ribbon { position: relative; height: 245px; margin: 1.1rem -2rem .4rem; overflow: hidden; background: #fffdfb; isolation: isolate; }.ribbon-strip { position: absolute; left: -22%; width: 144%; overflow: hidden; box-shadow: 0 7px 18px rgba(45, 25, 25, .07); transform-origin: center; }.ribbon-track { display: flex; width: max-content; will-change: transform; white-space: nowrap; }.ribbon-track > span { display: flex; align-items: center; flex: 0 0 auto; gap: 1.1em; padding: .34em 1.1em; font: 600 clamp(1.35rem, 2vw, 1.8rem)/1 "Manrope", sans-serif; letter-spacing: 0; }.ribbon-track b { color: currentColor; font-size: .58em; }.ribbon-primary { z-index: 2; top: 101px; transform: rotate(-6deg); background: #8d2638; color: #fff; }.ribbon-primary .ribbon-track { animation: ribbon-left 22s linear infinite; }.ribbon-secondary { z-index: 1; top: 101px; transform: rotate(6deg); background: #ddd5ce; color: #302d2c; }.ribbon-secondary .ribbon-track { animation: ribbon-right 21s linear infinite; }.crossing-ribbon:hover .ribbon-primary .ribbon-track { animation-duration: 17s; }.crossing-ribbon:hover .ribbon-secondary .ribbon-track { animation-duration: 16s; }@keyframes ribbon-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }@keyframes ribbon-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 .gifts-assurances { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; padding: 1.15rem 2rem; margin: 1.4rem .45rem 2rem; border: 1px solid #f0e9e6; border-radius: 16px; background: #fff; }
 .gifts-assurances article { display: flex; justify-content: center; align-items: center; gap: .8rem; }.gifts-assurances article > span { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: #f8e8e6; color: #8d2638; font-size: 1.1rem; }.gifts-assurances strong, .gifts-assurances small { display: block; }.gifts-assurances strong { font-size: .76rem; }.gifts-assurances small { margin-top: .25rem; color: #6e6565; font-size: .65rem; }
-.gifts-section { margin-top: 2.1rem; }.gifts-section-title { display: flex; justify-content: space-between; align-items: center; margin: 0 .35rem 1rem; }.gifts-section-title h2, .testimonials h2 { margin: 0; font: 600 1.45rem Georgia, serif; }.gifts-section-title a { color: #8d2638; font-size: .75rem; font-weight: 700; }
-.category-row, .gifts-product-row { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(120px, 1fr); gap: 1rem; overflow-x: auto; padding: .25rem .2rem .75rem; scrollbar-width: thin; }.category-item { text-align: center; font-size: .72rem; }.category-item img { width: 100%; aspect-ratio: 1; border-radius: 50%; object-fit: cover; background: #f5e9e4; }.category-item strong { display: block; margin-top: .65rem; white-space: nowrap; }
+.gifts-taxonomy-home-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1.5rem, 4vw, 3.5rem); }.gifts-section { margin-top: 2.1rem; }.gifts-taxonomy-home-grid .gifts-section { min-width: 0; }.gifts-section-title { display: flex; justify-content: space-between; align-items: center; margin: 0 .35rem 1rem; }.gifts-section-title h2, .testimonials h2 { margin: 0; font: 600 1.45rem Georgia, serif; }.gifts-section-title a { color: #8d2638; font-size: .75rem; font-weight: 700; }
+.category-row, .gifts-product-row { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(112px, 148px); gap: 1rem; overflow-x: auto; padding: .25rem .2rem .75rem; scrollbar-width: thin; }.category-item { text-align: center; font-size: .72rem; }.category-item img { width: 100%; aspect-ratio: 1; border-radius: 8px; object-fit: cover; background: #f5e9e4; }.category-item strong { display: block; margin-top: .65rem; white-space: nowrap; }.occasions-home-title { margin-top: 1.4rem; }
 .budget-pill-row { display: flex; flex-wrap: wrap; gap: .65rem; padding: .15rem .2rem; }.budget-pill-row a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 .95rem; border: 1px solid #ead9d4; border-radius: 999px; background: #fff; color: #4a3e3f; font: 800 .7rem/1 "Manrope", sans-serif; }.budget-pill-row a:hover { border-color: #8d2638; color: #8d2638; }.custom-gift-cta { margin-top: 2.1rem; padding: clamp(2rem, 5vw, 4rem); border-radius: 16px; background: linear-gradient(120deg, #82283a, #ad6949 58%, #e5b45d); color: #fff; }.custom-gift-cta p { margin: 0 0 .7rem; text-transform: uppercase; font: 800 .68rem "Manrope", sans-serif; letter-spacing: .1em; }.custom-gift-cta h2 { max-width: 760px; margin: 0; font: 500 clamp(2rem, 4vw, 3.6rem)/1 Georgia, serif; }.custom-gift-cta span { display: block; max-width: 540px; margin-top: .9rem; color: rgba(255,255,255,.86); font-size: .86rem; line-height: 1.7; }.custom-gift-cta .wine-button { display: inline-flex; margin-top: 1.45rem; background: #fff; color: #82283a; }
-.gifts-product-row { grid-auto-columns: minmax(190px, 1fr); }.gift-product-card { position: relative; padding: .55rem; border: 1px solid #f2ece9; border-radius: 9px; background: #fff; }.gift-product-card > a img { aspect-ratio: 1.15; object-fit: cover; border-radius: 6px; }.gift-product-card > button:first-of-type { position: absolute; top: .9rem; right: .9rem; width: 30px; height: 30px; border: 0; border-radius: 50%; background: rgba(255,255,255,.9); font-size: 1.18rem; }.gift-product-card > button.liked { color: #8d2638; }.gift-product-card h3 { min-height: 2.3em; margin: .65rem 0 .25rem; font-size: .76rem; line-height: 1.35; }.stars { margin: 0; color: #dc9c19; font-size: .65rem; }.stars small { color: #806e6e; }.gift-price { margin: .55rem 0; font-weight: 800; font-size: .85rem; }.gift-price del { margin-left: .35rem; color: #877b7b; font-size: .68rem; font-weight: 400; }.add-gift-button { width: 100%; border: 0; border-radius: 5px; padding: .7rem; background: #8d2638; color: #fff; font: 700 .69rem "Manrope", sans-serif; cursor: pointer; }
+.gifts-product-row { grid-auto-columns: minmax(190px, 1fr); }.gift-product-card { position: relative; padding: .55rem; border: 1px solid #f2ece9; border-radius: 9px; background: #fff; }.gift-product-card > a img { aspect-ratio: 1; object-fit: cover; border-radius: 6px; }.gift-product-card > button:first-of-type { position: absolute; top: .9rem; right: .9rem; width: 30px; height: 30px; border: 0; border-radius: 50%; background: rgba(255,255,255,.9); font-size: 1.18rem; }.gift-product-card > button.liked { color: #8d2638; }.gift-product-card h3 { min-height: 2.3em; margin: .65rem 0 .25rem; font-size: .76rem; line-height: 1.35; }.stars { margin: 0; color: #dc9c19; font-size: .65rem; }.stars small { color: #806e6e; }.gift-price { margin: .55rem 0; font-weight: 800; font-size: .85rem; }.gift-price del { margin-left: .35rem; color: #877b7b; font-size: .68rem; font-weight: 400; }.add-gift-button { width: 100%; border: 0; border-radius: 5px; padding: .7rem; background: #8d2638; color: #fff; font: 700 .69rem "Manrope", sans-serif; cursor: pointer; }
 .sale-banner { display: grid; grid-template-columns: 1fr 1fr; min-height: 255px; margin-top: 2.1rem; overflow: hidden; border-radius: 16px; background: linear-gradient(100deg, #f8e7e4, #fae6e8); }.sale-banner > div:first-child { padding: 2.2rem 0 2rem 8%; }.sale-banner h2 { color: #1d1b1a; font-size: clamp(2rem, 3vw, 3.4rem); }.sale-banner > div > span { display: block; color: #655c5b; font-size: .78rem; line-height: 1.55; }.sale-banner .wine-button { margin-top: 1.2rem; }.sale-art { background: url('/images/ohra-gifts-hero.png') center right / cover no-repeat; mix-blend-mode: multiply; }
 .testimonials { padding-top: 2.2rem; text-align: center; }.testimonials > div { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; max-width: 1040px; margin: 1rem auto 0; text-align: left; }.testimonials article { min-height: 135px; padding: 1rem 1.2rem; border: 1px solid #f0e9e5; border-radius: 9px; background: #fff; }.testimonials article > b { color: #8d2638; font: 2rem Georgia, serif; }.testimonials article p { min-height: 2.8em; margin: -.4rem 0 .8rem; color: #655d5d; font-size: .72rem; line-height: 1.5; }.testimonials strong { display: block; font-size: .71rem; }.testimonials .stars { display: block; margin-top: .25rem; }
 
@@ -727,7 +773,7 @@ picture {
 .taxonomy-card-rail::before, .taxonomy-card-rail::after { content: ""; position: absolute; top: 0; bottom: 2.2rem; z-index: 2; width: clamp(2.2rem, 5vw, 4.5rem); pointer-events: none; }
 .taxonomy-card-rail::before { left: 0; background: linear-gradient(90deg, #fffdfb 0%, rgba(255,253,251,0) 100%); }
 .taxonomy-card-rail::after { right: 0; background: linear-gradient(270deg, #fffdfb 0%, rgba(255,253,251,0) 100%); }
-.taxonomy-card-grid { display: flex; grid-template-columns: none; gap: 1rem; overflow-x: auto; overflow-y: hidden; overscroll-behavior: contain; scroll-behavior: smooth; scroll-snap-type: x proximity; scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch; touch-action: pan-x; padding: .25rem .75rem 3rem; }
+.taxonomy-card-grid { display: flex; grid-template-columns: none; gap: 1rem; width: 100%; overflow-x: scroll; overflow-y: hidden; overscroll-behavior: contain; scroll-behavior: smooth; scroll-snap-type: x proximity; scrollbar-width: thin; -ms-overflow-style: auto; -webkit-overflow-scrolling: touch; touch-action: pan-x; cursor: grab; padding: .25rem .75rem 3rem; }
 .taxonomy-card-grid::-webkit-scrollbar { width: 0; height: 0; display: none; }
 .taxonomy-card-grid button { flex: 0 0 178px; scroll-snap-align: start; }
 
@@ -1049,7 +1095,9 @@ picture {
 .personalised-store .personalised-preview-art { height: 385px; margin: .9rem 0 1rem; overflow: visible; }
 .personalised-store .personalised-preview-art img:first-child { position: relative; z-index: 1; width: min(92%, 390px); max-height: 340px; object-fit: contain; transform: scale(1.16); filter: drop-shadow(0 26px 30px rgba(120,65,48,.18)); }
 .personalised-store .personalised-preview-art img:nth-child(2) { z-index: 2; left: 10%; bottom: 11%; width: 132px; transform: rotate(-9deg); filter: drop-shadow(0 12px 18px rgba(120,65,48,.16)); }
-.personalised-store .personalised-preview > button { z-index: 3; top: 49%; box-shadow: 0 8px 18px rgba(32,26,26,.08); }
+.personalised-store .personalised-preview > button { z-index: 3; top: 50%; transform: translateY(-50%); box-shadow: 0 8px 18px rgba(32,26,26,.08); }
+.personalised-store .personalised-preview > button:first-of-type { left: .85rem; }
+.personalised-store .personalised-preview > button:last-of-type { right: .85rem; }
 .personalised-store .personalised-preview small { position: relative; z-index: 2; margin-top: .2rem; padding: .9rem 1rem; border-radius: 10px; }
 
 @media (max-width: 580px) {

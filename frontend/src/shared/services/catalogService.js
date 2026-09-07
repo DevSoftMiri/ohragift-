@@ -102,144 +102,76 @@ const wearProducts = [
 
 const sampleCatalog = [
   {
-    name: "Birthday Bloom Box",
-    slug: "birthday-bloom-box",
+    name: "Personalized Wooden Photo Frame",
+    slug: "personalized-wooden-photo-frame",
     store: "gifts",
-    price: 1299,
-    salePrice: 1099,
-    image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=900&q=80",
-    eyebrow: "Personalised Gifts",
-    description: "A keepsake box with blooms, note cards, and celebration details."
-  },
-  {
-    name: "Golden Hour Gift Hamper",
-    slug: "golden-hour-gift-hamper",
-    store: "gifts",
-    price: 999,
+    price: 899,
     salePrice: 899,
-    image: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=900&q=80",
-    eyebrow: "Festivals",
-    description: "Warm-toned festive gifting with premium packaging and message options."
-  },
-  {
-    name: "Personalised Wooden Photo Lamp",
-    slug: "personalised-wooden-photo-lamp",
-    store: "gifts",
-    price: 1799,
-    salePrice: 1299,
-    image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=900&q=80",
-    category: "Photo Gifts",
+    image: "/images/gifts/product%20image/photoframe.png",
+    category: "Photo Frames",
     occasion: "Anniversary",
-    eyebrow: "Best Selling Gifts",
-    description: "A warm wooden photo lamp customised with a favourite memory."
+    eyebrow: "Photo Frames",
+    description: "A timeless wooden frame customized with your favorite photo and a heartfelt message - made to turn special moments into lasting memories."
   },
   {
-    name: "Luxury Gift Hamper For Him",
-    slug: "luxury-gift-hamper-for-him",
+    name: "Earthy Leaf Ceramic Planter",
+    slug: "earthy-leaf-ceramic-planter",
     store: "gifts",
-    price: 3299,
-    salePrice: 2499,
-    image: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=900&q=80",
-    category: "Gift Hampers",
-    occasion: "For Him",
-    eyebrow: "Best Selling Gifts",
-    description: "A premium hamper curated with elegant keepsakes and treats."
-  },
-  {
-    name: "Signature Gift Hamper",
-    slug: "signature-gift-hamper",
-    store: "gifts",
-    price: 999,
+    price: 799,
     salePrice: 799,
-    image: "/images/gifts/hamper%201.png",
-    category: "Gift Hampers",
-    occasion: "Birthday",
-    eyebrow: "Gift Hampers",
-    description: "A polished all-occasion hamper with sweets, keepsakes, and premium gift-ready packaging."
+    image: "/images/gifts/product%20image/Decor.png",
+    category: "Decor",
+    occasion: "Wedding",
+    eyebrow: "Decor",
+    description: "A beautifully crafted ceramic planter with subtle leaf-pattern detailing and a warm earthy finish. Perfect for indoor plants, shelves, desks, or living spaces, adding a fresh and elegant touch to your decor."
   },
   {
-    name: "Corporate Thank You Hamper",
-    slug: "corporate-thank-you-hamper",
+    name: "OHRA Floral Celebration Hamper",
+    slug: "ohra-floral-celebration-hamper",
     store: "gifts",
     price: 1499,
-    salePrice: 1299,
-    image: "/images/gifts/hamper%202.png",
-    category: "Corporate Hampers",
-    occasion: "Corporate",
-    eyebrow: "Corporate Hampers",
-    description: "A refined desk-friendly selection for clients, teams, onboarding, and thoughtful business gifting."
-  },
-  {
-    name: "Birthday Celebration Hamper",
-    slug: "birthday-celebration-hamper",
-    store: "gifts",
-    price: 1199,
-    salePrice: 999,
-    image: "/images/gifts/hamper%203.png",
-    category: "Birthday Hampers",
+    salePrice: 1499,
+    image: "/images/gifts/product%20image/gift%20product.png",
+    category: "Gifts",
     occasion: "Birthday",
-    eyebrow: "Birthday Hampers",
-    description: "A cheerful birthday hamper with treats, a note-card feel, and celebratory finishing touches."
+    eyebrow: "Gifts",
+    description: "A beautifully curated gift hamper featuring an elegant floral arrangement paired with a premium sweet treat. Thoughtfully presented in OHRA's signature gift box, it's perfect for birthdays, anniversaries, congratulations, and other special celebrations."
   },
   {
-    name: "Anniversary Memory Hamper",
-    slug: "anniversary-memory-hamper",
-    store: "gifts",
-    price: 1799,
-    salePrice: 1599,
-    image: "/images/gifts/hamper%204.png",
-    category: "Anniversary Hampers",
-    occasion: "Anniversary",
-    eyebrow: "Anniversary Hampers",
-    description: "A romantic hamper curated for couples, milestones, and warm personal moments."
-  },
-  {
-    name: "Premium Festive Hamper",
-    slug: "premium-festive-hamper",
+    name: "Romantic Anniversary Keepsake Hamper",
+    slug: "romantic-anniversary-keepsake-hamper",
     store: "gifts",
     price: 1999,
-    salePrice: 1799,
-    image: "/images/gifts/hamper%205.png",
-    category: "Festive Hampers",
-    occasion: "Diwali",
-    eyebrow: "Festive Hampers",
-    description: "A festive-ready hamper with elegant presentation, rich gifting cues, and a premium finish."
+    salePrice: 1999,
+    image: "/images/gifts/product%20image/anniversary%20gift.png",
+    category: "Gifts",
+    occasion: "Anniversary",
+    eyebrow: "Anniversary Gifts",
+    description: "A thoughtfully curated anniversary hamper featuring fresh red roses, a cute teddy bear, scented candle, heart-themed mug, decorative photo frame, and floral keepsakes. Beautifully arranged for a romantic surprise that makes your special day even more memorable."
   },
   {
-    name: "Personalised Name Leather Wallet",
-    slug: "personalised-name-leather-wallet",
+    name: "Royal Wedding Keepsake Hamper",
+    slug: "royal-wedding-keepsake-hamper",
     store: "gifts",
-    price: 1299,
-    salePrice: 899,
-    image: "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=900&q=80",
-    category: "Fashion & Accessories",
-    occasion: "For Him",
-    eyebrow: "Best Selling Gifts",
-    description: "A sleek leather wallet finished with a personalised name detail."
+    price: 2299,
+    salePrice: 2299,
+    image: "/images/gifts/product%20image/wedding%20product.png",
+    category: "Gifts",
+    occasion: "Wedding",
+    eyebrow: "Wedding Gifts",
+    description: "An elegant wedding gift hamper featuring a premium decorative textile, floral mug, scented candle, golden keepsake frame, decorative tin, and beautifully curated accessories. Presented in a luxurious ivory-and-gold theme, it makes a thoughtful gift for newlyweds and wedding celebrations."
   },
   {
-    name: "Scented Candle Gift Set",
-    slug: "scented-candle-gift-set",
+    name: "Birthday Bliss Gift Hamper",
+    slug: "birthday-bliss-gift-hamper",
     store: "gifts",
     price: 1699,
-    salePrice: 1199,
-    image: "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=900&q=80",
-    category: "Home & Living",
-    occasion: "Housewarming",
-    eyebrow: "Best Selling Gifts",
-    description: "Softly scented candles packed for a calm, thoughtful gifting moment."
-  },
-  {
-    name: "Custom Couple Caricature Frame",
-    slug: "custom-couple-caricature-frame",
-    store: "gifts",
-    price: 1999,
-    salePrice: 1499,
-    image: "https://images.unsplash.com/photo-1541971875076-8f970d573be6?auto=format&fit=crop&w=900&q=80",
-    category: "Photo Gifts",
-    occasion: "Anniversary",
-    eyebrow: "Best Selling Gifts",
-    description: "A playful custom couple frame made for anniversaries and celebrations."
+    salePrice: 1699,
+    image: "/images/gifts/product%20image/birthday%20gift.png",
+    category: "Gifts",
+    occasion: "Birthday",
+    eyebrow: "Birthday Gifts",
+    description: "A charming birthday hamper featuring a beautiful floral bouquet, cute teddy bear, stylish mug, scented candle, and thoughtfully curated keepsakes. Presented in an elegant gift box, it's a lovely way to make someone's birthday feel extra special."
   },
   ...wearProducts
 ];
@@ -254,13 +186,37 @@ function normalizeProduct(product) {
   };
 }
 
+function visibleGiftProducts(products) {
+  const allowedCategories = new Set(["Photo Frames", "Decor", "Gifts"]);
+  return products.filter((product) => product.store !== "gifts" || allowedCategories.has(product.category));
+}
+
+function mergeGiftProducts(products) {
+  const localProducts = sampleCatalog.filter((product) => product.store === "gifts");
+  return visibleGiftProducts([...products, ...localProducts].reduce((unique, product) => {
+    if (!unique.some((entry) => entry.slug === product.slug)) unique.push(product);
+    return unique;
+  }, []));
+}
+
+const hiddenFromGiftTaxonomy = new Set([
+  "romantic-anniversary-keepsake-hamper",
+  "royal-wedding-keepsake-hamper",
+  "birthday-bliss-gift-hamper"
+]);
+
 export async function getProductsByStore(store) {
   try {
     const response = await fetch(`${apiUrl}/products?store=${store}`);
     if (!response.ok) throw new Error("Catalog API is unavailable");
-    return (await response.json()).map(normalizeProduct);
+    const products = (await response.json()).map(normalizeProduct);
+    return store === "gifts"
+      ? mergeGiftProducts(products).filter((product) => !hiddenFromGiftTaxonomy.has(product.slug))
+      : products;
   } catch {
-    return sampleCatalog.filter((item) => item.store === store);
+    return store === "gifts"
+      ? mergeGiftProducts([]).filter((product) => !hiddenFromGiftTaxonomy.has(product.slug))
+      : sampleCatalog.filter((item) => item.store === store);
   }
 }
 
@@ -283,13 +239,17 @@ export async function getGiftProducts(filters = {}) {
   try {
     const response = await fetch(`${apiUrl}/products?${query}`);
     if (!response.ok) throw new Error("Catalog API is unavailable");
-    return (await response.json()).map(normalizeProduct);
+    const products = mergeGiftProducts((await response.json()).map(normalizeProduct));
+    return products.filter((product) => (
+      (!filters.category || product.category === filters.category) &&
+      (!filters.occasion || product.occasion === filters.occasion)
+    ));
   } catch {
-    return sampleCatalog.filter((item) => (
+    return visibleGiftProducts(sampleCatalog.filter((item) => (
       item.store === "gifts" &&
       (!filters.category || item.category === filters.category) &&
       (!filters.occasion || item.occasion === filters.occasion)
-    ));
+    )));
   }
 }
 

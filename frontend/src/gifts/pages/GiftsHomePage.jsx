@@ -1,26 +1,27 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import StoreLayout from "../../shared/components/StoreLayout";
-import OptimizedImage from "../../shared/components/OptimizedImage";
 import { useAppContext } from "../../shared/store/AppContext";
 
 const categories = [
-  ["Birthday", "/gifts/occasions", "https://images.unsplash.com/photo-1513159446162-54eb8bdaa79b?auto=format&fit=crop&w=320&q=80"],
-  ["For Her", "/gifts/categories", "https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?auto=format&fit=crop&w=320&q=80"],
-  ["For Him", "/gifts/categories", "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=320&q=80"],
-  ["Anniversary", "/gifts/occasions", "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=320&q=80"],
-  ["Personalised", "/gifts/personalised", "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=320&q=80"],
-  ["Gift Hampers", "/gifts/boxes", "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=320&q=80"],
-  ["Corporate", "/gifts/categories", "https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=320&q=80"],
-  ["Festive", "/gifts/occasions", "https://images.unsplash.com/photo-1544907524-7c7d7c2af5b3?auto=format&fit=crop&w=320&q=80"]
+  ["Photo Frames", "/gifts/categories", "/images/gifts/category/photoframe.png"],
+  ["Decor", "/gifts/categories", "/images/gifts/category/decor.png"],
+  ["Gifts", "/gifts/categories", "/images/gifts/category/gift.png"]
+];
+
+const occasions = [
+  ["Anniversary", "/gifts/occasions", "/images/gifts/category/Anniversary.png"],
+  ["Birthday", "/gifts/occasions", "/images/gifts/category/Birthday.png"],
+  ["Wedding", "/gifts/occasions", "/images/gifts/category/wedding.png"]
 ];
 
 const products = [
-  { slug: "personalised-wooden-photo-lamp", store: "gifts", name: "Personalised Wooden Photo Lamp", price: 1799, salePrice: 1299, image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=700&q=80", eyebrow: "Best Selling Gifts", description: "A warm wooden photo lamp customised with a favourite memory." },
-  { slug: "luxury-gift-hamper-for-him", store: "gifts", name: "Luxury Gift Hamper For Him", price: 3299, salePrice: 2499, image: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=700&q=80", eyebrow: "Best Selling Gifts", description: "A premium hamper curated with elegant keepsakes and treats." },
-  { slug: "personalised-name-leather-wallet", store: "gifts", name: "Personalised Name Leather Wallet", price: 1299, salePrice: 899, image: "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=700&q=80", eyebrow: "Best Selling Gifts", description: "A sleek leather wallet finished with a personalised name detail." },
-  { slug: "scented-candle-gift-set", store: "gifts", name: "Scented Candle Gift Set", price: 1699, salePrice: 1199, image: "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=700&q=80", eyebrow: "Best Selling Gifts", description: "Softly scented candles packed for a calm, thoughtful gifting moment." },
-  { slug: "custom-couple-caricature-frame", store: "gifts", name: "Custom Couple Caricature Frame", price: 1999, salePrice: 1499, image: "https://images.unsplash.com/photo-1541971875076-8f970d573be6?auto=format&fit=crop&w=700&q=80", eyebrow: "Best Selling Gifts", description: "A playful custom couple frame made for anniversaries and celebrations." }
+  { slug: "personalized-wooden-photo-frame", store: "gifts", name: "Personalized Wooden Photo Frame", price: 899, salePrice: 899, image: "/images/gifts/product%20image/photoframe.png", eyebrow: "Photo Frames", description: "A timeless wooden frame customized with your favorite photo and a heartfelt message - made to turn special moments into lasting memories." },
+  { slug: "earthy-leaf-ceramic-planter", store: "gifts", name: "Earthy Leaf Ceramic Planter", price: 799, salePrice: 799, image: "/images/gifts/product%20image/Decor.png", eyebrow: "Decor", description: "A beautifully crafted ceramic planter with subtle leaf-pattern detailing and a warm earthy finish. Perfect for indoor plants, shelves, desks, or living spaces, adding a fresh and elegant touch to your decor." },
+  { slug: "ohra-floral-celebration-hamper", store: "gifts", name: "OHRA Floral Celebration Hamper", price: 1499, salePrice: 1499, image: "/images/gifts/product%20image/gift%20product.png", eyebrow: "Gifts", description: "A beautifully curated gift hamper featuring an elegant floral arrangement paired with a premium sweet treat. Thoughtfully presented in OHRA's signature gift box, it's perfect for birthdays, anniversaries, congratulations, and other special celebrations." },
+  { slug: "romantic-anniversary-keepsake-hamper", store: "gifts", name: "Romantic Anniversary Keepsake Hamper", price: 1999, salePrice: 1999, image: "/images/gifts/product%20image/anniversary%20gift.png", eyebrow: "Anniversary Gifts", description: "A thoughtfully curated anniversary hamper featuring fresh red roses, a cute teddy bear, scented candle, heart-themed mug, decorative photo frame, and floral keepsakes. Beautifully arranged for a romantic surprise that makes your special day even more memorable." },
+  { slug: "royal-wedding-keepsake-hamper", store: "gifts", name: "Royal Wedding Keepsake Hamper", price: 2299, salePrice: 2299, image: "/images/gifts/product%20image/wedding%20product.png", eyebrow: "Wedding Gifts", description: "An elegant wedding gift hamper featuring a premium decorative textile, floral mug, scented candle, golden keepsake frame, decorative tin, and beautifully curated accessories. Presented in a luxurious ivory-and-gold theme, it makes a thoughtful gift for newlyweds and wedding celebrations." },
+  { slug: "birthday-bliss-gift-hamper", store: "gifts", name: "Birthday Bliss Gift Hamper", price: 1699, salePrice: 1699, image: "/images/gifts/product%20image/birthday%20gift.png", eyebrow: "Birthday Gifts", description: "A charming birthday hamper featuring a beautiful floral bouquet, cute teddy bear, stylish mug, scented candle, and thoughtfully curated keepsakes. Presented in an elegant gift box, it's a lovely way to make someone's birthday feel extra special." }
 ];
 
 const heroSlides = [
@@ -80,20 +81,28 @@ export default function GiftsHomePage() {
           ))}
         </section>
 
-        <section className="gifts-section" id="occasions">
-          <div className="gifts-section-title"><h2>Find the Perfect Gift</h2><Link to="/gifts/categories">View All Categories <span>&rarr;</span></Link></div>
-          <div className="category-row">
-            {categories.map(([name, to, image]) => <Link to={to} className="category-item" key={name}><OptimizedImage src={image} alt="" sizes="112px" /><strong>{name}</strong></Link>)}
-          </div>
-        </section>
+        <div className="gifts-taxonomy-home-grid">
+          <section className="gifts-section" id="categories">
+            <div className="gifts-section-title"><h2>Find the Perfect Gift</h2><Link to="/gifts/categories">View All Categories <span>&rarr;</span></Link></div>
+            <div className="category-row">
+              {categories.map(([name, to, image]) => <Link to={to} className="category-item" key={name}><img src={image} alt={name} loading="lazy" /><strong>{name}</strong></Link>)}
+            </div>
+          </section>
+          <section className="gifts-section" id="occasions">
+            <div className="gifts-section-title"><h2>Shop by Occasion</h2><Link to="/gifts/occasions">View All Occasions <span>&rarr;</span></Link></div>
+            <div className="category-row occasion-row">
+              {occasions.map(([name, to, image]) => <Link to={to} className="category-item" key={name}><img src={image} alt={name} loading="lazy" /><strong>{name}</strong></Link>)}
+            </div>
+          </section>
+        </div>
 
         <section className="gifts-section" id="best-sellers">
           <div className="gifts-section-title"><h2>Best Selling Gifts</h2><Link to="/gifts/bestsellers">View All Products <span>&rarr;</span></Link></div>
           <div className="gifts-product-row">
             {products.map((product, index) => {
               return <article className="gift-product-card" key={`${product.slug}-${index}`}>
-                <Link to={`/gifts/product/${product.slug}`}><OptimizedImage src={product.image} alt={product.name} sizes="(max-width: 720px) 78vw, 22vw" /></Link>
-                <button className={wishlistItems.includes(product.slug) ? "liked" : ""} onClick={() => toggleWishlist(product.slug)} aria-label={`Save ${product.name}`}>&#9825;</button>
+                <Link to={`/gifts/product/${product.slug}`}><img src={product.image} alt={product.name} loading="lazy" /></Link>
+                <button className={wishlistItems.includes(product.slug) ? "liked" : ""} onClick={() => toggleWishlist(product.slug)} aria-label={`Save ${product.name}`}>{wishlistItems.includes(product.slug) ? "♥" : "♡"}</button>
                 <h3>{product.name}</h3><p className="stars">&#9733; &#9733; &#9733; &#9733; &#9733; <small>({157 + index * 42})</small></p>
                 <p className="gift-price">Rs. {product.salePrice.toLocaleString("en-IN")} <del>Rs. {product.price.toLocaleString("en-IN")}</del></p>
                 <button className={`add-gift-button${addedProducts.includes(product.slug) ? " added" : ""}`} onClick={() => { addToCart(product); setAddedProducts((items) => items.includes(product.slug) ? items : [...items, product.slug]); }}>{addedProducts.includes(product.slug) ? "Added to Cart" : <><span aria-hidden="true">&#128722;</span> Add to Cart</>}</button>

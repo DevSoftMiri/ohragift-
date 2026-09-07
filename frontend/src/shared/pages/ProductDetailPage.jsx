@@ -72,7 +72,7 @@ function WearProductDetail({ product }) {
           <div className="wear-option-group"><span>Quantity</span><div className="wear-quantity"><button type="button" onClick={() => setQuantity((value) => Math.max(1, value - 1))}>−</button><span>{quantity}</span><button type="button" onClick={() => setQuantity((value) => value + 1)}>+</button></div></div>
 
           <button className={`wear-add-button${added ? " added" : ""}`} type="button" onClick={handleAddToCart}>{added ? "Added to cart" : "Add to cart"}</button>
-          <button className={`wear-save-button${isSaved ? " saved" : ""}`} type="button" onClick={() => toggleWishlist(product.slug)}><span aria-hidden="true">&#9825;</span>{isSaved ? "Saved to wishlist" : "Save to wishlist"}</button>
+          <button className={`wear-save-button${isSaved ? " saved" : ""}`} type="button" onClick={() => toggleWishlist(product.slug)}><span aria-hidden="true">{isSaved ? "♥" : "♡"}</span>{isSaved ? "Saved to wishlist" : "Save to wishlist"}</button>
 
           <div className="wear-benefits"><div><span aria-hidden="true">&#9651;</span><small>Pan India<br />Delivery</small></div><div><span aria-hidden="true">&#10003;</span><small>Secure<br />Payments</small></div><div><span aria-hidden="true">&#9633;</span><small>Easy<br />Returns</small></div></div>
           <div className="wear-disclosures">{details.map(([title, content]) => { const isOpen = openSection === title; return <div className={`wear-disclosure${isOpen ? " open" : ""}`} key={title}><button type="button" aria-expanded={isOpen} onClick={() => setOpenSection(isOpen ? "" : title)}><span>{title}</span><b>{isOpen ? "−" : "+"}</b></button>{isOpen ? <p>{content}</p> : null}</div>; })}</div>
@@ -134,7 +134,7 @@ export default function ProductDetailPage() {
 
         <div className="product-detail-layout">
           <div className="product-visual">
-            <OptimizedImage src={product.image} alt={product.name} eager sizes="(max-width: 900px) 92vw, 48vw" />
+            <img src={product.image} alt={product.name} loading="eager" decoding="sync" />
           </div>
 
           <section className="product-detail-copy">
@@ -149,7 +149,7 @@ export default function ProductDetailPage() {
             <div className="product-detail-actions">
               <button className="product-add-button" onClick={() => addToCart(product)}>Add to bag <span aria-hidden="true">&rarr;</span></button>
               <button className={`product-wishlist-button${isSaved ? " saved" : ""}`} onClick={() => toggleWishlist(product.slug)}>
-                <span aria-hidden="true">&#9825;</span>{isSaved ? "Saved to wishlist" : "Save to wishlist"}
+                <span aria-hidden="true">{isSaved ? "♥" : "♡"}</span>{isSaved ? "Saved to wishlist" : "Save to wishlist"}
               </button>
             </div>
 

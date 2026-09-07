@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import StoreLayout from "../../shared/components/StoreLayout";
 import { getCatalogGroups, getProductsByStore } from "../../shared/services/catalogService";
 import { useAppContext } from "../../shared/store/AppContext";
@@ -46,58 +46,27 @@ const tabs = [
 ];
 
 const quickShortcuts = [
-  ["Flowers", "/gifts/categories"],
-  ["Chocolates", "/gifts/categories"],
-  ["Cakes", "/gifts/categories"],
-  ["Home Decor", "/gifts/categories"],
-  ["Fashion", "/gifts/categories"],
-  ["Beauty", "/gifts/categories"],
-  ["Kids", "/gifts/categories"],
-  ["Premium", "/gifts/categories"]
+  ["Photo Frames", "/gifts/categories"],
+  ["Decor", "/gifts/categories"],
+  ["Gifts", "/gifts/categories"]
 ];
 
 const categoryTiles = [
-  ["Flowers & Bouquets", "Fresh bouquets, artificial flowers, gift bouquets", "https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=760&q=80"],
-  ["Chocolates & Sweets", "Chocolate boxes, premium chocolates, mithai hampers", "https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=760&q=80"],
-  ["Cakes & Celebration", "Cakes, cupcakes, celebration combos", "https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&w=760&q=80"],
-  ["Home & Living", "Candles, decor, planters, lamps, clocks", "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=760&q=80"],
-  ["Fashion & Accessories", "Wallets, bags, jewellery, watches, accessories", "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=760&q=80"],
-  ["Beauty & Self-Care", "Skincare, fragrance, grooming, spa hampers", "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=760&q=80"],
-  ["Stationery", "Diaries, pens, planners, desk accessories", "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=760&q=80"],
-  ["Photo Gifts", "Frames, albums, photo lamps, photo collages", "https://images.unsplash.com/photo-1516724562728-afc824a36e84?auto=format&fit=crop&w=760&q=80"],
-  ["Kids Gifts", "Toys, activity kits, school gifts", "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=760&q=80"],
-  ["Spiritual Gifts", "Idols, religious decor, festive sets", "https://images.unsplash.com/photo-1609609830354-8f615d61b9c8?auto=format&fit=crop&w=760&q=80"],
-  ["Premium Gifts", "Luxury decor, executive gifts, elegant keepsakes", "https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=760&q=80"]
+  ["Photo Frames", "Personalised frames, photo gifts, and memory keepsakes", "/images/gifts/category/photoframe.png"],
+  ["Decor", "Thoughtful home accents, candles, lamps, and decor", "/images/gifts/category/decor.png"],
+  ["Gifts", "Ready-to-give keepsakes for every meaningful moment", "/images/gifts/category/gift.png"]
 ];
 
 const occasionTiles = [
-  ["Birthday", "Thoughtful gifts for birthdays and surprise celebrations", "https://images.unsplash.com/photo-1513159446162-54eb8bdaa79b?auto=format&fit=crop&w=760&q=80"],
-  ["Anniversary", "Romantic gifts for memories, milestones and togetherness", "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=760&q=80"],
-  ["Wedding", "Elegant gifting for weddings, couples and new beginnings", "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=760&q=80"],
-  ["Engagement", "Special gifts for rings, promises and families coming together", "https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=760&q=80"],
-  ["Housewarming", "Warm home gifts, decor and hosting-ready surprises", "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=760&q=80"],
-  ["Baby Shower", "Soft, sweet and memorable gifts for new parents", "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=760&q=80"],
-  ["Graduation", "Smart gifts for achievements, new chapters and proud moments", "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=760&q=80"],
-  ["Farewell", "Keepsakes and hampers for warm goodbyes", "https://images.unsplash.com/photo-1523364258745-0bbd7b2c688b?auto=format&fit=crop&w=760&q=80"],
-  ["Diwali", "Festive hampers and decor for lights, family and hosting", "https://images.unsplash.com/photo-1605292356183-a77d0a9c9d1d?auto=format&fit=crop&w=760&q=80"],
-  ["Raksha Bandhan", "Sweet, personal and festive gifts for sibling bonds", "https://images.unsplash.com/photo-1607877361964-da4e604bd8d8?auto=format&fit=crop&w=760&q=80"],
-  ["Holi", "Bright gifting for colour, joy and festive sharing", "https://images.unsplash.com/photo-1551757891-24a8dabd2708?auto=format&fit=crop&w=760&q=80"],
-  ["Christmas", "Warm boxes, treats and keepsakes for holiday gifting", "https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=760&q=80"]
+  ["Anniversary", "Romantic gifts for memories, milestones and togetherness", "/images/gifts/category/Anniversary.png"],
+  ["Wedding", "Elegant gifting for weddings, couples and new beginnings", "/images/gifts/category/wedding.png"],
+  ["Birthday", "Thoughtful gifts for birthdays and surprise celebrations", "/images/gifts/category/Birthday.png"]
 ];
 
 const personalisedTiles = [
   "Personalised Mugs",
-  "Photo Frames",
-  "Custom Bottles",
-  "Name Keychains",
-  "Custom Cushions",
-  "Photo Lamps",
-  "Name Plates",
-  "Engraved Gifts",
-  "Custom Diaries",
-  "Personalised Pens",
-  "Memory Plaques",
-  "Custom Gift Boxes"
+  "Personalised Keychains",
+  "Personalised Pens"
 ];
 
 const hamperProducts = [
@@ -112,26 +81,6 @@ const hamperProducts = [
     description: "A polished all-occasion hamper with sweets, keepsakes, and premium gift-ready packaging."
   },
   {
-    slug: "corporate-thank-you-hamper",
-    store: "gifts",
-    name: "Corporate Thank You Hamper",
-    price: 1499,
-    salePrice: 1299,
-    image: "/images/gifts/hamper%202.png",
-    category: "Corporate Hampers",
-    description: "A refined desk-friendly selection for clients, teams, onboarding, and thoughtful business gifting."
-  },
-  {
-    slug: "birthday-celebration-hamper",
-    store: "gifts",
-    name: "Birthday Celebration Hamper",
-    price: 1199,
-    salePrice: 999,
-    image: "/images/gifts/hamper%203.png",
-    category: "Birthday Hampers",
-    description: "A cheerful birthday hamper with treats, a note-card feel, and celebratory finishing touches."
-  },
-  {
     slug: "anniversary-memory-hamper",
     store: "gifts",
     name: "Anniversary Memory Hamper",
@@ -140,21 +89,10 @@ const hamperProducts = [
     image: "/images/gifts/hamper%204.png",
     category: "Anniversary Hampers",
     description: "A romantic hamper curated for couples, milestones, and warm personal moments."
-  },
-  {
-    slug: "premium-festive-hamper",
-    store: "gifts",
-    name: "Premium Festive Hamper",
-    price: 1999,
-    salePrice: 1799,
-    image: "/images/gifts/hamper%205.png",
-    category: "Festive Hampers",
-    description: "A festive-ready hamper with elegant presentation, rich gifting cues, and a premium finish."
   }
 ];
 
 const bestsellerFilters = ["All", "Personalised", "Hampers", "For Her", "For Him", "Birthday", "Anniversary", "Premium"];
-const hamperBudgets = ["Under Rs. 499", "Rs. 500-999", "Rs. 1,000-1,499", "Rs. 1,500-2,499", "Rs. 2,500+"];
 
 const customGiftSteps = [
   {
@@ -224,18 +162,9 @@ const customGiftSteps = [
     title: "What would they love?",
     multi: true,
     options: [
-      ["Chocolate", "C"],
-      ["Candles", "L"],
-      ["Perfume", "P"],
-      ["Skincare", "S"],
       ["Mugs", "M"],
-      ["Flowers", "F"],
-      ["Stationery", "N"],
-      ["Accessories", "A"],
-      ["Dry Fruits", "D"],
-      ["Snacks", "K"],
-      ["Personalised Items", "I"],
-      ["Other", "+"]
+      ["Keychains", "K"],
+      ["Pens", "P"]
     ]
   }
 ];
@@ -392,13 +321,7 @@ function PremiumPersonalisedPage() {
     "Premium Box": `${personalisedAssetPath}/12_premium_box_style.png`
   };
   const preferenceImages = {
-    Chocolate: `${personalisedAssetPath}/13_chocolate.png`,
-    Candles: `${personalisedAssetPath}/14_candle.png`,
-    Perfume: `${personalisedAssetPath}/15_perfume.png`,
-    Skincare: `${personalisedAssetPath}/16_skincare.png`,
     Mugs: `${personalisedAssetPath}/17_mug.png`,
-    Stationery: `${personalisedAssetPath}/18_stationery.png`,
-    "Dry Fruits": `${personalisedAssetPath}/20_dry_fruits.png`
   };
   const updateSingleChoice = (key, option) => setGiftRequest((current) => ({ ...current, [key]: option }));
   const toggleMultiChoice = (key, option) => setGiftRequest((current) => {
@@ -522,6 +445,7 @@ function PremiumPersonalisedPage() {
 
 export default function GiftsCollectionPage() {
   const { collection = "categories" } = useParams();
+  const [searchParams] = useSearchParams();
   const [products, setProducts] = useState([]);
   const [adminGroups, setAdminGroups] = useState([]);
   const [activeTile, setActiveTile] = useState("");
@@ -554,11 +478,11 @@ export default function GiftsCollectionPage() {
   useEffect(() => {
     if (!isTaxonomyPage) return;
     getCatalogGroups("gifts", taxonomyKind).then((groups) => {
-      const visibleGroups = groups.filter((group) => group.status !== "hidden");
+      const visibleGroups = groups.filter((group) => group.status !== "hidden" && (collection === "occasions" ? ["Anniversary", "Birthday", "Wedding"].includes(group.name) : ["Photo Frames", "Decor", "Gifts"].includes(group.name)));
       setAdminGroups(visibleGroups);
-      setActiveTile("");
+      setActiveTile(searchParams.get(collection === "occasions" ? "occasion" : "category") || "");
     });
-  }, [isTaxonomyPage, taxonomyKind]);
+  }, [isTaxonomyPage, taxonomyKind, collection, searchParams]);
 
   if (collection === "create-your-gift" || collection === "personalised") return <PremiumPersonalisedPage />;
 
@@ -579,7 +503,7 @@ export default function GiftsCollectionPage() {
           <section className="taxonomy-shop-page">
             <div className="taxonomy-card-rail">
               <div className="taxonomy-card-grid" aria-label={collection === "occasions" ? "Shop by occasion" : "Shop by category"} onWheel={handleTaxonomyWheel}>
-                {taxonomyTiles.map((tile, index) => (
+                {taxonomyTiles.map((tile) => (
                   <button
                     className={(selectedTile?.name || taxonomyTiles[0]?.name) === tile.name ? "active" : ""}
                     key={tile.id}
@@ -588,7 +512,6 @@ export default function GiftsCollectionPage() {
                   >
                     <img src={tile.image} alt="" />
                     <span>{tile.name}</span>
-                    {index === taxonomyTiles.length - 1 && <b aria-hidden="true">All</b>}
                   </button>
                 ))}
               </div>
@@ -603,7 +526,6 @@ export default function GiftsCollectionPage() {
                 <span>{taxonomyProducts.length ? `${taxonomyProducts.length}+ products` : "Products coming soon"}</span>
               </div>
               <div className="taxonomy-toolbar">
-                <button type="button">Filter</button>
                 <select aria-label="Sort products">
                   <option>Sort by: Popularity</option>
                   <option>Newest First</option>
@@ -615,7 +537,7 @@ export default function GiftsCollectionPage() {
                 {taxonomyProducts.map((product, index) => (
                   <article key={`${product.slug}-${index}`}>
                     <Link to={`/gifts/product/${product.slug}`}><img src={product.image} alt={product.name} /></Link>
-                    <button className={wishlistItems.includes(product.slug) ? "saved" : ""} onClick={() => toggleWishlist(product.slug)} aria-label={`Save ${product.name}`}>&#9825;</button>
+                    <button className={wishlistItems.includes(product.slug) ? "saved" : ""} onClick={() => toggleWishlist(product.slug)} aria-label={`Save ${product.name}`}>{wishlistItems.includes(product.slug) ? "♥" : "♡"}</button>
                     <Link to={`/gifts/product/${product.slug}`}><h3>{product.name}</h3></Link>
                     <strong>Rs. {(product.salePrice || product.price).toLocaleString("en-IN")}</strong>
                     <button type="button" onClick={() => addToCart(product)}>Add to Cart</button>
@@ -641,7 +563,7 @@ export default function GiftsCollectionPage() {
               {hamperProducts.map((product, index) => (
                 <article key={product.slug}>
                   <Link to={`/gifts/product/${product.slug}`}><img src={product.image} alt={product.name} /></Link>
-                  <button className={wishlistItems.includes(product.slug) ? "saved" : ""} onClick={() => toggleWishlist(product.slug)} aria-label={`Save ${product.name}`}>&#9825;</button>
+                  <button className={wishlistItems.includes(product.slug) ? "saved" : ""} onClick={() => toggleWishlist(product.slug)} aria-label={`Save ${product.name}`}>{wishlistItems.includes(product.slug) ? "♥" : "♡"}</button>
                   <p>{product.category}</p>
                   <Link to={`/gifts/product/${product.slug}`}><h2>{product.name}</h2></Link>
                   <span>{product.description}</span>
@@ -650,9 +572,6 @@ export default function GiftsCollectionPage() {
                 </article>
               ))}
             </section>
-            <nav className="budget-pill-row hamper-budget-row" aria-label="Hamper budget filters">
-              {hamperBudgets.map((item) => <Link key={item} to="/gifts/boxes">{item}</Link>)}
-            </nav>
           </>
         )}
 
@@ -670,7 +589,7 @@ export default function GiftsCollectionPage() {
             </div>
             <div className="gift-collection-grid">{visibleProducts.map((product, index) => <article key={`${product.slug}-${index}`}>
               <Link to={`/gifts/product/${product.slug}`}><img src={product.image} alt={product.name} /></Link>
-              <button className={wishlistItems.includes(product.slug) ? "saved" : ""} onClick={() => toggleWishlist(product.slug)} aria-label={`Save ${product.name}`}>&#9825;</button>
+              <button className={wishlistItems.includes(product.slug) ? "saved" : ""} onClick={() => toggleWishlist(product.slug)} aria-label={`Save ${product.name}`}>{wishlistItems.includes(product.slug) ? "♥" : "♡"}</button>
               <p>{collection === "bestsellers" ? ["Bestseller", "Trending", "Most Gifted", "New Favourite"][index % 4] : product.category || product.eyebrow}</p>
               <h2>{product.name}</h2>
               <span>Rs. {(product.salePrice || product.price).toLocaleString("en-IN")}</span>
