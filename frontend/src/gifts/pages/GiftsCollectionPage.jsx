@@ -34,12 +34,6 @@ const collectionCopy = {
     eyebrow: "Best Sellers",
     description: "Our most-loved gifts, chosen again and again by customers who want a proven pick.",
     intro: "Filter by style, recipient, or occasion when you want a gift with an easy yes."
-  },
-  offers: {
-    title: "More Reasons to Gift",
-    eyebrow: "Special Offers",
-    description: "Special prices on gifts worth giving, with clear deals across budget picks, combos, and hampers.",
-    intro: "Conversion-focused gifting offers without making the brand feel bargain-bin."
   }
 };
 
@@ -49,7 +43,6 @@ const tabs = [
   ["personalised", "Personalised"],
   ["boxes", "Hampers"],
   ["bestsellers", "Best Sellers"],
-  ["offers", "Offers"]
 ];
 
 const quickShortcuts = [
@@ -124,17 +117,6 @@ const hamperTiles = [
   "New Mom Hampers",
   "Festive Hampers",
   "Premium Hampers"
-];
-
-const offerTiles = [
-  "Today's Offers",
-  "Under Rs. 499",
-  "Under Rs. 999",
-  "Combo Deals",
-  "Buy More, Save More",
-  "Personalised Gifts on Offer",
-  "Hamper Deals",
-  "Festive Offers"
 ];
 
 const bestsellerFilters = ["All", "Personalised", "Hampers", "For Her", "For Him", "Birthday", "Anniversary", "Premium"];
@@ -365,7 +347,7 @@ export default function GiftsCollectionPage() {
   const { addToCart, wishlistItems, toggleWishlist } = useAppContext();
   const copy = collectionCopy[collection] || collectionCopy.categories;
   const visibleProducts = products.slice(0, collection === "bestsellers" ? 8 : 6);
-  const showProductSection = collection === "bestsellers" || collection === "offers";
+  const showProductSection = collection === "bestsellers";
   const isTaxonomyPage = collection === "categories" || collection === "occasions";
   const taxonomyKind = collection === "occasions" ? "occasion" : "category";
   const taxonomyTiles = isTaxonomyPage ? getTaxonomyTiles(adminGroups, collection === "occasions" ? occasionTiles : categoryTiles) : [];
@@ -374,6 +356,18 @@ export default function GiftsCollectionPage() {
     ? products.filter((product) => taxonomyKind === "occasion" ? product.occasion === selectedTile.name : product.category === selectedTile.name)
     : [];
   const taxonomyProducts = (filteredProducts.length ? filteredProducts : products).slice(0, 8);
+  const handleTaxonomyWheel = (event) => {
+    const scroller = event.currentTarget;
+    const maxScrollLeft = scroller.scrollWidth - scroller.clientWidth;
+
+    if (maxScrollLeft <= 0) return;
+
+    const horizontalDelta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY * 1.15;
+
+    event.preventDefault();
+    event.stopPropagation();
+    scroller.scrollLeft = Math.max(0, Math.min(maxScrollLeft, scroller.scrollLeft + horizontalDelta));
+  };
 
   useEffect(() => { getProductsByStore("gifts").then(setProducts); }, []);
   useEffect(() => {
@@ -402,19 +396,21 @@ export default function GiftsCollectionPage() {
 
         {isTaxonomyPage && (
           <section className="taxonomy-shop-page">
-            <div className="taxonomy-card-grid" aria-label={collection === "occasions" ? "Shop by occasion" : "Shop by category"}>
-              {taxonomyTiles.map((tile, index) => (
-                <button
-                  className={(selectedTile?.name || taxonomyTiles[0]?.name) === tile.name ? "active" : ""}
-                  key={tile.id}
-                  type="button"
-                  onClick={() => setActiveTile(tile.name)}
-                >
-                  <img src={tile.image} alt="" />
-                  <span>{tile.name}</span>
-                  {index === taxonomyTiles.length - 1 && <b aria-hidden="true">All</b>}
-                </button>
-              ))}
+            <div className="taxonomy-card-rail">
+              <div className="taxonomy-card-grid" aria-label={collection === "occasions" ? "Shop by occasion" : "Shop by category"} onWheel={handleTaxonomyWheel}>
+                {taxonomyTiles.map((tile, index) => (
+                  <button
+                    className={(selectedTile?.name || taxonomyTiles[0]?.name) === tile.name ? "active" : ""}
+                    key={tile.id}
+                    type="button"
+                    onClick={() => setActiveTile(tile.name)}
+                  >
+                    <img src={tile.image} alt="" />
+                    <span>{tile.name}</span>
+                    {index === taxonomyTiles.length - 1 && <b aria-hidden="true">All</b>}
+                  </button>
+                ))}
+              </div>
             </div>
 
             <section className="taxonomy-product-section">
@@ -475,16 +471,10 @@ export default function GiftsCollectionPage() {
           </nav>
         )}
 
-        {collection === "offers" && (
-          <section className="simple-tile-grid offer-tile-grid" aria-label="Gift offers">
-            {offerTiles.map((item) => <Link key={item} to="/gifts/products">{item}</Link>)}
-          </section>
-        )}
-
         {showProductSection && (
           <section className="collection-product-section">
             <div className="gifts-section-title">
-              <h2>{collection === "offers" ? "Today's Offers" : "Customer Favourites"}</h2>
+              <h2>Customer Favourites</h2>
               <Link to="/gifts/products">View All Products <span>&rarr;</span></Link>
             </div>
             <div className="gift-collection-grid">{visibleProducts.map((product, index) => <article key={`${product.slug}-${index}`}>

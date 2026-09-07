@@ -39,7 +39,7 @@ const pages = {
       ["Information We Collect", "We may collect details such as name, email, phone number, billing and shipping address, order information, product selections, size information, customization instructions, artwork, images, communications, payment information, and website usage information."],
       ["How We Use It", "Information is used to process orders, create customized products, confirm requirements, process payments, arrange delivery, share tracking updates, provide support, prevent fraud, improve services, and maintain legal or business records."],
       ["Sharing", "We may share information with payment processors, courier partners, hosting and technology providers, communication providers, production partners, professional advisers, or legal authorities where reasonably required."],
-      ["Contact", "For privacy-related questions, contact Ohra Wears at ohrawears@gmail.com or +91 8307642071."]
+      ["Contact", "For privacy-related questions, contact Ohra Wears at ohrawears@gmail.com or 83076 42071."]
     ]
   },
   "terms-of-service": {
@@ -59,7 +59,7 @@ const pages = {
       ["Support", "Contact us for custom T-shirt orders, personalized designs, artwork requirements, name customization, print placement, size guidance, order status, shipping, payment queries, damaged products, incorrect products, or lost shipments."],
       ["Order Help", "For an existing order, include your name, order number, registered phone number, email address, and reason for contact so we can assist faster."],
       ["Claims", "Damaged, defective, or incorrect-product claims must be submitted within 48 hours of delivery with order number, complete unboxing video, clear photographs, and a short issue description."],
-      ["Contact Details", "Email ohrawears@gmail.com or call/WhatsApp +91 8307642071. Support hours are Monday-Saturday, 10:00 AM-6:00 PM."]
+      ["Contact Details", "Email ohrawears@gmail.com or call/WhatsApp 83076 42071. Support hours are Monday-Saturday, 10:00 AM-6:00 PM."]
     ]
   },
   "business-enquiries": {
@@ -69,7 +69,7 @@ const pages = {
       ["Custom Apparel", "Ohra Wears works with individuals, businesses, creators, teams, colleges, events, communities, and organizations to turn ideas into wearable designs."],
       ["Requirements", "We can assist with bulk T-shirts, corporate merchandise, event merchandise, college or group T-shirts, team apparel, personalized gifting, creator merchandise, brand merchandise, custom artwork, and special occasion T-shirts."],
       ["Quotation Details", "For a faster quote, share your name, organization, phone number, email, required quantity, product type, sizes, customization requirements, delivery location, required date, and artwork or reference."],
-      ["Contact Details", "Call/WhatsApp +91 8307642071 or email ohrawears@gmail.com. Business hours are Monday-Saturday, 10:00 AM-6:00 PM."]
+      ["Contact Details", "Call/WhatsApp 83076 42071 or email ohrawears@gmail.com. Business hours are Monday-Saturday, 10:00 AM-6:00 PM."]
     ]
   }
 };

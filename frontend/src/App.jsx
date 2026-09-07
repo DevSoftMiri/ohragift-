@@ -1,4 +1,5 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import GatewayPage from "./shared/pages/GatewayPage";
 import CartPage from "./shared/pages/CartPage";
 import CheckoutPage from "./shared/pages/CheckoutPage";
@@ -14,25 +15,38 @@ import ProductDetailPage from "./shared/pages/ProductDetailPage";
 import AdminPage from "./admin/pages/AdminPage";
 import GiftsCollectionPage from "./gifts/pages/GiftsCollectionPage";
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [pathname]);
+
+  return null;
+}
+
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<GatewayPage />} />
-      <Route path="/gifts" element={<GiftsHomePage />} />
-      <Route path="/gifts/products" element={<ProductListingPage store="gifts" />} />
-      <Route path="/gifts/:collection" element={<GiftsCollectionPage />} />
-      <Route path="/gifts/product/:slug" element={<ProductDetailPage />} />
-      <Route path="/wears" element={<WearsHomePage />} />
-      <Route path="/wears/about" element={<WearsAboutPage />} />
-      <Route path="/wears/products" element={<Navigate to="/wears" replace />} />
-      <Route path="/wears/product/:slug" element={<ProductDetailPage />} />
-      <Route path="/wears/info/:page" element={<WearsInfoPage />} />
-      <Route path="/cart" element={<CartPage />} />
-      <Route path="/checkout" element={<CheckoutPage />} />
-      <Route path="/wishlist" element={<WishlistPage />} />
-      <Route path="/account" element={<AccountPage />} />
-      <Route path="/orders" element={<OrdersPage />} />
-      <Route path="/admin" element={<AdminPage />} />
-    </Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<GatewayPage />} />
+        <Route path="/gifts" element={<GiftsHomePage />} />
+        <Route path="/gifts/products" element={<ProductListingPage store="gifts" />} />
+        <Route path="/gifts/:collection" element={<GiftsCollectionPage />} />
+        <Route path="/gifts/product/:slug" element={<ProductDetailPage />} />
+        <Route path="/wears" element={<WearsHomePage />} />
+        <Route path="/wears/about" element={<WearsAboutPage />} />
+        <Route path="/wears/products" element={<Navigate to="/wears" replace />} />
+        <Route path="/wears/product/:slug" element={<ProductDetailPage />} />
+        <Route path="/wears/info/:page" element={<WearsInfoPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/wishlist" element={<WishlistPage />} />
+        <Route path="/account" element={<AccountPage />} />
+        <Route path="/orders" element={<OrdersPage />} />
+        <Route path="/admin" element={<AdminPage />} />
+      </Routes>
+    </>
   );
 }

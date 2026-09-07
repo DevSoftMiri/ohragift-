@@ -60,7 +60,7 @@ export default function WearsAboutPage() {
             <a href="https://www.instagram.com/wearohra/" target="_blank" rel="noreferrer">Instagram</a>
             <a href="https://www.facebook.com/people/ohrawear" target="_blank" rel="noreferrer">Facebook</a>
             <a href="mailto:ohrawears@gmail.com">ohrawears@gmail.com</a>
-            <a href="tel:+918307642071">+91 8307642071</a>
+            <a href="tel:+918307642071">83076 42071</a>
           </div>
         </section>
       </main>

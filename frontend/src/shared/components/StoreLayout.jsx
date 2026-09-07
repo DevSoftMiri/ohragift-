@@ -44,7 +44,6 @@ export default function StoreLayout({ store, children }) {
     ["Personalised", "/gifts/personalised", true],
     ["Hampers", "/gifts/boxes", true],
     ["Best Sellers", "/gifts/bestsellers", false],
-    ["Offers", "/gifts/offers", false]
   ];
   const giftDropdowns = {
     Categories: {
@@ -94,11 +93,11 @@ export default function StoreLayout({ store, children }) {
           <>
             <div className="gift-top-strip gift-desktop-strip">
               <span><b aria-hidden="true">&#x25A1;</b> For queries or placing order on call</span>
-              <span>Please call or WhatsApp on +91 1478523698</span>
+              <a className="gift-top-whatsapp" href="https://wa.me/918307642071" target="_blank" rel="noreferrer">Please call or WhatsApp on 83076 42071</a>
               <span className="gift-top-links">
                 <Link to="/orders">Track Order</Link>
                 <Link to="/account">Help &amp; Support</Link>
-                <a href="tel:+911478523698">+91 14785 23698</a>
+                <a href="tel:+918307642071">83076 42071</a>
               </span>
             </div>
 
@@ -131,7 +130,7 @@ export default function StoreLayout({ store, children }) {
             </div>
 
             <div className="gift-mobile-header">
-              <div className="gift-mobile-offer"><span aria-hidden="true">&#x25A1;</span> Call or WhatsApp +91 1478523698 to place orders</div>
+              <div className="gift-mobile-offer"><span aria-hidden="true">&#x25A1;</span> Call or WhatsApp 83076 42071 to place orders</div>
               <div className="gift-mobile-main">
                 <button type="button" onClick={() => setMobilePanel("menu")} aria-label="Open menu">&#9776;</button>
                 <Link className="brand-lockup" to="/gifts"><span className="brand-gift-mark">OHRA</span><strong>GIFTS</strong></Link>
@@ -184,7 +183,7 @@ export default function StoreLayout({ store, children }) {
                       <hr />
                       <Link to="/orders" onClick={() => setMobilePanel(null)}><i>O</i>Track Order</Link>
                       <Link to="/account" onClick={() => setMobilePanel(null)}><i>?</i>Help &amp; Support</Link>
-                      <a href="tel:+919876543210"><i>P</i>+91 98765 43210</a>
+                      <a href="tel:+918307642071"><i>P</i>83076 42071</a>
                     </nav>
                   )}
 

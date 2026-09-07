@@ -37,7 +37,7 @@ export default function GatewayPage() {
         <div className="gateway-logo-mark" aria-hidden="true">
           <span>O</span>
         </div>
-        <p className="gateway-brand">OHRA</p>
+        <p className="gateway-brand">MIRISOFT</p>
         <h1>Two Worlds. One <span>OHRA.</span></h1>
         <div className="gateway-divider" aria-hidden="true"><span /></div>
         <p>Choose how you'd like to explore.</p>

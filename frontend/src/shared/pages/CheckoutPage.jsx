@@ -169,7 +169,7 @@ export default function CheckoutPage() {
                   </label>
                   <label className="checkout-field">
                     Phone Number
-                    <input name="phone" value={contact.phone} onChange={handleContactChange} placeholder="+91 14785 23698" />
+                    <input name="phone" value={contact.phone} onChange={handleContactChange} placeholder="83076 42071" />
                   </label>
                 </div>
               </div>

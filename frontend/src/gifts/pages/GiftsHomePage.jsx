@@ -14,8 +14,6 @@ const categories = [
   ["Festive", "/gifts/occasions", "https://images.unsplash.com/photo-1544907524-7c7d7c2af5b3?auto=format&fit=crop&w=320&q=80"]
 ];
 
-const budgetLinks = ["Under Rs. 499", "Rs. 500-999", "Rs. 1,000-1,999", "Rs. 2,000-4,999", "Premium Rs. 5,000+"];
-
 const products = [
   { slug: "personalised-wooden-photo-lamp", store: "gifts", name: "Personalised Wooden Photo Lamp", price: 1799, salePrice: 1299, image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=700&q=80", eyebrow: "Best Selling Gifts", description: "A warm wooden photo lamp customised with a favourite memory." },
   { slug: "luxury-gift-hamper-for-him", store: "gifts", name: "Luxury Gift Hamper For Him", price: 3299, salePrice: 2499, image: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=700&q=80", eyebrow: "Best Selling Gifts", description: "A premium hamper curated with elegant keepsakes and treats." },
@@ -88,13 +86,6 @@ export default function GiftsHomePage() {
           </div>
         </section>
 
-        <section className="gifts-section shop-budget-section" aria-label="Shop gifts by budget">
-          <div className="gifts-section-title"><h2>Shop by Budget</h2><Link to="/gifts/offers">See Offers <span>&rarr;</span></Link></div>
-          <div className="budget-pill-row">
-            {budgetLinks.map((label) => <Link key={label} to="/gifts/offers">{label}</Link>)}
-          </div>
-        </section>
-
         <section className="gifts-section" id="best-sellers">
           <div className="gifts-section-title"><h2>Best Selling Gifts</h2><Link to="/gifts/products">View All Products <span>&rarr;</span></Link></div>
           <div className="gifts-product-row">
@@ -109,8 +100,6 @@ export default function GiftsHomePage() {
             })}
           </div>
         </section>
-
-        <section className="sale-banner" id="sale"><div><p>Special Offer</p><h2>Up to 50% Off</h2><span>Limited time offer on selected gifts.<br />Hurry up and grab the best deals!</span><a className="wine-button" href="#best-sellers">Shop the Sale <b>&rarr;</b></a></div><div className="sale-art" /></section>
 
         <section className="custom-gift-cta">
           <p>Can't Find the Perfect Gift?</p>

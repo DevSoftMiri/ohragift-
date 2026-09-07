@@ -6,7 +6,7 @@ const starterCart = [];
 
 export function AppProvider({ children }) {
   const [cartItems, setCartItems] = useState(starterCart);
-  const [wishlistItems, setWishlistItems] = useState(["birthday-bloom-box"]);
+  const [wishlistItems, setWishlistItems] = useState([]);
 
   const totals = useMemo(() => {
     const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
