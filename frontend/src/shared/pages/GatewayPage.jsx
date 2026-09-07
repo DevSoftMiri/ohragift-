@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import OptimizedImage from "../components/OptimizedImage";
 
 const journeyItems = [
   {
@@ -45,7 +46,7 @@ export default function GatewayPage() {
 
       <section className="gateway-grid">
         <Link className="gateway-card gifts-card" to="/gifts" aria-label="Explore OHRA Gifts">
-          <img src="/images/ohra_gifts_landing_image.png" alt="OHRA Gifts collection with gift box, candle, nuts and mug" />
+          <OptimizedImage src="/images/ohra_gifts_landing_image.png" alt="OHRA Gifts collection with gift box, candle, nuts and mug" eager sizes="(max-width: 800px) 92vw, 45vw" />
           <span className="gateway-card-copy">
             <strong>Thoughtful gifts<br />for every moment.</strong>
             <span>Explore Gifts <b aria-hidden="true">&rarr;</b></span>
@@ -55,7 +56,7 @@ export default function GatewayPage() {
         <span className="gateway-or" aria-hidden="true">OR</span>
 
         <Link className="gateway-card wears-card" to="/wears" aria-label="Explore OHRA Wears">
-          <img src="/images/Ohra wear img.png" alt="OHRA Wears model wearing a graphic t-shirt" />
+          <OptimizedImage src="/images/Ohra wear img.png" alt="OHRA Wears model wearing a graphic t-shirt" eager sizes="(max-width: 800px) 92vw, 45vw" />
           <span className="gateway-card-copy">
             <strong>Modern fashion<br />for everyday<br />expression.</strong>
             <span>Explore Wears <b aria-hidden="true">&rarr;</b></span>

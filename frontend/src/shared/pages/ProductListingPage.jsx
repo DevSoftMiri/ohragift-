@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import StoreLayout from "../components/StoreLayout";
+import OptimizedImage from "../components/OptimizedImage";
 import { getProductsByStore } from "../services/catalogService";
 
 export default function ProductListingPage({ store }) {
@@ -21,7 +22,7 @@ export default function ProductListingPage({ store }) {
         <div className="product-grid">
           {products.map((product) => (
             <article className="product-card" key={product.slug}>
-              <img src={product.image} alt={product.name} />
+              <OptimizedImage src={product.image} alt={product.name} sizes="(max-width: 720px) 92vw, 25vw" />
               <p className="eyebrow">{product.eyebrow}</p>
               <h2>{product.name}</h2>
               <p>{product.description}</p>

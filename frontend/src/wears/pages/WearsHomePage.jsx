@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import StoreLayout from "../../shared/components/StoreLayout";
+import OptimizedImage from "../../shared/components/OptimizedImage";
 
 const summerDrop = [
   {
@@ -77,24 +78,24 @@ function productSlug(name) {
 }
 
 function ProductRail({ title, items, id, showViewAll = true }) {
-  return <section className="wears-rail" id={id}><div className="wears-rail-heading"><h2>{title}</h2>{showViewAll ? <Link to="/wears">View All</Link> : null}</div><div className="wears-product-row">{items.map((product) => <article key={product.name}><Link to={`/wears/product/${productSlug(product.name)}`}><span className="wears-product-image"><img src={product.image} alt={product.name} /><img src={product.secondaryImage} alt={`${product.name} alternate view`} /></span><h3>{product.name}</h3><span className="wears-product-description">{product.description}</span><p>{product.price}</p></Link></article>)}</div></section>;
+  return <section className="wears-rail" id={id}><div className="wears-rail-heading"><h2>{title}</h2>{showViewAll ? <Link to="/wears">View All</Link> : null}</div><div className="wears-product-row">{items.map((product) => <article key={product.name}><Link to={`/wears/product/${productSlug(product.name)}`}><span className="wears-product-image"><OptimizedImage src={product.image} alt={product.name} sizes="(max-width: 720px) 72vw, 25vw" /><OptimizedImage src={product.secondaryImage} alt={`${product.name} alternate view`} sizes="(max-width: 720px) 72vw, 25vw" /></span><h3>{product.name}</h3><span className="wears-product-description">{product.description}</span><p>{product.price}</p></Link></article>)}</div></section>;
 }
 
 export default function WearsHomePage() {
   return (
     <StoreLayout store="wears">
       <main className="wears-home">
-        <section className="wears-hero"><picture><source media="(max-width: 720px)" srcSet="/images/wears/mobile%20hero.png" /><img src="/images/wears/hero%20desktop.png" alt="OHRA Wears city T-shirt campaign" /></picture><Link to="#summer-drop">Shop Now</Link></section>
+        <section className="wears-hero"><picture><source media="(max-width: 720px)" srcSet="/images/wears/mobile%20hero-720.webp" type="image/webp" /><source media="(max-width: 720px)" srcSet="/images/wears/mobile%20hero.png" /><source srcSet="/images/wears/hero%20desktop-1200.webp 1200w, /images/wears/hero%20desktop-1600.webp 1600w" type="image/webp" /><img src="/images/wears/hero%20desktop.png" alt="OHRA Wears city T-shirt campaign" loading="eager" decoding="sync" fetchPriority="high" /></picture><Link to="#summer-drop">Shop Now</Link></section>
         <ProductRail title="New In // Summer Drop" items={summerDrop} id="summer-drop" />
         <ProductRail title="Best Sellers" items={bestSellers} id="best-sellers" showViewAll={false} />
-        <section className="wears-archive"><h2>OHRA Wears Archives</h2><div>{archive.map((image, index) => <img src={image} alt="OHRA Wears editorial archive" key={image} className={`archive-${index + 1}`} />)}</div></section>
+        <section className="wears-archive"><h2>OHRA Wears Archives</h2><div>{archive.map((image, index) => <OptimizedImage src={image} alt="OHRA Wears editorial archive" key={image} className={`archive-${index + 1}`} sizes="(max-width: 720px) 46vw, 22vw" />)}</div></section>
         <section className="wears-rail wears-accessories"><div className="wears-rail-heading"><h2>Custom Drop</h2><Link to="/wears">View All</Link></div><div className="wears-product-row">{[{
           name: "Custom Name Car Graphic T-Shirt",
           description: "Add a name, city, or location to create a custom car-themed T-shirt.",
           price: "Rs. 899.00",
           image: "/images/wears/custom%20name%20with%20car.png",
           secondaryImage: "/images/wears/custom%20name%20with%20car%20t%20shirt.png"
-        }].map((product) => <article key={product.name}><Link to={`/wears/product/${productSlug(product.name)}`}><span className="wears-product-image"><img src={product.image} alt={product.name} /><img src={product.secondaryImage} alt={`${product.name} alternate view`} /></span><h3>{product.name}</h3><span className="wears-product-description">{product.description}</span><p>{product.price}</p></Link></article>)}</div></section>
+        }].map((product) => <article key={product.name}><Link to={`/wears/product/${productSlug(product.name)}`}><span className="wears-product-image"><OptimizedImage src={product.image} alt={product.name} sizes="(max-width: 720px) 72vw, 25vw" /><OptimizedImage src={product.secondaryImage} alt={`${product.name} alternate view`} sizes="(max-width: 720px) 72vw, 25vw" /></span><h3>{product.name}</h3><span className="wears-product-description">{product.description}</span><p>{product.price}</p></Link></article>)}</div></section>
       </main>
     </StoreLayout>
   );

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import StoreLayout from "../../shared/components/StoreLayout";
+import OptimizedImage from "../../shared/components/OptimizedImage";
 import { useAppContext } from "../../shared/store/AppContext";
 
 const categories = [
@@ -46,7 +47,7 @@ export default function GiftsHomePage() {
       <main className="gifts-home">
         <section className="gifts-showcase gifts-carousel" aria-label="OHRA Gifts featured collections">
           {heroSlides.map((slide, index) => <article className={`gift-hero-slide ${index === activeHero ? "active" : ""}`} key={slide.desktop} aria-hidden={index !== activeHero}>
-            <picture className="gift-hero-image"><source media="(max-width: 700px)" srcSet={`/images/gifts/${slide.mobile}`} /><img src={`/images/gifts/${slide.desktop}`} alt={`${slide.eyebrow} by OHRA Gifts`} /></picture>
+            <picture className="gift-hero-image"><source media="(max-width: 700px)" srcSet={`/images/gifts/${slide.mobile.replace(/\.png$/i, "-720.webp")}`} type="image/webp" /><source media="(max-width: 700px)" srcSet={`/images/gifts/${slide.mobile}`} /><source srcSet={`/images/gifts/${slide.desktop.replace(/\.png$/i, "-1200.webp")} 1200w, /images/gifts/${slide.desktop.replace(/\.png$/i, "-1600.webp")} 1600w`} type="image/webp" /><img src={`/images/gifts/${slide.desktop}`} alt={`${slide.eyebrow} by OHRA Gifts`} loading={index === activeHero ? "eager" : "lazy"} decoding={index === activeHero ? "sync" : "async"} fetchPriority={index === activeHero ? "high" : "auto"} /></picture>
             <div className="gift-hero-overlay" />
             <div className="gift-hero-copy">
               <p className="gifts-kicker">{slide.eyebrow}</p>
@@ -82,7 +83,7 @@ export default function GiftsHomePage() {
         <section className="gifts-section" id="occasions">
           <div className="gifts-section-title"><h2>Find the Perfect Gift</h2><Link to="/gifts/categories">View All Categories <span>&rarr;</span></Link></div>
           <div className="category-row">
-            {categories.map(([name, to, image]) => <Link to={to} className="category-item" key={name}><img src={image} alt="" /><strong>{name}</strong></Link>)}
+            {categories.map(([name, to, image]) => <Link to={to} className="category-item" key={name}><OptimizedImage src={image} alt="" sizes="112px" /><strong>{name}</strong></Link>)}
           </div>
         </section>
 
@@ -91,7 +92,7 @@ export default function GiftsHomePage() {
           <div className="gifts-product-row">
             {products.map((product, index) => {
               return <article className="gift-product-card" key={`${product.slug}-${index}`}>
-                <Link to={`/gifts/product/${product.slug}`}><img src={product.image} alt={product.name} /></Link>
+                <Link to={`/gifts/product/${product.slug}`}><OptimizedImage src={product.image} alt={product.name} sizes="(max-width: 720px) 78vw, 22vw" /></Link>
                 <button className={wishlistItems.includes(product.slug) ? "liked" : ""} onClick={() => toggleWishlist(product.slug)} aria-label={`Save ${product.name}`}>&#9825;</button>
                 <h3>{product.name}</h3><p className="stars">&#9733; &#9733; &#9733; &#9733; &#9733; <small>({157 + index * 42})</small></p>
                 <p className="gift-price">Rs. {product.salePrice.toLocaleString("en-IN")} <del>Rs. {product.price.toLocaleString("en-IN")}</del></p>

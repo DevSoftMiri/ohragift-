@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import StoreLayout from "../components/StoreLayout";
+import OptimizedImage from "../components/OptimizedImage";
 import { getProductBySlug } from "../services/catalogService";
 import { useAppContext } from "../store/AppContext";
 
@@ -53,11 +54,11 @@ function WearProductDetail({ product }) {
           <div className="wear-thumbnails">
             {galleryImages.map((image, index) => (
               <button className={selectedImage === image ? "active" : ""} key={`${image}-${index}`} type="button" aria-label={`View product image ${index + 1}`} onClick={() => setSelectedImage(image)}>
-                <img src={image} alt="" />
+                <OptimizedImage src={image} alt="" sizes="84px" />
               </button>
             ))}
           </div>
-          <div className="wear-main-image"><img src={selectedImage} alt={product.name} /></div>
+          <div className="wear-main-image"><OptimizedImage src={selectedImage} alt={product.name} eager sizes="(max-width: 900px) 92vw, 50vw" /></div>
         </section>
 
         <section className="wear-product-copy">
@@ -78,7 +79,7 @@ function WearProductDetail({ product }) {
         </section>
       </div>
 
-      <section className="wear-complete-look"><h2>Complete The Look</h2><div>{wearLookItems.map(([name, price, image]) => <Link to="/wears" key={name}><img src={image} alt={name} /><strong>{name}</strong><small>{price}</small></Link>)}</div></section>
+      <section className="wear-complete-look"><h2>Complete The Look</h2><div>{wearLookItems.map(([name, price, image]) => <Link to="/wears" key={name}><OptimizedImage src={image} alt={name} sizes="(max-width: 720px) 45vw, 20vw" /><strong>{name}</strong><small>{price}</small></Link>)}</div></section>
     </main>
   );
 }
@@ -133,7 +134,7 @@ export default function ProductDetailPage() {
 
         <div className="product-detail-layout">
           <div className="product-visual">
-            <img src={product.image} alt={product.name} />
+            <OptimizedImage src={product.image} alt={product.name} eager sizes="(max-width: 900px) 92vw, 48vw" />
           </div>
 
           <section className="product-detail-copy">
