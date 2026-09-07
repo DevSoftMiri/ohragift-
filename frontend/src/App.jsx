@@ -24,10 +24,27 @@ function ScrollToTop() {
   return null;
 }
 
+function RouteFavicon() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const favicon = document.querySelector("link[rel='icon']") || document.createElement("link");
+    favicon.rel = "icon";
+    favicon.type = "image/png";
+    favicon.href = pathname.startsWith("/wears")
+      ? "/images/gifts/ohra%20wear%20favicon.png"
+      : "/images/gifts/ohra%20gift%20favicon.png";
+    document.head.appendChild(favicon);
+  }, [pathname]);
+
+  return null;
+}
+
 export default function App() {
   return (
     <>
       <ScrollToTop />
+      <RouteFavicon />
       <Routes>
         <Route path="/" element={<GatewayPage />} />
         <Route path="/gifts" element={<GiftsHomePage />} />

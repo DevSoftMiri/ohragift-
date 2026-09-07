@@ -310,7 +310,7 @@ function CreateGiftPage() {
                         onClick={() => step.multi ? toggleMultiChoice(step.key, option) : updateSingleChoice(step.key, option)}
                       >
                         <i aria-hidden="true">{icon}</i>
-                        <span>{selected ? `✓ ${option}` : option}</span>
+                        <span>{selected ? `Selected ${option}` : option}</span>
                       </button>
                     );
                   })}
@@ -481,7 +481,7 @@ function PremiumPersonalisedPage() {
               <div>
                 {personalTouchOptions.map((option) => {
                   const selected = giftRequest.touches.includes(option);
-                  return <button key={option} className={selected ? "selected" : ""} type="button" onClick={() => toggleMultiChoice("touches", option)}><i aria-hidden="true">+</i><span>{selected ? `✓ ${option}` : option}</span></button>;
+                  return <button key={option} className={selected ? "selected" : ""} type="button" onClick={() => toggleMultiChoice("touches", option)}><i aria-hidden="true">+</i><span>{selected ? `Selected ${option}` : option}</span></button>;
                 })}
               </div>
             </article>
