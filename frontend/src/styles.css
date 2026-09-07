@@ -955,7 +955,7 @@ img {
 .personalised-progress { margin-top: 1.45rem; margin-bottom: 1.45rem; gap: 1.15rem; }
 .personalised-progress span { position: relative; gap: .65rem; }
 .personalised-progress span + span::before { content: ""; width: 30px; height: 1px; background: #e7a9b5; margin-right: .05rem; }
-.personalised-builder-shell { width: min(1120px, calc(100% - 2.2rem)); grid-template-columns: minmax(0, 1.5fr) minmax(350px, .92fr); gap: 1rem; }
+.personalised-builder-shell { width: min(1280px, calc(100% - 2.2rem)); grid-template-columns: minmax(0, 1.42fr) minmax(430px, .98fr); gap: 1.2rem; }
 .personalised-step, .personalised-preview, .personalised-summary { border-color: rgba(221,213,209,.82); border-radius: 14px; box-shadow: 0 18px 46px rgba(65,45,39,.07); }
 .personalised-step { padding: 1rem 1.1rem 1.08rem; }
 .personalised-step h2 { margin-top: .28rem; margin-bottom: .8rem; font-size: 1.32rem; color: #1e1717; }
@@ -966,8 +966,8 @@ img {
 .personalised-step:nth-child(3) button { flex-direction: column; min-width: 94px; min-height: 96px; padding: .5rem .55rem .62rem; }
 .personalised-step:nth-child(3) button img { width: 64px; height: 50px; object-fit: contain; }
 .personalised-preview-column { top: 104px; }
-.personalised-preview { min-height: 455px; padding: 1.18rem; }
-.personalised-preview-art { position: relative; height: 310px; margin: .5rem 0 .75rem; display: grid; place-items: center; }
+.personalised-preview { min-height: 485px; padding: 1.25rem; }
+.personalised-preview-art { position: relative; height: 335px; margin: .6rem 0 .85rem; display: grid; place-items: center; }
 .personalised-preview-art img:first-child { width: min(82%, 305px); max-height: 280px; object-fit: contain; filter: drop-shadow(0 22px 22px rgba(85,52,33,.15)); }
 .personalised-preview-art img:nth-child(2) { position: absolute; left: 17%; bottom: 16%; width: 92px; transform: rotate(-9deg); opacity: .94; }
 .personalised-preview-art img:nth-child(3) { position: absolute; left: 20%; top: 3%; width: 110px; opacity: .95; }
@@ -1004,6 +1004,8 @@ img {
 .store-shell.personalised-store .gift-header-main { min-height: 92px; }
 .store-shell.personalised-store .gift-primary-nav .active { color: #a32237; border-bottom-color: #a32237; }
 .personalised-store .personalised-page { margin-top: 0; }
+.personalised-store .personalised-builder-shell { width: min(1280px, calc(100% - 2.2rem)); grid-template-columns: minmax(0, 1.38fr) minmax(460px, .98fr); gap: 1.25rem; }
+.personalised-store .personalised-preview-column { min-width: 0; }
 .personalised-store .personalised-hero { min-height: 360px; padding-top: 3rem; padding-bottom: 6.2rem; }
 .personalised-store .personalised-hero-gift { right: clamp(8rem, 18vw, 18rem); bottom: -1.8rem; width: min(42vw, 560px); max-height: 390px; }
 .personalised-store .personalised-hero-card { right: clamp(28rem, 47vw, 43rem); bottom: 4rem; width: min(24vw, 310px); }
@@ -1012,11 +1014,16 @@ img {
 .personalised-store .personalised-step button:has(img) img { width: 78px; height: 58px; margin: 0; object-fit: contain; transform: scale(1.7); transform-origin: center; }
 .personalised-store .personalised-step:nth-child(3) button img { width: 84px; height: 62px; transform: scale(1.55); }
 .personalised-store .personalised-step:nth-child(5) button { min-width: 112px; }
-.personalised-store .personalised-preview-art { height: 325px; overflow: hidden; }
+.personalised-store .personalised-preview-art { height: 360px; overflow: hidden; }
 .personalised-store .personalised-preview-art img:first-child { width: min(96%, 390px); max-height: 330px; transform: scale(1.32); }
 .personalised-store .personalised-preview-art img:nth-child(2) { width: 150px; left: 10%; bottom: 10%; transform: rotate(-9deg) scale(1.35); }
 .personalised-store .personalised-preview-art img:nth-child(3) { width: 180px; left: 12%; top: 0; transform: scale(1.2); }
 .personalised-store .personalised-custom-cta > img { width: min(50%, 520px); transform: scale(1.15); transform-origin: right center; }
+
+@media (max-width: 1050px) {
+  .personalised-store .personalised-builder-shell { grid-template-columns: 1fr; }
+  .personalised-store .personalised-preview-column { position: static; }
+}
 
 @media (max-width: 900px) {
   .personalised-store .personalised-hero-gift { right: -1.2rem; bottom: 2.5rem; width: min(62vw, 430px); }
@@ -1033,9 +1040,9 @@ img {
 .personalised-summary .personalised-whatsapp-button { display: inline-flex; align-items: center; justify-content: center; width: 100%; min-height: 52px; margin-top: .85rem; border: 0; border-radius: 7px; background: linear-gradient(90deg, #a32237, #bd2942); color: #fff; font: 900 .76rem/1 "Manrope", sans-serif; text-transform: uppercase; cursor: pointer; }
 .personalised-custom-cta a { display: inline-flex; align-items: center; justify-content: center; width: auto; min-height: 42px; margin-top: .85rem; padding: 0 1.1rem; border: 1px solid #a32237; border-radius: 7px; background: transparent; color: #a32237; font: 900 .76rem/1 "Manrope", sans-serif; text-transform: uppercase; cursor: pointer; }
 
-.personalised-store .personalised-preview { padding: 1.25rem; overflow: hidden; }
+.personalised-store .personalised-preview { padding: 1.35rem; overflow: hidden; }
 .personalised-store .personalised-preview::before { content: ""; position: absolute; left: 50%; top: 47%; width: 310px; height: 310px; border-radius: 50%; background: radial-gradient(circle, rgba(253,228,232,.95) 0%, rgba(253,228,232,.4) 42%, rgba(253,228,232,0) 70%); transform: translate(-50%, -50%); pointer-events: none; }
-.personalised-store .personalised-preview-art { height: 355px; margin: .85rem 0 1rem; overflow: visible; }
+.personalised-store .personalised-preview-art { height: 385px; margin: .9rem 0 1rem; overflow: visible; }
 .personalised-store .personalised-preview-art img:first-child { position: relative; z-index: 1; width: min(92%, 390px); max-height: 340px; object-fit: contain; transform: scale(1.16); filter: drop-shadow(0 26px 30px rgba(120,65,48,.18)); }
 .personalised-store .personalised-preview-art img:nth-child(2) { z-index: 2; left: 10%; bottom: 11%; width: 132px; transform: rotate(-9deg); filter: drop-shadow(0 12px 18px rgba(120,65,48,.16)); }
 .personalised-store .personalised-preview > button { z-index: 3; top: 49%; box-shadow: 0 8px 18px rgba(32,26,26,.08); }
@@ -1045,4 +1052,13 @@ img {
   .personalised-store .personalised-preview-art { height: 290px; }
   .personalised-store .personalised-preview-art img:first-child { transform: scale(1.05); }
   .personalised-store .personalised-preview-art img:nth-child(2) { width: 104px; left: 7%; }
+}
+
+.personalised-store .personalised-step:nth-child(3) div { display: grid; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); gap: .7rem; }
+.personalised-store .personalised-step:nth-child(3) button:has(img) { display: grid; grid-template-rows: 86px auto; align-items: stretch; justify-items: center; min-width: 0; min-height: 132px; padding: .55rem .55rem .65rem; overflow: hidden; }
+.personalised-store .personalised-step:nth-child(3) button:has(img) img { width: 100%; height: 86px; margin: 0; border-radius: 7px; object-fit: contain; transform: none; background: #fff7f5; }
+.personalised-store .personalised-step:nth-child(3) button:has(img) span { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 26px; color: inherit; text-align: center; font-size: .7rem; line-height: 1.2; overflow-wrap: anywhere; }
+
+@media (max-width: 580px) {
+  .personalised-store .personalised-step:nth-child(3) div { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
