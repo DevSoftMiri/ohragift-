@@ -46,14 +46,14 @@ const tabs = [
 ];
 
 const quickShortcuts = [
-  ["Flowers", "/gifts/products"],
-  ["Chocolates", "/gifts/products"],
-  ["Cakes", "/gifts/products"],
-  ["Home Decor", "/gifts/products"],
-  ["Fashion", "/gifts/products"],
-  ["Beauty", "/gifts/products"],
-  ["Kids", "/gifts/products"],
-  ["Premium", "/gifts/products"]
+  ["Flowers", "/gifts/categories"],
+  ["Chocolates", "/gifts/categories"],
+  ["Cakes", "/gifts/categories"],
+  ["Home Decor", "/gifts/categories"],
+  ["Fashion", "/gifts/categories"],
+  ["Beauty", "/gifts/categories"],
+  ["Kids", "/gifts/categories"],
+  ["Premium", "/gifts/categories"]
 ];
 
 const categoryTiles = [
@@ -100,23 +100,57 @@ const personalisedTiles = [
   "Custom Gift Boxes"
 ];
 
-const hamperTiles = [
-  "Gift Hampers",
-  "Corporate Hampers",
-  "Birthday Hampers",
-  "Anniversary Hampers",
-  "For Her Hampers",
-  "For Him Hampers",
-  "Chocolate Hampers",
-  "Self-Care Hampers",
-  "Coffee Lover Hampers",
-  "Tea Lover Hampers",
-  "Gourmet Hampers",
-  "Wedding Hampers",
-  "Bridesmaid Hampers",
-  "New Mom Hampers",
-  "Festive Hampers",
-  "Premium Hampers"
+const hamperProducts = [
+  {
+    slug: "signature-gift-hamper",
+    store: "gifts",
+    name: "Signature Gift Hamper",
+    price: 999,
+    salePrice: 799,
+    image: "/images/gifts/hamper%201.png",
+    category: "Gift Hampers",
+    description: "A polished all-occasion hamper with sweets, keepsakes, and premium gift-ready packaging."
+  },
+  {
+    slug: "corporate-thank-you-hamper",
+    store: "gifts",
+    name: "Corporate Thank You Hamper",
+    price: 1499,
+    salePrice: 1299,
+    image: "/images/gifts/hamper%202.png",
+    category: "Corporate Hampers",
+    description: "A refined desk-friendly selection for clients, teams, onboarding, and thoughtful business gifting."
+  },
+  {
+    slug: "birthday-celebration-hamper",
+    store: "gifts",
+    name: "Birthday Celebration Hamper",
+    price: 1199,
+    salePrice: 999,
+    image: "/images/gifts/hamper%203.png",
+    category: "Birthday Hampers",
+    description: "A cheerful birthday hamper with treats, a note-card feel, and celebratory finishing touches."
+  },
+  {
+    slug: "anniversary-memory-hamper",
+    store: "gifts",
+    name: "Anniversary Memory Hamper",
+    price: 1799,
+    salePrice: 1599,
+    image: "/images/gifts/hamper%204.png",
+    category: "Anniversary Hampers",
+    description: "A romantic hamper curated for couples, milestones, and warm personal moments."
+  },
+  {
+    slug: "premium-festive-hamper",
+    store: "gifts",
+    name: "Premium Festive Hamper",
+    price: 1999,
+    salePrice: 1799,
+    image: "/images/gifts/hamper%205.png",
+    category: "Festive Hampers",
+    description: "A festive-ready hamper with elegant presentation, rich gifting cues, and a premium finish."
+  }
 ];
 
 const bestsellerFilters = ["All", "Personalised", "Hampers", "For Her", "For Him", "Birthday", "Anniversary", "Premium"];
@@ -207,6 +241,7 @@ const customGiftSteps = [
 ];
 
 const personalTouchOptions = ["Add a handwritten note", "Add recipient name", "Add photo", "Custom packaging"];
+const personalisedAssetPath = "/images/gifts/OHRA_All_Transparent_Separate_Images";
 
 function normalizeAdminTile(entry, fallbackImage) {
   return {
@@ -339,6 +374,152 @@ function CreateGiftPage() {
   );
 }
 
+function PremiumPersonalisedPage() {
+  const [giftRequest, setGiftRequest] = useState({
+    recipient: "For Her",
+    occasion: "Birthday",
+    style: "Gift Box",
+    budget: "Rs. 1,500-2,500",
+    preferences: ["Chocolate", "Flowers", "Personalised Items"],
+    touches: ["Add a handwritten note"]
+  });
+  const styleImages = {
+    "Gift Box": `${personalisedAssetPath}/07_gift_box_style.png`,
+    Basket: `${personalisedAssetPath}/08_basket_style.png`,
+    Hamper: `${personalisedAssetPath}/09_hamper_style.png`,
+    Tray: `${personalisedAssetPath}/10_tray_style.png`,
+    "Bouquet Style": `${personalisedAssetPath}/11_bouquet_style.png`,
+    "Premium Box": `${personalisedAssetPath}/12_premium_box_style.png`
+  };
+  const preferenceImages = {
+    Chocolate: `${personalisedAssetPath}/13_chocolate.png`,
+    Candles: `${personalisedAssetPath}/14_candle.png`,
+    Perfume: `${personalisedAssetPath}/15_perfume.png`,
+    Skincare: `${personalisedAssetPath}/16_skincare.png`,
+    Mugs: `${personalisedAssetPath}/17_mug.png`,
+    Stationery: `${personalisedAssetPath}/18_stationery.png`,
+    "Dry Fruits": `${personalisedAssetPath}/20_dry_fruits.png`
+  };
+  const updateSingleChoice = (key, option) => setGiftRequest((current) => ({ ...current, [key]: option }));
+  const toggleMultiChoice = (key, option) => setGiftRequest((current) => {
+    const selected = current[key].includes(option);
+    return { ...current, [key]: selected ? current[key].filter((item) => item !== option) : [...current[key], option] };
+  });
+  const previewImage = styleImages[giftRequest.style] || styleImages["Gift Box"];
+  const summaryRows = [
+    ["For", giftRequest.recipient],
+    ["Occasion", giftRequest.occasion],
+    ["Style", giftRequest.style],
+    ["Budget", giftRequest.budget],
+    ["Items", giftRequest.preferences.join(", ")],
+    ["Personal Touch", giftRequest.touches.join(", ") || "Optional"]
+  ];
+  const whatsappMessage = [
+    "Hi OHRA, I want to create a personalised gift.",
+    "",
+    `For: ${giftRequest.recipient}`,
+    `Occasion: ${giftRequest.occasion}`,
+    `Style: ${giftRequest.style}`,
+    `Budget: ${giftRequest.budget}`,
+    `Items: ${giftRequest.preferences.join(", ") || "Please suggest"}`,
+    `Personal Touch: ${giftRequest.touches.join(", ") || "Optional"}`,
+    "",
+    "Please help me finalise this gift."
+  ].join("\n");
+  const whatsappLink = `https://wa.me/918307642071?text=${encodeURIComponent(whatsappMessage)}`;
+  const heroStages = [
+    ["Choose", `${personalisedAssetPath}/02_choose_icon.png`],
+    ["Personalise", `${personalisedAssetPath}/03_personalise_icon.png`],
+    ["We Curate", `${personalisedAssetPath}/04_curate_icon.png`],
+    ["We Deliver", `${personalisedAssetPath}/05_delivery_icon.png`]
+  ];
+
+  return (
+    <StoreLayout store="gifts">
+      <main className="personalised-page">
+        <section className="personalised-hero">
+          <img className="personalised-hero-gift" src={`${personalisedAssetPath}/09_hamper_style.png`} alt="" />
+          <img className="personalised-hero-card" src={`${personalisedAssetPath}/23_thank_you_card.png`} alt="" />
+          <img className="personalised-hero-ribbon" src={`${personalisedAssetPath}/01_ribbon_heart.png`} alt="" />
+          <div>
+            <p>Turn moments into gifts</p>
+            <h1>Create a gift made just for them.</h1>
+            <span>Personalise every detail and we'll bring it to life with love and care.</span>
+          </div>
+          <aside aria-label="Custom gifting promise"><span>Custom</span><span>Gifts</span><span>Happier</span><span>People</span></aside>
+          <nav aria-label="Personalised gift stages">{heroStages.map(([item, image]) => <strong key={item}><img src={image} alt="" />{item}</strong>)}</nav>
+        </section>
+
+        <nav className="personalised-progress" aria-label="Create your gift progress">
+          {customGiftSteps.map((step) => <span key={step.key} className={giftRequest[step.key]?.length ? "complete" : ""}><b>{step.number}</b>{step.label}</span>)}
+          <span><b>06</b>Review</span>
+        </nav>
+
+        <section className="personalised-builder-shell" aria-label="Create your gift builder">
+          <div className="personalised-builder-config">
+            {customGiftSteps.map((step) => (
+              <article className="personalised-step" key={step.key}>
+                <span>Step {step.number}</span>
+                <h2>{step.title}</h2>
+                <div>
+                  {step.options.map(([option, icon]) => {
+                    const selected = step.multi ? giftRequest[step.key].includes(option) : giftRequest[step.key] === option;
+                    return (
+                      <button key={option} className={selected ? "selected" : ""} type="button" onClick={() => step.multi ? toggleMultiChoice(step.key, option) : updateSingleChoice(step.key, option)}>
+                        {styleImages[option] || preferenceImages[option] ? <img src={styleImages[option] || preferenceImages[option]} alt="" /> : <i aria-hidden="true">{icon}</i>}
+                        <span>{selected ? `✓ ${option}` : option}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </article>
+            ))}
+
+            <article className="personalised-step personal-touch-step">
+              <span>Step 06</span>
+              <h2>Add a personal touch</h2>
+              <div>
+                {personalTouchOptions.map((option) => {
+                  const selected = giftRequest.touches.includes(option);
+                  return <button key={option} className={selected ? "selected" : ""} type="button" onClick={() => toggleMultiChoice("touches", option)}><i aria-hidden="true">+</i><span>{selected ? `✓ ${option}` : option}</span></button>;
+                })}
+              </div>
+            </article>
+          </div>
+
+          <aside className="personalised-preview-column">
+            <section className="personalised-preview" aria-label="Your gift preview">
+              <div><p>Your Gift Preview</p><span>A glimpse of your customised gift</span></div>
+              <button type="button" aria-label="Previous preview">&#8249;</button>
+              <div className="personalised-preview-art">
+                <img src={previewImage} alt={`${giftRequest.style} preview`} />
+                <img src={`${personalisedAssetPath}/23_thank_you_card.png`} alt="" />
+              </div>
+              <button type="button" aria-label="Next preview">&#8250;</button>
+              <small>This is a sample preview. Our team will curate the final design based on your selections.</small>
+            </section>
+            <section className="personalised-summary" aria-label="Gift summary">
+              <div><h2>Gift Summary</h2><button type="button">Edit</button></div>
+              {summaryRows.map(([label, value]) => <p key={label}><strong>{label}</strong><span>{value}</span></p>)}
+              <a className="personalised-whatsapp-button" href={whatsappLink} target="_blank" rel="noreferrer">Create My Gift <b>&rarr;</b></a>
+              <small>No payment required. OHRA Gift Concierge will contact you to finalise your gift.</small>
+            </section>
+          </aside>
+        </section>
+
+        <section className="personalised-custom-cta">
+          <div><p>Need something extra special?</p><h2>Tell us your idea and our gifting team will curate it for you.</h2><span>Share names, dates, delivery city, notes, or an inspiration photo - we'd love to hear it.</span><a href={whatsappLink} target="_blank" rel="noreferrer">Talk to OHRA <b>&rarr;</b></a></div>
+          <img src={`${personalisedAssetPath}/25_bottom_ribbon.png`} alt="" />
+        </section>
+
+        <section className="personalised-assurances" aria-label="Personalised gift benefits">
+          {["Pan India Delivery", "Safe & Secure Payments", "Thoughtfully Curated", "Customisation Support", "Dedicated Assistance"].map((item) => <span key={item}>{item}</span>)}
+        </section>
+      </main>
+    </StoreLayout>
+  );
+}
+
 export default function GiftsCollectionPage() {
   const { collection = "categories" } = useParams();
   const [products, setProducts] = useState([]);
@@ -379,7 +560,7 @@ export default function GiftsCollectionPage() {
     });
   }, [isTaxonomyPage, taxonomyKind]);
 
-  if (collection === "create-your-gift" || collection === "personalised") return <CreateGiftPage />;
+  if (collection === "create-your-gift" || collection === "personalised") return <PremiumPersonalisedPage />;
 
   return (
     <StoreLayout store="gifts">
@@ -456,18 +637,28 @@ export default function GiftsCollectionPage() {
 
         {collection === "boxes" && (
           <>
-            <section className="simple-tile-grid" aria-label="Gift boxes and hampers">
-              {hamperTiles.map((item) => <Link key={item} to="/gifts/products">{item}</Link>)}
+            <section className="hamper-product-grid" aria-label="Gift boxes and hampers">
+              {hamperProducts.map((product, index) => (
+                <article key={product.slug}>
+                  <Link to={`/gifts/product/${product.slug}`}><img src={product.image} alt={product.name} /></Link>
+                  <button className={wishlistItems.includes(product.slug) ? "saved" : ""} onClick={() => toggleWishlist(product.slug)} aria-label={`Save ${product.name}`}>&#9825;</button>
+                  <p>{product.category}</p>
+                  <Link to={`/gifts/product/${product.slug}`}><h2>{product.name}</h2></Link>
+                  <span>{product.description}</span>
+                  <strong>Rs. {(product.salePrice || product.price).toLocaleString("en-IN")} <del>Rs. {product.price.toLocaleString("en-IN")}</del></strong>
+                  <button className="collection-add" onClick={() => addToCart(product)}>{index === 0 ? "Add signature hamper" : "Add to bag"}</button>
+                </article>
+              ))}
             </section>
             <nav className="budget-pill-row hamper-budget-row" aria-label="Hamper budget filters">
-              {hamperBudgets.map((item) => <Link key={item} to="/gifts/products">{item}</Link>)}
+              {hamperBudgets.map((item) => <Link key={item} to="/gifts/boxes">{item}</Link>)}
             </nav>
           </>
         )}
 
         {collection === "bestsellers" && (
           <nav className="budget-pill-row bestseller-filter-row" aria-label="Bestseller filters">
-            {bestsellerFilters.map((item) => <Link key={item} to="/gifts/products">{item}</Link>)}
+            {bestsellerFilters.map((item) => <Link key={item} to="/gifts/bestsellers">{item}</Link>)}
           </nav>
         )}
 
@@ -475,7 +666,7 @@ export default function GiftsCollectionPage() {
           <section className="collection-product-section">
             <div className="gifts-section-title">
               <h2>Customer Favourites</h2>
-              <Link to="/gifts/products">View All Products <span>&rarr;</span></Link>
+              <Link to="/gifts/bestsellers">View All Products <span>&rarr;</span></Link>
             </div>
             <div className="gift-collection-grid">{visibleProducts.map((product, index) => <article key={`${product.slug}-${index}`}>
               <Link to={`/gifts/product/${product.slug}`}><img src={product.image} alt={product.name} /></Link>

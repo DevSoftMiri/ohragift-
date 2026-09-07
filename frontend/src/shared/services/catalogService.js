@@ -146,6 +146,66 @@ const sampleCatalog = [
     description: "A premium hamper curated with elegant keepsakes and treats."
   },
   {
+    name: "Signature Gift Hamper",
+    slug: "signature-gift-hamper",
+    store: "gifts",
+    price: 999,
+    salePrice: 799,
+    image: "/images/gifts/hamper%201.png",
+    category: "Gift Hampers",
+    occasion: "Birthday",
+    eyebrow: "Gift Hampers",
+    description: "A polished all-occasion hamper with sweets, keepsakes, and premium gift-ready packaging."
+  },
+  {
+    name: "Corporate Thank You Hamper",
+    slug: "corporate-thank-you-hamper",
+    store: "gifts",
+    price: 1499,
+    salePrice: 1299,
+    image: "/images/gifts/hamper%202.png",
+    category: "Corporate Hampers",
+    occasion: "Corporate",
+    eyebrow: "Corporate Hampers",
+    description: "A refined desk-friendly selection for clients, teams, onboarding, and thoughtful business gifting."
+  },
+  {
+    name: "Birthday Celebration Hamper",
+    slug: "birthday-celebration-hamper",
+    store: "gifts",
+    price: 1199,
+    salePrice: 999,
+    image: "/images/gifts/hamper%203.png",
+    category: "Birthday Hampers",
+    occasion: "Birthday",
+    eyebrow: "Birthday Hampers",
+    description: "A cheerful birthday hamper with treats, a note-card feel, and celebratory finishing touches."
+  },
+  {
+    name: "Anniversary Memory Hamper",
+    slug: "anniversary-memory-hamper",
+    store: "gifts",
+    price: 1799,
+    salePrice: 1599,
+    image: "/images/gifts/hamper%204.png",
+    category: "Anniversary Hampers",
+    occasion: "Anniversary",
+    eyebrow: "Anniversary Hampers",
+    description: "A romantic hamper curated for couples, milestones, and warm personal moments."
+  },
+  {
+    name: "Premium Festive Hamper",
+    slug: "premium-festive-hamper",
+    store: "gifts",
+    price: 1999,
+    salePrice: 1799,
+    image: "/images/gifts/hamper%205.png",
+    category: "Festive Hampers",
+    occasion: "Diwali",
+    eyebrow: "Festive Hampers",
+    description: "A festive-ready hamper with elegant presentation, rich gifting cues, and a premium finish."
+  },
+  {
     name: "Personalised Name Leather Wallet",
     slug: "personalised-name-leather-wallet",
     store: "gifts",

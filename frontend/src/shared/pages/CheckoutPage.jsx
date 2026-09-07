@@ -2,25 +2,6 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../store/AppContext";
 
-const savedAddresses = [
-  {
-    id: "home",
-    label: "Home",
-    address: "123, Sector 22, Chandigarh - 160022",
-    badge: "Default"
-  },
-  {
-    id: "work",
-    label: "Work",
-    address: "Plot No. 10, Industrial Area, Phase 1, Chandigarh - 160002"
-  },
-  {
-    id: "other",
-    label: "Other",
-    address: "Enter a new address"
-  }
-];
-
 const paymentMethods = [
   { id: "upi", title: "UPI", subtitle: "Pay with any UPI app", detail: "GPay, PhonePe, Paytm and more", icon: "UPI" },
   { id: "card", title: "Credit / Debit Card", subtitle: "Visa, Mastercard, RuPay and more", detail: "Card details will be collected securely", icon: "CARD" },
@@ -38,14 +19,23 @@ function formatCurrency(value) {
   return `Rs. ${value.toLocaleString("en-IN")}`;
 }
 
+const emptyAddress = {
+  line1: "",
+  line2: "",
+  landmark: "",
+  city: "",
+  state: "",
+  pincode: "",
+  country: "India"
+};
+
 export default function CheckoutPage() {
   const { cartItems, setCartItems } = useAppContext();
   const [step, setStep] = useState(1);
-  const [selectedAddress, setSelectedAddress] = useState("home");
   const [paymentMethod, setPaymentMethod] = useState("upi");
   const [contact, setContact] = useState({ name: "", phone: "" });
-  const [newAddress, setNewAddress] = useState("");
-  const [saveAddress, setSaveAddress] = useState(true);
+  const [address, setAddress] = useState(emptyAddress);
+  const [saveAddress, setSaveAddress] = useState(false);
   const [error, setError] = useState("");
   const [placedOrder, setPlacedOrder] = useState(null);
 
@@ -61,6 +51,18 @@ export default function CheckoutPage() {
     setContact((current) => ({ ...current, [name]: value }));
   }
 
+  function handleAddressChange(event) {
+    const { name, value } = event.target;
+    setAddress((current) => ({ ...current, [name]: value }));
+  }
+
+  function getFormattedAddress() {
+    return [address.line1, address.line2, address.landmark, address.city, address.state, address.pincode, address.country]
+      .map((item) => item.trim())
+      .filter(Boolean)
+      .join(", ");
+  }
+
   function continueToPayment(event) {
     event.preventDefault();
     if (!contact.name.trim()) {
@@ -71,8 +73,20 @@ export default function CheckoutPage() {
       setError("Please enter a valid phone number.");
       return;
     }
-    if (selectedAddress === "other" && !newAddress.trim()) {
-      setError("Please enter the delivery address.");
+    if (!address.line1.trim()) {
+      setError("Please enter the house number and street address.");
+      return;
+    }
+    if (!address.city.trim()) {
+      setError("Please enter the city.");
+      return;
+    }
+    if (!address.state.trim()) {
+      setError("Please enter the state.");
+      return;
+    }
+    if (!/^[1-9][0-9]{5}$/.test(address.pincode.trim())) {
+      setError("Please enter a valid 6 digit PIN code.");
       return;
     }
     setError("");
@@ -84,14 +98,10 @@ export default function CheckoutPage() {
       setError("Your cart is empty.");
       return;
     }
-    const address = selectedAddress === "other"
-      ? newAddress
-      : savedAddresses.find((item) => item.id === selectedAddress)?.address;
-
     setPlacedOrder({
       id: `OHRA-${Date.now().toString().slice(-6)}`,
       items: cartItems,
-      address,
+      address: getFormattedAddress(),
       contact,
       payment: paymentMethods.find((item) => item.id === paymentMethod)?.title,
       total
@@ -139,25 +149,36 @@ export default function CheckoutPage() {
               <h1>Delivery Address</h1>
               <span>Where should we deliver your order?</span>
 
-              <div className="checkout-address-list">
-                {savedAddresses.map((address) => (
-                  <label key={address.id} className={selectedAddress === address.id ? "selected" : ""}>
-                    <input type="radio" name="address" value={address.id} checked={selectedAddress === address.id} onChange={() => setSelectedAddress(address.id)} />
-                    <strong>{address.label}</strong>
-                    <small>{address.address}</small>
-                    {address.badge && <em>{address.badge}</em>}
-                  </label>
-                ))}
-              </div>
-
-              {selectedAddress === "other" && (
+              <div className="checkout-address-fields">
                 <label className="checkout-field wide">
-                  New Delivery Address
-                  <textarea value={newAddress} onChange={(event) => setNewAddress(event.target.value)} placeholder="House number, street, city, state, pin code" />
+                  House No., Building, Street
+                  <input name="line1" value={address.line1} onChange={handleAddressChange} placeholder="House number, building name, street" autoComplete="address-line1" />
                 </label>
-              )}
-
-              <button className="checkout-add-address" type="button" onClick={() => setSelectedAddress("other")}>+ Add a new address</button>
+                <label className="checkout-field wide">
+                  Area / Locality
+                  <input name="line2" value={address.line2} onChange={handleAddressChange} placeholder="Area, colony, sector, locality" autoComplete="address-line2" />
+                </label>
+                <label className="checkout-field">
+                  Landmark
+                  <input name="landmark" value={address.landmark} onChange={handleAddressChange} placeholder="Nearby landmark" />
+                </label>
+                <label className="checkout-field">
+                  City
+                  <input name="city" value={address.city} onChange={handleAddressChange} placeholder="City" autoComplete="address-level2" />
+                </label>
+                <label className="checkout-field">
+                  State
+                  <input name="state" value={address.state} onChange={handleAddressChange} placeholder="State" autoComplete="address-level1" />
+                </label>
+                <label className="checkout-field">
+                  PIN Code
+                  <input name="pincode" value={address.pincode} onChange={handleAddressChange} placeholder="6 digit PIN code" inputMode="numeric" maxLength="6" autoComplete="postal-code" />
+                </label>
+                <label className="checkout-field wide">
+                  Country
+                  <input name="country" value={address.country} onChange={handleAddressChange} placeholder="Country" autoComplete="country-name" />
+                </label>
+              </div>
 
               <div className="checkout-contact">
                 <h2>Contact Details</h2>

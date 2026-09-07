@@ -87,7 +87,7 @@ export default function GiftsHomePage() {
         </section>
 
         <section className="gifts-section" id="best-sellers">
-          <div className="gifts-section-title"><h2>Best Selling Gifts</h2><Link to="/gifts/products">View All Products <span>&rarr;</span></Link></div>
+          <div className="gifts-section-title"><h2>Best Selling Gifts</h2><Link to="/gifts/bestsellers">View All Products <span>&rarr;</span></Link></div>
           <div className="gifts-product-row">
             {products.map((product, index) => {
               return <article className="gift-product-card" key={`${product.slug}-${index}`}>

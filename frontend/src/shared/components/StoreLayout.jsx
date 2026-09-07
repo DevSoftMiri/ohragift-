@@ -38,6 +38,7 @@ export default function StoreLayout({ store, children }) {
   const [mobilePanel, setMobilePanel] = useState(null);
   const isGifts = store === "gifts";
   const isWearsPath = location.pathname.startsWith("/wears");
+  const isPersonalisedPath = location.pathname.startsWith("/gifts/personalised") || location.pathname.startsWith("/gifts/create-your-gift");
   const giftNavItems = [
     ["Categories", "/gifts/categories", true],
     ["Occasions", "/gifts/occasions", true],
@@ -78,7 +79,7 @@ export default function StoreLayout({ store, children }) {
   const giftCartItems = cartItems.filter((item) => item.store !== "wears");
 
   return (
-    <div className={`store-shell ${store}`}>
+    <div className={`store-shell ${store}${isPersonalisedPath ? " personalised-store" : ""}`}>
       {!isGifts ? (
         <div className="wears-top-strip" aria-label="OHRA Wears custom product messages">
           <span>CUSTOM PRODUCT</span>
@@ -112,7 +113,9 @@ export default function StoreLayout({ store, children }) {
                       <section className="gift-mega-menu single-dropdown" aria-label={`${label} menu`}>
                         <div className="gift-mega-links">
                           <p>{giftDropdowns[label].title}</p>
-                          {giftDropdowns[label].links.map((item) => <Link key={item} to="/gifts/products">{item}</Link>)}
+                          {giftDropdowns[label].links.map((item) => (
+                            <Link key={item} to={giftDropdowns[label].to}>{item}</Link>
+                          ))}
                           <Link className="gift-mega-more" to={giftDropdowns[label].to}>View All {label} <span>&rarr;</span></Link>
                         </div>
                       </section>
@@ -191,7 +194,7 @@ export default function StoreLayout({ store, children }) {
                     <section className="gift-mobile-submenu">
                       <h2>{giftDropdowns[mobilePanel === "hampers" ? "Hampers" : mobilePanel[0].toUpperCase() + mobilePanel.slice(1)].title}</h2>
                       {giftDropdowns[mobilePanel === "hampers" ? "Hampers" : mobilePanel[0].toUpperCase() + mobilePanel.slice(1)].links.map((item, index) => (
-                        <Link key={item} to="/gifts/products" onClick={() => setMobilePanel(null)}>
+                        <Link key={item} to={giftDropdowns[mobilePanel === "hampers" ? "Hampers" : mobilePanel[0].toUpperCase() + mobilePanel.slice(1)].to} onClick={() => setMobilePanel(null)}>
                           <img src={mobileShortcuts[index % mobileShortcuts.length][2]} alt="" />
                           <span>{item}</span>
                           <b>&rsaquo;</b>
@@ -207,9 +210,9 @@ export default function StoreLayout({ store, children }) {
                         <input defaultValue="birthday gifts" aria-label="Search gifts" />
                         <button type="button" aria-label="Clear search">&times;</button>
                       </label>
-                      <div>{searchSuggestions.map((item) => <Link key={item} to="/gifts/products" onClick={() => setMobilePanel(null)}><span aria-hidden="true">&#9906;</span>{item}</Link>)}</div>
+                      <div>{searchSuggestions.map((item) => <Link key={item} to="/gifts/categories" onClick={() => setMobilePanel(null)}><span aria-hidden="true">&#9906;</span>{item}</Link>)}</div>
                       <h2>Popular Searches</h2>
-                      <nav>{popularSearches.map((item) => <Link key={item} to="/gifts/products" onClick={() => setMobilePanel(null)}>{item}</Link>)}</nav>
+                      <nav>{popularSearches.map((item) => <Link key={item} to={item === "Hampers" ? "/gifts/boxes" : item === "Personalised" ? "/gifts/personalised" : "/gifts/categories"} onClick={() => setMobilePanel(null)}>{item}</Link>)}</nav>
                     </section>
                   )}
 

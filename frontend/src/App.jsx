@@ -10,7 +10,6 @@ import GiftsHomePage from "./gifts/pages/GiftsHomePage";
 import WearsHomePage from "./wears/pages/WearsHomePage";
 import WearsAboutPage from "./wears/pages/WearsAboutPage";
 import WearsInfoPage from "./wears/pages/WearsInfoPage";
-import ProductListingPage from "./shared/pages/ProductListingPage";
 import ProductDetailPage from "./shared/pages/ProductDetailPage";
 import AdminPage from "./admin/pages/AdminPage";
 import GiftsCollectionPage from "./gifts/pages/GiftsCollectionPage";
@@ -32,7 +31,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<GatewayPage />} />
         <Route path="/gifts" element={<GiftsHomePage />} />
-        <Route path="/gifts/products" element={<ProductListingPage store="gifts" />} />
+        <Route path="/gifts/products" element={<Navigate to="/gifts/categories" replace />} />
         <Route path="/gifts/:collection" element={<GiftsCollectionPage />} />
         <Route path="/gifts/product/:slug" element={<ProductDetailPage />} />
         <Route path="/wears" element={<WearsHomePage />} />
