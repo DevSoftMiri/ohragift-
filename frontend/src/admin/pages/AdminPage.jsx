@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAdminCatalog, loginAdmin, removeCategory, removeProduct, saveCategory, saveProduct } from "../../shared/services/adminService";
+import OptimizedImage from "../../shared/components/OptimizedImage";
 
 const emptyCategory = { name: "", kind: "category", description: "", image: "", status: "active" };
 const emptyProduct = { name: "", category: "", occasion: "", subCategory: "", description: "", price: "", salePrice: "", inventory: "0", images: "", status: "draft" };
@@ -12,7 +13,7 @@ function ProductRows({ products, token, loadCatalog, onEdit }) {
   if (!products.length) return <p>No products yet.</p>;
   return <div className="admin-list">
     {products.map((product) => <article key={product._id}>
-      <img src={product.images?.[0]} alt="" />
+      <OptimizedImage src={product.images?.[0]} alt="" sizes="70px" />
       <div><strong>{product.name}</strong><small>{product.subCategory || product.category || "Uncategorised"} - Rs. {product.salePrice || product.price}</small></div>
       <small>{product.status}</small>
       <div><button onClick={() => onEdit(product)}>Edit</button><button onClick={() => removeProduct(product._id, token).then(loadCatalog)}>Delete</button></div>

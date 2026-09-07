@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAppContext } from "../store/AppContext";
+import OptimizedImage from "./OptimizedImage";
 
 function WearsFooter() {
   return (
@@ -18,7 +19,7 @@ function WearsFooter() {
         <Link to="/wears/info/customer-enquiries">Customer Enquiries</Link>
       </nav>
       <Link className="wears-footer-logo" to="/wears" aria-label="OHRA Wears home">
-        <img src="/images/wears/wear logo.png" alt="OHRA Wears" />
+        <OptimizedImage src="/images/wears/wear logo.png" alt="OHRA Wears" sizes="160px" />
       </Link>
       <div className="wears-footer-bottom">
         <span>&copy; 2026, OHRA Wears</span>
@@ -150,7 +151,7 @@ export default function StoreLayout({ store, children }) {
               <nav className="gift-mobile-shortcuts" aria-label="Popular gift shortcuts">
                 {mobileShortcuts.map(([label, to, image]) => (
                   <Link key={label} to={to}>
-                    <img src={image} alt="" />
+                    <OptimizedImage src={image} alt="" sizes="64px" />
                     <span>{label}</span>
                   </Link>
                 ))}
@@ -195,7 +196,7 @@ export default function StoreLayout({ store, children }) {
                       <h2>{giftDropdowns[mobilePanel === "hampers" ? "Hampers" : mobilePanel[0].toUpperCase() + mobilePanel.slice(1)].title}</h2>
                       {giftDropdowns[mobilePanel === "hampers" ? "Hampers" : mobilePanel[0].toUpperCase() + mobilePanel.slice(1)].links.map((item, index) => (
                         <Link key={item} to={`${giftDropdowns[mobilePanel === "hampers" ? "Hampers" : mobilePanel[0].toUpperCase() + mobilePanel.slice(1)].to}?${mobilePanel === "occasions" ? "occasion" : "category"}=${encodeURIComponent(item)}`} onClick={() => setMobilePanel(null)}>
-                          <img src={mobileShortcuts[index % mobileShortcuts.length][2]} alt="" />
+                          <OptimizedImage src={mobileShortcuts[index % mobileShortcuts.length][2]} alt="" sizes="44px" />
                           <span>{item}</span>
                           <b>&rsaquo;</b>
                         </Link>
@@ -221,7 +222,7 @@ export default function StoreLayout({ store, children }) {
                       <h2>Your Cart ({giftCartItems.length})</h2>
                       {giftCartItems.map((item) => (
                         <article key={item.slug}>
-                          {item.image && <img src={item.image} alt="" />}
+                          {item.image && <OptimizedImage src={item.image} alt="" sizes="84px" />}
                           <div>
                             <h3>{item.name}</h3>
                             <strong>Rs. {item.price.toLocaleString("en-IN")}</strong>
@@ -245,7 +246,7 @@ export default function StoreLayout({ store, children }) {
           </>
         ) : (
           <>
-            <Link className="wears-logo-link" to="/wears" aria-label="OHRA Wears home"><img src="/images/wears/wear logo.png" alt="OHRA Wears" /></Link>
+            <Link className="wears-logo-link" to="/wears" aria-label="OHRA Wears home"><OptimizedImage src="/images/wears/wear logo.png" alt="OHRA Wears" sizes="160px" /></Link>
             <nav className="wears-primary-nav" aria-label="Wears navigation">
               <Link to="/wears">Shop</Link>
               <a href="#summer-drop">Summer '26</a>
@@ -263,11 +264,11 @@ export default function StoreLayout({ store, children }) {
       {!isGifts ? <WearsFooter /> : null}
       <nav className="mobile-store-switcher" aria-label="Switch OHRA store">
         <Link className={!isWearsPath ? "active gifts-tab" : "gifts-tab"} to="/gifts">
-          <span aria-hidden="true"><img src="/images/gift.png" alt="" /></span>
+          <span aria-hidden="true"><OptimizedImage src="/images/gift.png" alt="" sizes="32px" /></span>
           <strong>OHRA Gifts</strong>
         </Link>
         <Link className={isWearsPath ? "active wears-tab" : "wears-tab"} to="/wears">
-          <span aria-hidden="true"><img src="/images/cloth.png" alt="" /></span>
+          <span aria-hidden="true"><OptimizedImage src="/images/cloth.png" alt="" sizes="32px" /></span>
           <strong>OHRA Wears</strong>
         </Link>
       </nav>

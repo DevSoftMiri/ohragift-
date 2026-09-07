@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import StoreLayout from "../../shared/components/StoreLayout";
+import OptimizedImage from "../../shared/components/OptimizedImage";
 import { useAppContext } from "../../shared/store/AppContext";
 
 const categories = [
@@ -85,13 +86,13 @@ export default function GiftsHomePage() {
           <section className="gifts-section" id="categories">
             <div className="gifts-section-title"><h2>Find the Perfect Gift</h2><Link to="/gifts/categories">View All Categories <span>&rarr;</span></Link></div>
             <div className="category-row">
-              {categories.map(([name, to, image]) => <Link to={to} className="category-item" key={name}><img src={image} alt={name} loading="lazy" /><strong>{name}</strong></Link>)}
+              {categories.map(([name, to, image]) => <Link to={to} className="category-item" key={name}><OptimizedImage src={image} alt={name} sizes="(max-width: 720px) 30vw, 160px" /><strong>{name}</strong></Link>)}
             </div>
           </section>
           <section className="gifts-section" id="occasions">
             <div className="gifts-section-title"><h2>Shop by Occasion</h2><Link to="/gifts/occasions">View All Occasions <span>&rarr;</span></Link></div>
             <div className="category-row occasion-row">
-              {occasions.map(([name, to, image]) => <Link to={to} className="category-item" key={name}><img src={image} alt={name} loading="lazy" /><strong>{name}</strong></Link>)}
+              {occasions.map(([name, to, image]) => <Link to={to} className="category-item" key={name}><OptimizedImage src={image} alt={name} sizes="(max-width: 720px) 30vw, 160px" /><strong>{name}</strong></Link>)}
             </div>
           </section>
         </div>
@@ -101,7 +102,7 @@ export default function GiftsHomePage() {
           <div className="gifts-product-row">
             {products.map((product, index) => {
               return <article className="gift-product-card" key={`${product.slug}-${index}`}>
-                <Link to={`/gifts/product/${product.slug}`}><img src={product.image} alt={product.name} loading="lazy" /></Link>
+                <Link to={`/gifts/product/${product.slug}`}><OptimizedImage src={product.image} alt={product.name} sizes="(max-width: 720px) 70vw, 250px" /></Link>
                 <button className={wishlistItems.includes(product.slug) ? "liked" : ""} onClick={() => toggleWishlist(product.slug)} aria-label={`Save ${product.name}`}>{wishlistItems.includes(product.slug) ? "♥" : "♡"}</button>
                 <h3>{product.name}</h3><p className="stars">&#9733; &#9733; &#9733; &#9733; &#9733; <small>({157 + index * 42})</small></p>
                 <p className="gift-price">Rs. {product.salePrice.toLocaleString("en-IN")} <del>Rs. {product.price.toLocaleString("en-IN")}</del></p>

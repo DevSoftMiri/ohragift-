@@ -134,7 +134,7 @@ export default function ProductDetailPage() {
 
         <div className="product-detail-layout">
           <div className="product-visual">
-            <img src={product.image} alt={product.name} loading="eager" decoding="sync" />
+            <OptimizedImage src={product.image} alt={product.name} eager sizes="(max-width: 900px) 92vw, 50vw" />
           </div>
 
           <section className="product-detail-copy">

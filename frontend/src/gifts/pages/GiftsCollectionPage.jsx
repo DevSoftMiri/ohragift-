@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import StoreLayout from "../../shared/components/StoreLayout";
+import OptimizedImage from "../../shared/components/OptimizedImage";
 import { getCatalogGroups, getProductsByStore } from "../../shared/services/catalogService";
 import { useAppContext } from "../../shared/store/AppContext";
 
@@ -162,9 +163,18 @@ const customGiftSteps = [
     title: "What would they love?",
     multi: true,
     options: [
-      ["Mugs", "M"],
-      ["Keychains", "K"],
-      ["Pens", "P"]
+      ["Flowers", "F"],
+      ["Personalised Items", "P"],
+      ["Photo Frame", "P"],
+      ["Scented Candle", "S"],
+      ["Self-care Treats", "S"],
+      ["Desk Accessories", "D"],
+      ["Custom Mug", "M"],
+      ["Keychain", "K"],
+      ["Personalised Pen", "P"],
+      ["Mini Plant", "P"],
+      ["Memory Book", "B"],
+      ["Something Else", "+"]
     ]
   }
 ];
@@ -195,7 +205,7 @@ function CreateGiftPage() {
     occasion: "Birthday",
     style: "Gift Box",
     budget: "Rs. 1,500-2,500",
-    preferences: ["Chocolate", "Flowers", "Personalised Items"],
+    preferences: ["Flowers", "Personalised Items"],
     touches: ["Add a handwritten note"]
   });
 
@@ -309,7 +319,7 @@ function PremiumPersonalisedPage() {
     occasion: "Birthday",
     style: "Gift Box",
     budget: "Rs. 1,500-2,500",
-    preferences: ["Chocolate", "Flowers", "Personalised Items"],
+    preferences: ["Flowers", "Personalised Items"],
     touches: ["Add a handwritten note"]
   });
   const styleImages = {
@@ -319,9 +329,6 @@ function PremiumPersonalisedPage() {
     Tray: `${personalisedAssetPath}/10_tray_style.png`,
     "Bouquet Style": `${personalisedAssetPath}/11_bouquet_style.png`,
     "Premium Box": `${personalisedAssetPath}/12_premium_box_style.png`
-  };
-  const preferenceImages = {
-    Mugs: `${personalisedAssetPath}/17_mug.png`,
   };
   const updateSingleChoice = (key, option) => setGiftRequest((current) => ({ ...current, [key]: option }));
   const toggleMultiChoice = (key, option) => setGiftRequest((current) => {
@@ -361,16 +368,16 @@ function PremiumPersonalisedPage() {
     <StoreLayout store="gifts">
       <main className="personalised-page">
         <section className="personalised-hero">
-          <img className="personalised-hero-gift" src={`${personalisedAssetPath}/09_hamper_style.png`} alt="" />
-          <img className="personalised-hero-card" src={`${personalisedAssetPath}/23_thank_you_card.png`} alt="" />
-          <img className="personalised-hero-ribbon" src={`${personalisedAssetPath}/01_ribbon_heart.png`} alt="" />
+          <OptimizedImage className="personalised-hero-gift" src={`${personalisedAssetPath}/09_hamper_style.png`} alt="" eager sizes="(max-width: 720px) 54vw, 30vw" />
+          <OptimizedImage className="personalised-hero-card" src={`${personalisedAssetPath}/23_thank_you_card.png`} alt="" sizes="(max-width: 720px) 36vw, 18vw" />
+          <OptimizedImage className="personalised-hero-ribbon" src={`${personalisedAssetPath}/01_ribbon_heart.png`} alt="" sizes="180px" />
           <div>
             <p>Turn moments into gifts</p>
             <h1>Create a gift made just for them.</h1>
             <span>Personalise every detail and we'll bring it to life with love and care.</span>
           </div>
           <aside aria-label="Custom gifting promise"><span>Custom</span><span>Gifts</span><span>Happier</span><span>People</span></aside>
-          <nav aria-label="Personalised gift stages">{heroStages.map(([item, image]) => <strong key={item}><img src={image} alt="" />{item}</strong>)}</nav>
+          <nav aria-label="Personalised gift stages">{heroStages.map(([item, image]) => <strong key={item}><OptimizedImage src={image} alt="" sizes="72px" />{item}</strong>)}</nav>
         </section>
 
         <nav className="personalised-progress" aria-label="Create your gift progress">
@@ -389,7 +396,7 @@ function PremiumPersonalisedPage() {
                     const selected = step.multi ? giftRequest[step.key].includes(option) : giftRequest[step.key] === option;
                     return (
                       <button key={option} className={selected ? "selected" : ""} type="button" onClick={() => step.multi ? toggleMultiChoice(step.key, option) : updateSingleChoice(step.key, option)}>
-                        {styleImages[option] || preferenceImages[option] ? <img src={styleImages[option] || preferenceImages[option]} alt="" /> : <i aria-hidden="true">{icon}</i>}
+                        {styleImages[option] ? <OptimizedImage src={styleImages[option]} alt="" sizes="120px" /> : <i aria-hidden="true">{icon}</i>}
                         <span>{selected ? `✓ ${option}` : option}</span>
                       </button>
                     );
@@ -415,8 +422,8 @@ function PremiumPersonalisedPage() {
               <div><p>Your Gift Preview</p><span>A glimpse of your customised gift</span></div>
               <button type="button" aria-label="Previous preview">&#8249;</button>
               <div className="personalised-preview-art">
-                <img src={previewImage} alt={`${giftRequest.style} preview`} />
-                <img src={`${personalisedAssetPath}/23_thank_you_card.png`} alt="" />
+                <OptimizedImage src={previewImage} alt={`${giftRequest.style} preview`} sizes="(max-width: 720px) 70vw, 420px" />
+                <OptimizedImage src={`${personalisedAssetPath}/23_thank_you_card.png`} alt="" sizes="160px" />
               </div>
               <button type="button" aria-label="Next preview">&#8250;</button>
               <small>This is a sample preview. Our team will curate the final design based on your selections.</small>
@@ -510,7 +517,7 @@ export default function GiftsCollectionPage() {
                     type="button"
                     onClick={() => setActiveTile(tile.name)}
                   >
-                    <img src={tile.image} alt="" />
+                    <OptimizedImage src={tile.image} alt="" sizes="(max-width: 720px) 38vw, 180px" />
                     <span>{tile.name}</span>
                   </button>
                 ))}
@@ -536,7 +543,7 @@ export default function GiftsCollectionPage() {
               <div className="taxonomy-product-grid">
                 {taxonomyProducts.map((product, index) => (
                   <article key={`${product.slug}-${index}`}>
-                    <Link to={`/gifts/product/${product.slug}`}><img src={product.image} alt={product.name} /></Link>
+                    <Link to={`/gifts/product/${product.slug}`}><OptimizedImage src={product.image} alt={product.name} sizes="(max-width: 720px) 46vw, 25vw" /></Link>
                     <button className={wishlistItems.includes(product.slug) ? "saved" : ""} onClick={() => toggleWishlist(product.slug)} aria-label={`Save ${product.name}`}>{wishlistItems.includes(product.slug) ? "♥" : "♡"}</button>
                     <Link to={`/gifts/product/${product.slug}`}><h3>{product.name}</h3></Link>
                     <strong>Rs. {(product.salePrice || product.price).toLocaleString("en-IN")}</strong>
@@ -562,7 +569,7 @@ export default function GiftsCollectionPage() {
             <section className="hamper-product-grid" aria-label="Gift boxes and hampers">
               {hamperProducts.map((product, index) => (
                 <article key={product.slug}>
-                  <Link to={`/gifts/product/${product.slug}`}><img src={product.image} alt={product.name} /></Link>
+                  <Link to={`/gifts/product/${product.slug}`}><OptimizedImage src={product.image} alt={product.name} sizes="(max-width: 720px) 46vw, 25vw" /></Link>
                   <button className={wishlistItems.includes(product.slug) ? "saved" : ""} onClick={() => toggleWishlist(product.slug)} aria-label={`Save ${product.name}`}>{wishlistItems.includes(product.slug) ? "♥" : "♡"}</button>
                   <p>{product.category}</p>
                   <Link to={`/gifts/product/${product.slug}`}><h2>{product.name}</h2></Link>
@@ -588,7 +595,7 @@ export default function GiftsCollectionPage() {
               <Link to="/gifts/bestsellers">View All Products <span>&rarr;</span></Link>
             </div>
             <div className="gift-collection-grid">{visibleProducts.map((product, index) => <article key={`${product.slug}-${index}`}>
-              <Link to={`/gifts/product/${product.slug}`}><img src={product.image} alt={product.name} /></Link>
+              <Link to={`/gifts/product/${product.slug}`}><OptimizedImage src={product.image} alt={product.name} sizes="(max-width: 720px) 46vw, 25vw" /></Link>
               <button className={wishlistItems.includes(product.slug) ? "saved" : ""} onClick={() => toggleWishlist(product.slug)} aria-label={`Save ${product.name}`}>{wishlistItems.includes(product.slug) ? "♥" : "♡"}</button>
               <p>{collection === "bestsellers" ? ["Bestseller", "Trending", "Most Gifted", "New Favourite"][index % 4] : product.category || product.eyebrow}</p>
               <h2>{product.name}</h2>

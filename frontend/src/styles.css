@@ -1117,6 +1117,12 @@ picture {
 .personalised-store .personalised-step:nth-child(5) button:has(img) span { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 26px; color: inherit; text-align: center; font-size: .7rem; line-height: 1.2; overflow-wrap: anywhere; }
 .personalised-store .personalised-step:nth-child(5) button:not(:has(img)) { justify-content: center; min-height: 56px; }
 
+/* Keep the gift-preference choices scannable without product thumbnails. */
+.personalised-store .personalised-step:nth-child(5) div { grid-template-columns: repeat(auto-fit, minmax(132px, 1fr)); gap: .5rem; }
+.personalised-store .personalised-step:nth-child(5) button:not(:has(img)) { min-height: 42px; padding: .42rem .58rem; }
+.personalised-store .personalised-step:nth-child(5) button:not(:has(img)) i { flex: 0 0 19px; width: 19px; height: 19px; font-size: .54rem; }
+.personalised-store .personalised-step:nth-child(5) button:not(:has(img)) span { font-size: .66rem; }
+
 @media (max-width: 580px) {
   .personalised-store .personalised-step:nth-child(3) div { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .personalised-store .personalised-step:nth-child(5) div { grid-template-columns: repeat(2, minmax(0, 1fr)); }

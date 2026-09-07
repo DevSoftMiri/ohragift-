@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../store/AppContext";
+import OptimizedImage from "../components/OptimizedImage";
 
 const paymentMethods = [
   { id: "upi", title: "UPI", subtitle: "Pay with any UPI app", detail: "GPay, PhonePe, Paytm and more", icon: "UPI" },
@@ -237,7 +238,7 @@ export default function CheckoutPage() {
               <div className="checkout-summary-items">
                 {activeItems.map((item) => (
                   <article key={item.slug}>
-                    <img src={item.image || fallbackImages[item.store] || fallbackImages.gifts} alt={item.name} />
+                    <OptimizedImage src={item.image || fallbackImages[item.store] || fallbackImages.gifts} alt={item.name} sizes="80px" />
                     <div>
                       <h3>{item.name}</h3>
                       <small>Qty: {item.quantity}</small>

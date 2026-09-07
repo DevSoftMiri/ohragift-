@@ -1,8 +1,10 @@
 import { readdir, stat } from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 
-const publicDir = path.resolve("public");
+const scriptDir = path.dirname(fileURLToPath(import.meta.url));
+const publicDir = path.resolve(scriptDir, "..", "public");
 const imageDir = path.join(publicDir, "images");
 const widths = [360, 720, 1200, 1600];
 

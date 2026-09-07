@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getProductsByStore } from "../services/catalogService";
 import { useAppContext } from "../store/AppContext";
+import OptimizedImage from "../components/OptimizedImage";
 
 const fallbackImages = {
   "personalized-wooden-photo-frame": "/images/gifts/product%20image/photoframe.png",
@@ -97,7 +98,7 @@ export default function CartPage() {
 
                       return (
                         <article className="cart-item-card" key={itemKey}>
-                          <img src={item.image || fallbackImages[item.slug] || fallbackImages["birthday-bloom-box"]} alt={item.name} loading="lazy" />
+                          <OptimizedImage src={item.image || fallbackImages[item.slug] || fallbackImages["birthday-bloom-box"]} alt={item.name} sizes="118px" />
                           <div>
                             <p>{meta.label}</p>
                             <h3>{item.name}</h3>
@@ -160,7 +161,7 @@ export default function CartPage() {
           <div className="cart-bestseller-grid">
             {recommendedGifts.map((product) => (
               <article key={product.slug}>
-                <Link to={`/gifts/product/${product.slug}`}><img src={product.image || fallbackImages[product.slug] || fallbackImages["birthday-bloom-box"]} alt={product.name} loading="lazy" /></Link>
+                <Link to={`/gifts/product/${product.slug}`}><OptimizedImage src={product.image || fallbackImages[product.slug] || fallbackImages["birthday-bloom-box"]} alt={product.name} sizes="(max-width: 720px) 45vw, 20vw" /></Link>
                 <p>{product.eyebrow || product.category || "OHRA Gifts"}</p>
                 <Link to={`/gifts/product/${product.slug}`}><h3>{product.name}</h3></Link>
                 <strong>{formatPrice(product.salePrice || product.price)}</strong>

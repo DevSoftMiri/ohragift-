@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import StoreLayout from "../../shared/components/StoreLayout";
+import OptimizedImage from "../../shared/components/OptimizedImage";
 
 export default function WearsAboutPage() {
   return (
@@ -15,7 +16,7 @@ export default function WearsAboutPage() {
               actually care about.
             </p>
           </div>
-          <img src="/images/wears/custom%20name%20with%20car.png" alt="Custom OHRA Wears T-shirt" />
+          <OptimizedImage src="/images/wears/custom%20name%20with%20car.png" alt="Custom OHRA Wears T-shirt" eager sizes="(max-width: 720px) 92vw, 44vw" />
         </section>
 
         <section className="wears-about-story">
