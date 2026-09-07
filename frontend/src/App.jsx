@@ -13,6 +13,7 @@ import WearsInfoPage from "./wears/pages/WearsInfoPage";
 import ProductDetailPage from "./shared/pages/ProductDetailPage";
 import AdminPage from "./admin/pages/AdminPage";
 import GiftsCollectionPage from "./gifts/pages/GiftsCollectionPage";
+import GiftsPolicyPage from "./gifts/pages/GiftsPolicyPage";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -48,6 +49,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<GatewayPage />} />
         <Route path="/gifts" element={<GiftsHomePage />} />
+        <Route path="/gifts/privacy-policy" element={<GiftsPolicyPage />} />
         <Route path="/gifts/products" element={<Navigate to="/gifts/categories" replace />} />
         <Route path="/gifts/:collection" element={<GiftsCollectionPage />} />
         <Route path="/gifts/product/:slug" element={<ProductDetailPage />} />

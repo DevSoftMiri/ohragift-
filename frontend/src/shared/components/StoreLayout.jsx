@@ -33,6 +33,21 @@ function WearsFooter() {
   );
 }
 
+function GiftsFooter() {
+  return (
+    <footer className="gifts-footer">
+      <Link className="gifts-footer-brand" to="/gifts"><span>OHRA</span><strong>GIFTS</strong></Link>
+      <p>Thoughtful gifts, made personal.</p>
+      <nav aria-label="OHRA Gifts footer links">
+        <Link to="/gifts/privacy-policy">Privacy Policy</Link>
+        <Link to="/account">Help &amp; Support</Link>
+        <a href="tel:+918307642071">83076 42071</a>
+      </nav>
+      <small>&copy; 2026 OHRA Gifts. All rights reserved.</small>
+    </footer>
+  );
+}
+
 export default function StoreLayout({ store, children }) {
   const { cartItems, totals, wishlistItems, removeFromCart, updateCartQuantity } = useAppContext();
   const location = useLocation();
@@ -261,7 +276,7 @@ export default function StoreLayout({ store, children }) {
         )}
       </header>
       {children}
-      {!isGifts ? <WearsFooter /> : null}
+      {isGifts ? <GiftsFooter /> : <WearsFooter />}
       <nav className="mobile-store-switcher" aria-label="Switch OHRA store">
         <Link className={!isWearsPath ? "active gifts-tab" : "gifts-tab"} to="/gifts">
           <span aria-hidden="true"><OptimizedImage src="/images/gift.png" alt="" sizes="32px" /></span>
