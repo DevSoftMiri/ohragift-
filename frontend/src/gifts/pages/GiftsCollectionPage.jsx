@@ -509,7 +509,7 @@ function PremiumPersonalisedPage() {
 
         <section className="personalised-custom-cta">
           <div><p>Need something extra special?</p><h2>Tell us your idea and our gifting team will curate it for you.</h2><span>Share names, dates, delivery city, notes, or an inspiration photo - we'd love to hear it.</span><a href={whatsappLink} target="_blank" rel="noreferrer">Talk to OHRA <b>&rarr;</b></a></div>
-          <img src={`${personalisedAssetPath}/25_bottom_ribbon.png`} alt="" />
+          {/* <img src={`${personalisedAssetPath}/25_bottom_ribbon.png`} alt="" /> */}
         </section>
 
         <section className="personalised-assurances" aria-label="Personalised gift benefits">
