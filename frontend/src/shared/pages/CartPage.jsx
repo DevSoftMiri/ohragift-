@@ -1,6 +1,4 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { getProductsByStore } from "../services/catalogService";
 import { useAppContext } from "../store/AppContext";
 import OptimizedImage from "../components/OptimizedImage";
 
@@ -39,40 +37,34 @@ function formatPrice(value) {
 }
 
 export default function CartPage() {
-  const { addToCart, cartItems, removeFromCart, totals, updateCartQuantity } = useAppContext();
-  const [bestSellingGifts, setBestSellingGifts] = useState([]);
-  const grouped = cartItems.reduce((acc, item) => {
+  const { cartItems, removeFromCart, updateCartQuantity } = useAppContext();
+  const visibleCartItems = cartItems.filter((item) => item.store === "wears");
+  const grouped = visibleCartItems.reduce((acc, item) => {
     const store = item.store || "gifts";
     acc[store] = acc[store] || [];
     acc[store].push(item);
     return acc;
   }, {});
-  const deliveryEstimate = totals.subtotal >= 999 ? 0 : 99;
-  const grandTotal = totals.subtotal + deliveryEstimate;
-  const cartSlugs = new Set(cartItems.map((item) => item.slug));
-  const recommendedGifts = bestSellingGifts.filter((product) => !cartSlugs.has(product.slug)).slice(0, 4);
-
-  useEffect(() => {
-    getProductsByStore("gifts").then(setBestSellingGifts);
-  }, []);
+  const visibleSubtotal = visibleCartItems.reduce((sum, item) => sum + Number(item.price || 0) * item.quantity, 0);
+  const deliveryEstimate = visibleSubtotal >= 999 ? 0 : 99;
+  const grandTotal = visibleSubtotal + deliveryEstimate;
 
   return (
     <main className="cart-page">
       <header className="cart-hero">
-        <Link to="/gifts" aria-label="Back to OHRA Gifts">&lsaquo;</Link>
+        <Link to="/wears" aria-label="Back to OHRA Wears">&lsaquo;</Link>
         <div>
-          <p>Shared OHRA Bag</p>
-          <h1>Your Cart ({cartItems.length})</h1>
-          <span>Gifts and wears stay together, with one calm checkout.</span>
+          <p>OHRA Wears Bag</p>
+          <h1>Your Cart ({visibleCartItems.length})</h1>
+          <span>Your selected OHRA Wears pieces are ready for checkout.</span>
         </div>
       </header>
 
-      {cartItems.length === 0 ? (
+      {visibleCartItems.length === 0 ? (
         <section className="cart-empty">
           <p>Your cart is empty</p>
-          <h2>Find something beautiful across OHRA.</h2>
+          <h2>Find your next custom tee.</h2>
           <div>
-            <Link to="/gifts">Shop Gifts</Link>
             <Link to="/wears">Shop Wears</Link>
           </div>
         </section>
@@ -132,7 +124,7 @@ export default function CartPage() {
             <h2>{formatPrice(grandTotal)}</h2>
             <div>
               <span>Subtotal</span>
-              <strong>{formatPrice(totals.subtotal)}</strong>
+              <strong>{formatPrice(visibleSubtotal)}</strong>
             </div>
             <div>
               <span>Delivery</span>
@@ -143,32 +135,9 @@ export default function CartPage() {
               <strong>{formatPrice(grandTotal)}</strong>
             </div>
             <Link className="cart-primary-action" to="/checkout">Checkout <span>&rarr;</span></Link>
-            <Link className="cart-secondary-action" to="/gifts">Continue Shopping</Link>
-            <small>Free shipping on orders above Rs. 999. Gift and apparel items can be checked out together.</small>
+            <Link className="cart-secondary-action" to="/wears">Continue Shopping</Link>
+            <small>Free shipping on orders above Rs. 999. Apparel items can be checked out together.</small>
           </aside>
-        </section>
-      )}
-
-      {recommendedGifts.length > 0 && (
-        <section className="cart-bestsellers">
-          <div className="cart-bestsellers-heading">
-            <div>
-              <p>Best Selling Gifts</p>
-              <h2>Add something thoughtful before checkout</h2>
-            </div>
-            <Link to="/gifts/bestsellers">View All <span>&rarr;</span></Link>
-          </div>
-          <div className="cart-bestseller-grid">
-            {recommendedGifts.map((product) => (
-              <article key={product.slug}>
-                <Link to={`/gifts/product/${product.slug}`}><OptimizedImage src={product.image || fallbackImages[product.slug] || fallbackImages["birthday-bloom-box"]} alt={product.name} sizes="(max-width: 720px) 45vw, 20vw" /></Link>
-                <p>{product.eyebrow || product.category || "OHRA Gifts"}</p>
-                <Link to={`/gifts/product/${product.slug}`}><h3>{product.name}</h3></Link>
-                <strong>{formatPrice(product.salePrice || product.price)}</strong>
-                <button type="button" onClick={() => addToCart(product)}>Add to Cart</button>
-              </article>
-            ))}
-          </div>
         </section>
       )}
     </main>
