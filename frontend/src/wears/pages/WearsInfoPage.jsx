@@ -36,10 +36,11 @@ const pages = {
     title: "Privacy Policy",
     updated: "September 2026",
     sections: [
+      ["Company", "Ohra Wears is operated by Mirisoft Solution, also referred to as Mirisoft in this Privacy Policy."],
       ["Information We Collect", "We may collect details such as name, email, phone number, billing and shipping address, order information, product selections, size information, customization instructions, artwork, images, communications, payment information, and website usage information."],
-      ["How We Use It", "Information is used to process orders, create customized products, confirm requirements, process payments, arrange delivery, share tracking updates, provide support, prevent fraud, improve services, and maintain legal or business records."],
+      ["How We Use It", "Mirisoft uses information to process orders, create customized products, confirm requirements, process payments, arrange delivery, share tracking updates, provide support, prevent fraud, improve services, and maintain legal or business records."],
       ["Sharing", "We may share information with payment processors, courier partners, hosting and technology providers, communication providers, production partners, professional advisers, or legal authorities where reasonably required."],
-      ["Contact", "For privacy-related questions, contact Ohra Wears at ohrawears@gmail.com or 83076 42071."]
+      ["Contact", "For privacy-related questions, contact Mirisoft Solution for Ohra Wears at ohrawears@gmail.com or 83076 42071."]
     ]
   },
   "terms-of-service": {
