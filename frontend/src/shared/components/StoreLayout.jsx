@@ -268,7 +268,6 @@ export default function StoreLayout({ store, children }) {
               <a href="#best-sellers">Almost Gone</a>
             </nav>
             <div className="header-links">
-              <Link className="wears-to-gifts" to="/gifts">OHRA GIFTS <span aria-hidden="true">&rarr;</span></Link>
               <Link aria-label="Wishlist" to="/wishlist">&#9825;<span>{wishlistItems.length}</span></Link>
               <Link aria-label="Shopping bag" to="/cart">&#128722;<span>{totals.items}</span></Link>
             </div>

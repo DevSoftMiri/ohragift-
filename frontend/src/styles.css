@@ -105,10 +105,12 @@ picture {
 .gateway-divider::before { left: 0; }.gateway-divider::after { right: 0; }
 .gateway-divider span::before { content: "♥"; position: absolute; inset: 0; color: currentColor; font-size: .85rem; line-height: 1; }
 .gateway-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2.8rem, 5vw, 4.7rem); align-items: center; margin-top: 1.3rem; flex: 1 1 auto; min-height: 0; }
+.gateway-grid-wears-only { grid-template-columns: minmax(0, min(640px, 100%)); justify-content: center; flex: 0 0 auto; overflow: hidden; }
 .gateway-card { position: relative; min-height: 0; padding: 0; display: block; overflow: hidden; border-radius: 12px; background: linear-gradient(135deg, #fff8f1, #f2e2d7); box-shadow: 0 16px 42px rgba(66, 43, 25, .13); transition: transform .25s ease, box-shadow .25s ease; }
 .gateway-card:hover { transform: translateY(-4px); box-shadow: 0 24px 54px rgba(66, 43, 25, .18); }
 .gateway-card:focus-visible { outline: 3px solid #b9843d; outline-offset: 5px; }
 .gateway-card img { width: 100%; height: min(30vw, 390px); max-height: none; object-fit: cover; transition: transform .45s ease; }
+.gateway-grid-wears-only .gateway-card img { height: clamp(260px, 32vw, 390px); min-height: 0; }
 .gifts-card img { object-position: 50% 50%; }
 .wears-card img { object-position: 56% 50%; }
 .gateway-card:hover img { transform: scale(1.025); }
