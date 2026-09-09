@@ -1,6 +1,6 @@
 const wearProducts = [
   {
-    name: "Unisex Tshirt ",
+    name: "Unisex Tshirt(Ambala Print)",
     slug: "unisex-t-shirt",
     store: "wears",
     price: 899,
