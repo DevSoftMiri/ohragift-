@@ -4,7 +4,7 @@ import OptimizedImage from "../../shared/components/OptimizedImage";
 
 const summerDrop = [
   {
-    name: "Ambala City Graphic T-Shirt",
+    name: "Unisex T-Shirt(Ambala print)",
     description: "Add your chosen city, location, or name to create a personal everyday tee.",
     price: "Rs. 899.00",
     image: "/images/wears/ambala%20main.png",
